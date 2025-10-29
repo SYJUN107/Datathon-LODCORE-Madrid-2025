@@ -1,0 +1,753 @@
+Municipio;Tipo de dato;Periodo;Total
+Total Nacional;Índice;2023;118,727
+02003 Albacete;Índice;2023;116,009
+02009 Almansa;Índice;2023;111,702
+02025 Caudete;Índice;2023;105,418
+02037 Hellín;Índice;2023;113,467
+02069 Roda, La;Índice;2023;112,544
+02081 Villarrobledo;Índice;2023;111,793
+Resto Albacete;Índice;2023;112,525
+03005 Albatera;Índice;2023;117,243
+03009 Alcoi/Alcoy;Índice;2023;116,556
+03011 Alfàs del Pi, l';Índice;2023;117,539
+03014 Alacant/Alicante;Índice;2023;121,321
+03015 Almoradí;Índice;2023;118,192
+03018 Altea;Índice;2023;119,473
+03019 Aspe;Índice;2023;120,513
+03031 Benidorm;Índice;2023;115,401
+03041 Benissa;Índice;2023;117,482
+03047 Calp;Índice;2023;117,431
+03049 Callosa de Segura;Índice;2023;116,367
+03050 Campello, el;Índice;2023;120,972
+03053 Castalla;Índice;2023;120,936
+03056 Cocentaina;Índice;2023;113,778
+03059 Crevillent;Índice;2023;115,203
+03063 Dénia;Índice;2023;119,586
+03065 Elx/Elche;Índice;2023;120,426
+03066 Elda;Índice;2023;116,566
+03076 Guardamar del Segura;Índice;2023;116,849
+03079 Ibi;Índice;2023;117,774
+03082 Xàbia/Jávea;Índice;2023;118,901
+03089 Monòver/Monóvar;Índice;2023;111,804
+03090 Mutxamel;Índice;2023;120,780
+03093 Novelda;Índice;2023;117,578
+03094 Nucia, la;Índice;2023;115,570
+03099 Orihuela;Índice;2023;116,446
+03102 Pego;Índice;2023;117,987
+03104 Petrer;Índice;2023;118,779
+03113 Rojales;Índice;2023;112,794
+03119 Sant Joan d'Alacant;Índice;2023;126,363
+03121 Santa Pola;Índice;2023;116,472
+03122 Sant Vicent del Raspeig/San Vicente del Raspeig;Índice;2023;121,805
+03128 Teulada;Índice;2023;121,716
+03133 Torrevieja;Índice;2023;114,537
+03139 Vila Joiosa, la/Villajoyosa;Índice;2023;119,488
+03140 Villena;Índice;2023;114,084
+03902 Pilar de la Horadada;Índice;2023;117,133
+Resto Alicante/Alacant;Índice;2023;117,279
+04003 Adra;Índice;2023;109,637
+04006 Albox;Índice;2023;129,478
+04013 Almería;Índice;2023;117,249
+04029 Berja;Índice;2023;94,240
+04035 Cuevas del Almanzora;Índice;2023;114,590
+04052 Huércal de Almería;Índice;2023;113,923
+04053 Huércal-Overa;Índice;2023;119,010
+04066 Níjar;Índice;2023;111,463
+04075 Pulpí;Índice;2023;120,380
+04079 Roquetas de Mar;Índice;2023;120,839
+04100 Vera;Índice;2023;115,698
+04102 Vícar;Índice;2023;122,448
+04902 Ejido, El;Índice;2023;114,137
+Resto Almería;Índice;2023;116,311
+05019 Ávila;Índice;2023;119,682
+Resto Ávila;Índice;2023;113,779
+06011 Almendralejo;Índice;2023;114,197
+06015 Badajoz;Índice;2023;115,329
+06044 Don Benito;Índice;2023;110,989
+06083 Mérida;Índice;2023;117,238
+06088 Montijo;Índice;2023;108,047
+06095 Olivenza;Índice;2023;109,253
+06149 Villafranca de los Barros;Índice;2023;106,928
+06153 Villanueva de la Serena;Índice;2023;112,545
+06158 Zafra;Índice;2023;117,488
+Resto Badajoz;Índice;2023;107,737
+07003 Alcúdia;Índice;2023;118,528
+07005 Andratx;Índice;2023;125,477
+07011 Calvià;Índice;2023;122,789
+07013 Campos;Índice;2023;122,547
+07014 Capdepera;Índice;2023;123,266
+07015 Ciutadella de Menorca;Índice;2023;120,360
+07022 Felanitx;Índice;2023;124,152
+07024 Formentera;Índice;2023;115,942
+07026 Eivissa;Índice;2023;123,591
+07027 Inca;Índice;2023;128,322
+07031 Llucmajor;Índice;2023;123,683
+07032 Maó;Índice;2023;125,127
+07033 Manacor;Índice;2023;123,565
+07036 Marratxí;Índice;2023;122,016
+07040 Palma;Índice;2023;125,996
+07042 Pollença;Índice;2023;116,100
+07044 Pobla, Sa;Índice;2023;119,520
+07046 Sant Antoni de Portmany;Índice;2023;122,957
+07048 Sant Josep de sa Talaia;Índice;2023;122,140
+07054 Santa Eulària des Riu;Índice;2023;123,074
+07055 Santa Margalida;Índice;2023;118,143
+07057 Santanyí;Índice;2023;118,043
+07061 Sóller;Índice;2023;121,388
+07062 Son Servera;Índice;2023;115,809
+Resto Baleares, Illes;Índice;2023;121,521
+08001 Abrera;Índice;2023;123,662
+08006 Arenys de Mar;Índice;2023;119,000
+08009 Argentona;Índice;2023;117,605
+08015 Badalona;Índice;2023;117,567
+08019 Barcelona;Índice;2023;120,582
+08022 Berga;Índice;2023;117,903
+08033 Caldes de Montbui;Índice;2023;119,379
+08035 Calella;Índice;2023;118,207
+08040 Canet de Mar;Índice;2023;119,381
+08041 Canovelles;Índice;2023;119,927
+08046 Cardedeu;Índice;2023;120,460
+08051 Castellar del Vallès;Índice;2023;114,257
+08054 Castellbisbal;Índice;2023;114,695
+08056 Castelldefels;Índice;2023;120,962
+08072 Corbera de Llobregat;Índice;2023;119,237
+08073 Cornellà de Llobregat;Índice;2023;121,089
+08074 Cubelles;Índice;2023;121,448
+08076 Esparreguera;Índice;2023;118,729
+08077 Esplugues de Llobregat;Índice;2023;120,079
+08086 Franqueses del Vallès, Les;Índice;2023;124,254
+08088 Garriga, La;Índice;2023;120,138
+08089 Gavà;Índice;2023;119,374
+08096 Granollers;Índice;2023;123,973
+08101 Hospitalet de Llobregat, L';Índice;2023;122,545
+08102 Igualada;Índice;2023;122,562
+08105 Llagosta, La;Índice;2023;118,104
+08106 Llinars del Vallès;Índice;2023;120,751
+08107 Lliçà d'Amunt;Índice;2023;120,022
+08110 Malgrat de Mar;Índice;2023;116,452
+08112 Manlleu;Índice;2023;117,162
+08113 Manresa;Índice;2023;119,398
+08114 Martorell;Índice;2023;119,765
+08118 Masnou, El;Índice;2023;118,970
+08121 Mataró;Índice;2023;119,407
+08123 Molins de Rei;Índice;2023;118,843
+08124 Mollet del Vallès;Índice;2023;121,946
+08125 Montcada i Reixac;Índice;2023;117,967
+08126 Montgat;Índice;2023;115,996
+08136 Montornès del Vallès;Índice;2023;118,479
+08147 Olesa de Montserrat;Índice;2023;121,486
+08156 Palau-solità i Plegamans;Índice;2023;122,171
+08157 Pallejà;Índice;2023;113,683
+08159 Parets del Vallès;Índice;2023;119,189
+08161 Piera;Índice;2023;117,359
+08163 Pineda de Mar;Índice;2023;115,117
+08169 Prat de Llobregat, El;Índice;2023;117,780
+08172 Premià de Mar;Índice;2023;118,354
+08180 Ripollet;Índice;2023;119,232
+08181 Roca del Vallès, La;Índice;2023;116,450
+08184 Rubí;Índice;2023;124,075
+08187 Sabadell;Índice;2023;122,912
+08194 Sant Adrià de Besòs;Índice;2023;118,441
+08196 Sant Andreu de la Barca;Índice;2023;120,697
+08197 Sant Andreu de Llavaneres;Índice;2023;118,875
+08200 Sant Boi de Llobregat;Índice;2023;117,808
+08202 Sant Celoni;Índice;2023;121,597
+08205 Sant Cugat del Vallès;Índice;2023;123,762
+08211 Sant Feliu de Llobregat;Índice;2023;119,504
+08217 Sant Joan Despí;Índice;2023;120,089
+08218 Sant Joan de Vilatorrada;Índice;2023;118,308
+08219 Vilassar de Mar;Índice;2023;120,994
+08221 Sant Just Desvern;Índice;2023;117,919
+08230 Premià de Dalt;Índice;2023;120,185
+08231 Sant Pere de Ribes;Índice;2023;119,842
+08238 Sant Quirze del Vallès;Índice;2023;120,228
+08240 Sant Sadurní d'Anoia;Índice;2023;117,736
+08245 Santa Coloma de Gramenet;Índice;2023;119,268
+08250 Santa Margarida de Montbui;Índice;2023;120,396
+08252 Barberà del Vallès;Índice;2023;117,043
+08260 Santa Perpètua de Mogoda;Índice;2023;117,445
+08263 Sant Vicenç dels Horts;Índice;2023;114,915
+08266 Cerdanyola del Vallès;Índice;2023;120,085
+08270 Sitges;Índice;2023;121,340
+08279 Terrassa;Índice;2023;124,944
+08284 Tordera;Índice;2023;118,614
+08285 Torelló;Índice;2023;118,359
+08295 Vallirana;Índice;2023;123,332
+08298 Vic;Índice;2023;120,071
+08301 Viladecans;Índice;2023;117,640
+08302 Vilanova del Camí;Índice;2023;122,309
+08305 Vilafranca del Penedès;Índice;2023;124,958
+08307 Vilanova i la Geltrú;Índice;2023;118,800
+08904 Badia del Vallès;Índice;2023;119,236
+Resto Barcelona;Índice;2023;117,966
+09018 Aranda de Duero;Índice;2023;113,136
+09059 Burgos;Índice;2023;114,026
+09219 Miranda de Ebro;Índice;2023;112,601
+Resto Burgos;Índice;2023;110,676
+10037 Cáceres;Índice;2023;114,139
+10067 Coria;Índice;2023;113,335
+10131 Navalmoral de la Mata;Índice;2023;112,742
+10148 Plasencia;Índice;2023;114,289
+Resto Cáceres;Índice;2023;111,298
+11004 Algeciras;Índice;2023;116,801
+11006 Arcos de la Frontera;Índice;2023;108,594
+11007 Barbate;Índice;2023;113,369
+11008 Barrios, Los;Índice;2023;112,813
+11012 Cádiz;Índice;2023;111,880
+11014 Conil de la Frontera;Índice;2023;115,841
+11015 Chiclana de la Frontera;Índice;2023;115,777
+11016 Chipiona;Índice;2023;112,770
+11020 Jerez de la Frontera;Índice;2023;117,994
+11022 Línea de la Concepción, La;Índice;2023;115,760
+11023 Medina Sidonia;Índice;2023;113,927
+11027 Puerto de Santa María, El;Índice;2023;113,935
+11028 Puerto Real;Índice;2023;115,117
+11030 Rota;Índice;2023;111,654
+11031 San Fernando;Índice;2023;114,538
+11032 Sanlúcar de Barrameda;Índice;2023;116,332
+11033 San Roque;Índice;2023;119,175
+11035 Tarifa;Índice;2023;112,851
+11038 Ubrique;Índice;2023;105,737
+11039 Vejer de la Frontera;Índice;2023;120,189
+11041 Villamartín;Índice;2023;100,726
+Resto Cádiz;Índice;2023;115,619
+12005 Alcora, l';Índice;2023;122,442
+12009 Almassora;Índice;2023;121,901
+12027 Benicarló;Índice;2023;116,972
+12028 Benicàssim/Benicasim;Índice;2023;115,857
+12032 Borriana/Burriana;Índice;2023;113,388
+12040 Castelló de la Plana;Índice;2023;121,131
+12082 Nules;Índice;2023;112,680
+12084 Onda;Índice;2023;123,434
+12126 Vall d'Uixó, la;Índice;2023;112,516
+12135 Vila-real;Índice;2023;123,669
+12138 Vinaròs;Índice;2023;116,842
+Resto Castellón/Castelló;Índice;2023;116,968
+13005 Alcázar de San Juan;Índice;2023;115,107
+13023 Bolaños de Calatrava;Índice;2023;127,529
+13028 Campo de Criptana;Índice;2023;109,469
+13034 Ciudad Real;Índice;2023;115,036
+13039 Daimiel;Índice;2023;102,294
+13053 Manzanares;Índice;2023;106,480
+13056 Miguelturra;Índice;2023;118,146
+13071 Puertollano;Índice;2023;109,983
+13078 Socuéllamos;Índice;2023;117,348
+13079 Solana, La;Índice;2023;110,222
+13082 Tomelloso;Índice;2023;117,299
+13087 Valdepeñas;Índice;2023;114,485
+Resto Ciudad Real;Índice;2023;105,423
+14002 Aguilar de la Frontera;Índice;2023;103,039
+14007 Baena;Índice;2023;101,196
+14013 Cabra;Índice;2023;109,104
+14017 Carlota, La;Índice;2023;121,466
+14021 Córdoba;Índice;2023;111,714
+14038 Lucena;Índice;2023;119,846
+14042 Montilla;Índice;2023;109,079
+14049 Palma del Río;Índice;2023;101,341
+14052 Peñarroya-Pueblonuevo;Índice;2023;107,205
+14054 Pozoblanco;Índice;2023;112,920
+14055 Priego de Córdoba;Índice;2023;108,500
+14056 Puente Genil;Índice;2023;116,901
+Resto Córdoba;Índice;2023;106,628
+15002 Ames;Índice;2023;116,021
+15005 Arteixo;Índice;2023;114,141
+15009 Betanzos;Índice;2023;111,872
+15011 Boiro;Índice;2023;117,298
+15017 Cambre;Índice;2023;113,231
+15019 Carballo;Índice;2023;114,024
+15030 Coruña, A;Índice;2023;115,661
+15031 Culleredo;Índice;2023;115,932
+15035 Fene;Índice;2023;105,063
+15036 Ferrol;Índice;2023;110,956
+15041 Laracha, A;Índice;2023;113,121
+15054 Narón;Índice;2023;110,730
+15057 Noia;Índice;2023;111,774
+15058 Oleiros;Índice;2023;114,466
+15059 Ordes;Índice;2023;111,191
+15070 Pontes de García Rodríguez, As;Índice;2023;110,909
+15072 Rianxo;Índice;2023;107,058
+15073 Ribeira;Índice;2023;107,825
+15075 Sada;Índice;2023;108,465
+15078 Santiago de Compostela;Índice;2023;115,276
+15082 Teo;Índice;2023;110,395
+Resto Coruña, A;Índice;2023;112,588
+16078 Cuenca;Índice;2023;118,245
+16203 Tarancón;Índice;2023;126,567
+Resto Cuenca;Índice;2023;111,197
+17015 Banyoles;Índice;2023;119,685
+17022 Bisbal d'Empordà, La;Índice;2023;116,511
+17023 Blanes;Índice;2023;115,760
+17034 Calonge i Sant Antoni;Índice;2023;113,885
+17044 Cassà de la Selva;Índice;2023;118,513
+17047 Castelló d'Empúries;Índice;2023;108,583
+17048 Castell d'Aro, Platja d'Aro i s'Agaró;Índice;2023;112,683
+17062 Escala, L';Índice;2023;117,116
+17066 Figueres;Índice;2023;115,642
+17079 Girona;Índice;2023;123,513
+17095 Lloret de Mar;Índice;2023;114,147
+17114 Olot;Índice;2023;120,266
+17117 Palafrugell;Índice;2023;117,733
+17118 Palamós;Índice;2023;114,600
+17147 Ripoll;Índice;2023;111,270
+17152 Roses;Índice;2023;112,028
+17155 Salt;Índice;2023;116,357
+17160 Sant Feliu de Guíxols;Índice;2023;114,887
+17180 Santa Coloma de Farners;Índice;2023;116,580
+17199 Torroella de Montgrí;Índice;2023;117,839
+Resto Girona;Índice;2023;115,363
+18003 Albolote;Índice;2023;121,482
+18017 Almuñécar;Índice;2023;110,526
+18021 Armilla;Índice;2023;124,354
+18022 Atarfe;Índice;2023;122,219
+18023 Baza;Índice;2023;110,905
+18062 Churriana de la Vega;Índice;2023;124,304
+18087 Granada;Índice;2023;119,113
+18089 Guadix;Índice;2023;117,870
+18100 Huétor Tájar;Índice;2023;113,652
+18101 Huétor Vega;Índice;2023;114,195
+18102 Íllora;Índice;2023;104,002
+18122 Loja;Índice;2023;119,656
+18127 Maracena;Índice;2023;118,714
+18140 Motril;Índice;2023;114,229
+18145 Ogíjares;Índice;2023;119,999
+18153 Peligros;Índice;2023;112,262
+18173 Salobreña;Índice;2023;113,677
+18175 Santa Fe;Índice;2023;127,423
+18193 Zubia, La;Índice;2023;119,751
+18905 Gabias, Las;Índice;2023;123,666
+18911 Vegas del Genil;Índice;2023;114,515
+Resto Granada;Índice;2023;117,321
+19024 Alovera;Índice;2023;121,531
+19046 Azuqueca de Henares;Índice;2023;121,895
+19058 Cabanillas del Campo;Índice;2023;118,974
+19071 Casar, El;Índice;2023;119,079
+19130 Guadalajara;Índice;2023;121,113
+Resto Guadalajara;Índice;2023;119,590
+21002 Aljaraque;Índice;2023;112,020
+21005 Almonte;Índice;2023;111,083
+21010 Ayamonte;Índice;2023;112,838
+21013 Bollullos Par del Condado;Índice;2023;111,217
+21021 Cartaya;Índice;2023;116,019
+21035 Gibraleón;Índice;2023;124,309
+21041 Huelva;Índice;2023;118,483
+21042 Isla Cristina;Índice;2023;113,926
+21044 Lepe;Índice;2023;108,979
+21050 Moguer;Índice;2023;103,479
+21054 Palma del Condado, La;Índice;2023;125,003
+21055 Palos de la Frontera;Índice;2023;100,049
+21060 Punta Umbría;Índice;2023;106,266
+21072 Valverde del Camino;Índice;2023;111,879
+Resto Huelva;Índice;2023;112,145
+22048 Barbastro;Índice;2023;119,590
+22112 Fraga;Índice;2023;114,888
+22125 Huesca;Índice;2023;120,594
+22130 Jaca;Índice;2023;112,951
+22158 Monzón;Índice;2023;113,891
+Resto Huesca;Índice;2023;113,906
+23002 Alcalá la Real;Índice;2023;112,100
+23003 Alcaudete;Índice;2023;102,470
+23005 Andújar;Índice;2023;115,091
+23009 Baeza;Índice;2023;117,873
+23010 Bailén;Índice;2023;103,462
+23024 Carolina, La;Índice;2023;109,703
+23050 Jaén;Índice;2023;113,531
+23053 Jódar;Índice;2023;127,509
+23055 Linares;Índice;2023;106,718
+23058 Mancha Real;Índice;2023;107,853
+23060 Martos;Índice;2023;112,981
+23086 Torredelcampo;Índice;2023;115,293
+23087 Torredonjimeno;Índice;2023;102,935
+23092 Úbeda;Índice;2023;111,916
+23095 Villacarrillo;Índice;2023;106,943
+Resto Jaén;Índice;2023;109,708
+24008 Astorga;Índice;2023;107,127
+24010 Bañeza, La;Índice;2023;108,874
+24089 León;Índice;2023;111,289
+24115 Ponferrada;Índice;2023;109,135
+24142 San Andrés del Rabanedo;Índice;2023;110,220
+24222 Villaquilambre;Índice;2023;111,300
+Resto León;Índice;2023;107,963
+25040 Balaguer;Índice;2023;112,596
+25120 Lleida;Índice;2023;116,880
+25137 Mollerussa;Índice;2023;117,037
+25203 Seu d'Urgell, La;Índice;2023;115,320
+25217 Tàrrega;Índice;2023;119,473
+Resto Lleida;Índice;2023;113,761
+26018 Arnedo;Índice;2023;115,616
+26036 Calahorra;Índice;2023;114,266
+26071 Haro;Índice;2023;116,942
+26084 Lardero;Índice;2023;120,867
+26089 Logroño;Índice;2023;116,647
+Resto Rioja, La;Índice;2023;112,559
+27019 Foz;Índice;2023;114,787
+27028 Lugo;Índice;2023;113,585
+27031 Monforte de Lemos;Índice;2023;109,220
+27057 Sarria;Índice;2023;109,875
+27065 Vilalba;Índice;2023;113,267
+27066 Viveiro;Índice;2023;109,786
+Resto Lugo;Índice;2023;109,790
+28005 Alcalá de Henares;Índice;2023;117,899
+28006 Alcobendas;Índice;2023;115,806
+28007 Alcorcón;Índice;2023;117,293
+28009 Algete;Índice;2023;114,728
+28010 Alpedrete;Índice;2023;118,558
+28013 Aranjuez;Índice;2023;121,341
+28014 Arganda del Rey;Índice;2023;117,159
+28015 Arroyomolinos;Índice;2023;123,239
+28022 Boadilla del Monte;Índice;2023;117,955
+28026 Brunete;Índice;2023;117,607
+28040 Ciempozuelos;Índice;2023;119,144
+28045 Colmenar Viejo;Índice;2023;116,265
+28047 Collado Villalba;Índice;2023;118,751
+28049 Coslada;Índice;2023;115,974
+28053 Daganzo de Arriba;Índice;2023;117,670
+28054 Escorial, El;Índice;2023;117,863
+28058 Fuenlabrada;Índice;2023;117,865
+28061 Galapagar;Índice;2023;120,522
+28065 Getafe;Índice;2023;119,795
+28066 Griñón;Índice;2023;117,384
+28068 Guadarrama;Índice;2023;117,375
+28073 Humanes de Madrid;Índice;2023;118,586
+28074 Leganés;Índice;2023;117,995
+28079 Madrid;Índice;2023;118,336
+28080 Majadahonda;Índice;2023;117,439
+28083 Meco;Índice;2023;121,490
+28084 Mejorada del Campo;Índice;2023;116,450
+28090 Moralzarzal;Índice;2023;114,599
+28092 Móstoles;Índice;2023;116,905
+28096 Navalcarnero;Índice;2023;121,807
+28104 Paracuellos de Jarama;Índice;2023;116,468
+28106 Parla;Índice;2023;120,418
+28113 Pinto;Índice;2023;118,480
+28115 Pozuelo de Alarcón;Índice;2023;116,902
+28123 Rivas-Vaciamadrid;Índice;2023;116,345
+28127 Rozas de Madrid, Las;Índice;2023;118,486
+28129 San Agustín del Guadalix;Índice;2023;116,155
+28130 San Fernando de Henares;Índice;2023;112,163
+28131 San Lorenzo de El Escorial;Índice;2023;118,689
+28132 San Martín de la Vega;Índice;2023;113,920
+28134 San Sebastián de los Reyes;Índice;2023;115,744
+28148 Torrejón de Ardoz;Índice;2023;116,699
+28152 Torrelodones;Índice;2023;116,529
+28160 Valdemorillo;Índice;2023;122,014
+28161 Valdemoro;Índice;2023;122,392
+28167 Velilla de San Antonio;Índice;2023;115,423
+28172 Villalbilla;Índice;2023;114,055
+28176 Villanueva de la Cañada;Índice;2023;125,794
+28177 Villanueva del Pardillo;Índice;2023;120,560
+28181 Villaviciosa de Odón;Índice;2023;119,104
+28903 Tres Cantos;Índice;2023;114,775
+Resto Madrid;Índice;2023;118,417
+29007 Alhaurín de la Torre;Índice;2023;118,878
+29008 Alhaurín el Grande;Índice;2023;131,918
+29012 Álora;Índice;2023;124,029
+29015 Antequera;Índice;2023;118,231
+29025 Benalmádena;Índice;2023;125,194
+29038 Cártama;Índice;2023;124,160
+29042 Coín;Índice;2023;126,397
+29051 Estepona;Índice;2023;127,386
+29054 Fuengirola;Índice;2023;122,570
+29067 Málaga;Índice;2023;126,081
+29068 Manilva;Índice;2023;120,764
+29069 Marbella;Índice;2023;122,395
+29070 Mijas;Índice;2023;123,421
+29075 Nerja;Índice;2023;115,001
+29082 Rincón de la Victoria;Índice;2023;124,722
+29084 Ronda;Índice;2023;116,770
+29091 Torrox;Índice;2023;119,218
+29094 Vélez-Málaga;Índice;2023;121,230
+29901 Torremolinos;Índice;2023;124,731
+Resto Málaga;Índice;2023;119,282
+30002 Abarán;Índice;2023;111,748
+30003 Águilas;Índice;2023;111,113
+30005 Alcantarilla;Índice;2023;116,607
+30008 Alhama de Murcia;Índice;2023;117,031
+30009 Archena;Índice;2023;121,006
+30010 Beniel;Índice;2023;116,152
+30012 Bullas;Índice;2023;100,031
+30013 Calasparra;Índice;2023;115,672
+30015 Caravaca de la Cruz;Índice;2023;115,112
+30016 Cartagena;Índice;2023;115,464
+30017 Cehegín;Índice;2023;120,878
+30018 Ceutí;Índice;2023;119,640
+30019 Cieza;Índice;2023;113,679
+30020 Fortuna;Índice;2023;112,394
+30021 Fuente Álamo de Murcia;Índice;2023;112,965
+30022 Jumilla;Índice;2023;117,969
+30024 Lorca;Índice;2023;115,152
+30026 Mazarrón;Índice;2023;114,538
+30027 Molina de Segura;Índice;2023;119,443
+30029 Mula;Índice;2023;114,915
+30030 Murcia;Índice;2023;120,941
+30033 Puerto Lumbreras;Índice;2023;116,972
+30035 San Javier;Índice;2023;117,395
+30036 San Pedro del Pinatar;Índice;2023;109,995
+30037 Torre-Pacheco;Índice;2023;110,707
+30038 Torres de Cotillas, Las;Índice;2023;116,746
+30039 Totana;Índice;2023;115,137
+30041 Unión, La;Índice;2023;119,823
+30043 Yecla;Índice;2023;122,038
+30901 Santomera;Índice;2023;110,905
+30902 Alcázares, Los;Índice;2023;110,926
+Resto Murcia;Índice;2023;113,988
+32008 Barbadás;Índice;2023;110,754
+32009 Barco de Valdeorras, O;Índice;2023;110,932
+32019 Carballiño, O;Índice;2023;107,132
+32054 Ourense;Índice;2023;112,689
+32085 Verín;Índice;2023;102,664
+Resto Ourense;Índice;2023;108,400
+33002 Aller;Índice;2023;113,726
+33004 Avilés;Índice;2023;110,135
+33011 Cangas del Narcea;Índice;2023;110,017
+33014 Carreño;Índice;2023;111,057
+33016 Castrillón;Índice;2023;110,155
+33020 Corvera de Asturias;Índice;2023;108,540
+33024 Gijón;Índice;2023;112,841
+33025 Gozón;Índice;2023;111,054
+33031 Langreo;Índice;2023;107,142
+33032 Laviana;Índice;2023;110,877
+33033 Lena;Índice;2023;108,187
+33034 Valdés;Índice;2023;108,252
+33035 Llanera;Índice;2023;112,235
+33036 Llanes;Índice;2023;111,366
+33037 Mieres;Índice;2023;107,623
+33044 Oviedo;Índice;2023;112,472
+33060 San Martín del Rey Aurelio;Índice;2023;103,625
+33066 Siero;Índice;2023;111,448
+33076 Villaviciosa;Índice;2023;111,807
+Resto Asturias;Índice;2023;110,712
+34120 Palencia;Índice;2023;112,178
+Resto Palencia;Índice;2023;109,700
+35002 Agüimes;Índice;2023;118,066
+35003 Antigua;Índice;2023;119,853
+35004 Arrecife;Índice;2023;124,070
+35006 Arucas;Índice;2023;116,137
+35009 Gáldar;Índice;2023;117,805
+35011 Ingenio;Índice;2023;118,938
+35012 Mogán;Índice;2023;112,872
+35014 Oliva, La;Índice;2023;128,388
+35015 Pájara;Índice;2023;115,108
+35016 Palmas de Gran Canaria, Las;Índice;2023;115,676
+35017 Puerto del Rosario;Índice;2023;125,580
+35018 San Bartolomé;Índice;2023;118,262
+35019 San Bartolomé de Tirajana;Índice;2023;114,626
+35021 Santa Brígida;Índice;2023;116,583
+35022 Santa Lucía de Tirajana;Índice;2023;119,047
+35023 Santa María de Guía de Gran Canaria;Índice;2023;121,512
+35024 Teguise;Índice;2023;120,054
+35026 Telde;Índice;2023;118,331
+35027 Teror;Índice;2023;118,965
+35028 Tías;Índice;2023;121,056
+35030 Tuineje;Índice;2023;119,560
+35034 Yaiza;Índice;2023;123,023
+Resto Palmas, Las;Índice;2023;116,049
+36003 Baiona;Índice;2023;112,545
+36004 Bueu;Índice;2023;111,685
+36006 Cambados;Índice;2023;113,026
+36008 Cangas;Índice;2023;112,986
+36017 Estrada, A;Índice;2023;111,128
+36021 Gondomar;Índice;2023;113,597
+36022 Grove, O;Índice;2023;112,792
+36023 Guarda, A;Índice;2023;114,570
+36024 Lalín;Índice;2023;114,213
+36026 Marín;Índice;2023;110,314
+36029 Moaña;Índice;2023;106,086
+36033 Mos;Índice;2023;110,735
+36035 Nigrán;Índice;2023;116,114
+36038 Pontevedra;Índice;2023;116,400
+36039 Porriño, O;Índice;2023;116,394
+36041 Poio;Índice;2023;117,923
+36042 Ponteareas;Índice;2023;117,096
+36045 Redondela;Índice;2023;115,652
+36050 Salvaterra de Miño;Índice;2023;116,295
+36051 Sanxenxo;Índice;2023;113,867
+36054 Tomiño;Índice;2023;113,665
+36055 Tui;Índice;2023;115,187
+36057 Vigo;Índice;2023;115,407
+36060 Vilagarcía de Arousa;Índice;2023;116,371
+36061 Vilanova de Arousa;Índice;2023;113,418
+Resto Pontevedra;Índice;2023;115,266
+37046 Béjar;Índice;2023;105,972
+37107 Ciudad Rodrigo;Índice;2023;110,574
+37274 Salamanca;Índice;2023;112,972
+37294 Santa Marta de Tormes;Índice;2023;110,919
+Resto Salamanca;Índice;2023;112,540
+38001 Adeje;Índice;2023;120,088
+38006 Arona;Índice;2023;123,432
+38011 Candelaria;Índice;2023;124,163
+38017 Granadilla de Abona;Índice;2023;128,988
+38019 Guía de Isora;Índice;2023;121,673
+38020 Güímar;Índice;2023;124,133
+38022 Icod de los Vinos;Índice;2023;123,308
+38023 San Cristóbal de La Laguna;Índice;2023;121,504
+38024 Llanos de Aridane, Los;Índice;2023;122,714
+38026 Orotava, La;Índice;2023;118,795
+38028 Puerto de la Cruz;Índice;2023;119,545
+38031 Realejos, Los;Índice;2023;112,103
+38032 Rosario, El;Índice;2023;121,132
+38035 San Miguel de Abona;Índice;2023;124,029
+38037 Santa Cruz de la Palma;Índice;2023;121,658
+38038 Santa Cruz de Tenerife;Índice;2023;120,995
+38039 Santa Úrsula;Índice;2023;117,482
+38040 Santiago del Teide;Índice;2023;120,398
+38043 Tacoronte;Índice;2023;120,973
+38046 Tegueste;Índice;2023;114,335
+Resto Santa Cruz de Tenerife;Índice;2023;120,540
+39008 Astillero, El;Índice;2023;115,024
+39016 Camargo;Índice;2023;115,389
+39020 Castro-Urdiales;Índice;2023;113,544
+39025 Corrales de Buelna, Los;Índice;2023;114,164
+39035 Laredo;Índice;2023;115,054
+39052 Piélagos;Índice;2023;119,132
+39073 Santa Cruz de Bezana;Índice;2023;115,440
+39075 Santander;Índice;2023;115,368
+39079 Santoña;Índice;2023;106,377
+39087 Torrelavega;Índice;2023;114,208
+Resto Cantabria;Índice;2023;114,859
+40194 Segovia;Índice;2023;114,172
+Resto Segovia;Índice;2023;113,787
+41004 Alcalá de Guadaíra;Índice;2023;118,360
+41005 Alcalá del Río;Índice;2023;118,846
+41007 Algaba, La;Índice;2023;118,733
+41011 Arahal;Índice;2023;114,222
+41016 Bollullos de la Mitación;Índice;2023;117,752
+41017 Bormujos;Índice;2023;116,871
+41018 Brenes;Índice;2023;114,164
+41020 Cabezas de San Juan, Las;Índice;2023;127,772
+41021 Camas;Índice;2023;118,079
+41023 Cantillana;Índice;2023;100,871
+41024 Carmona;Índice;2023;116,217
+41029 Castilleja de la Cuesta;Índice;2023;123,884
+41034 Coria del Río;Índice;2023;111,724
+41038 Dos Hermanas;Índice;2023;120,923
+41039 Écija;Índice;2023;114,261
+41040 Espartinas;Índice;2023;112,801
+41041 Estepa;Índice;2023;115,943
+41044 Gelves;Índice;2023;114,399
+41047 Gines;Índice;2023;117,770
+41049 Guillena;Índice;2023;108,004
+41053 Lebrija;Índice;2023;119,862
+41055 Lora del Río;Índice;2023;118,031
+41058 Mairena del Alcor;Índice;2023;116,245
+41059 Mairena del Aljarafe;Índice;2023;118,934
+41060 Marchena;Índice;2023;113,902
+41065 Morón de la Frontera;Índice;2023;108,088
+41068 Osuna;Índice;2023;114,635
+41069 Palacios y Villafranca, Los;Índice;2023;108,087
+41075 Pilas;Índice;2023;119,434
+41077 Puebla de Cazalla, La;Índice;2023;120,270
+41079 Puebla del Río, La;Índice;2023;117,277
+41081 Rinconada, La;Índice;2023;112,780
+41086 San Juan de Aznalfarache;Índice;2023;116,692
+41087 Sanlúcar la Mayor;Índice;2023;119,164
+41091 Sevilla;Índice;2023;117,963
+41093 Tomares;Índice;2023;116,143
+41095 Utrera;Índice;2023;115,251
+41102 Viso del Alcor, El;Índice;2023;114,323
+Resto Sevilla;Índice;2023;111,672
+42173 Soria;Índice;2023;117,978
+Resto Soria;Índice;2023;108,474
+43014 Amposta;Índice;2023;117,969
+43037 Calafell;Índice;2023;119,173
+43038 Cambrils;Índice;2023;114,823
+43051 Cunit;Índice;2023;118,205
+43092 Mont-roig del Camp;Índice;2023;115,320
+43123 Reus;Índice;2023;117,419
+43136 Ràpita, La;Índice;2023;113,389
+43148 Tarragona;Índice;2023;118,022
+43153 Torredembarra;Índice;2023;119,657
+43155 Tortosa;Índice;2023;114,403
+43161 Valls;Índice;2023;115,451
+43163 Vendrell, El;Índice;2023;120,865
+43171 Vila-seca;Índice;2023;115,076
+43901 Deltebre;Índice;2023;115,951
+43905 Salou;Índice;2023;113,990
+Resto Tarragona;Índice;2023;114,831
+44013 Alcañiz;Índice;2023;112,843
+44216 Teruel;Índice;2023;117,700
+Resto Teruel;Índice;2023;110,843
+45019 Bargas;Índice;2023;124,457
+45066 Fuensalida;Índice;2023;127,717
+45081 Illescas;Índice;2023;129,942
+45087 Madridejos;Índice;2023;115,344
+45121 Ocaña;Índice;2023;134,634
+45142 Quintanar de la Orden;Índice;2023;114,458
+45161 Seseña;Índice;2023;130,055
+45163 Sonseca;Índice;2023;127,328
+45165 Talavera de la Reina;Índice;2023;116,133
+45168 Toledo;Índice;2023;121,002
+45173 Torrijos;Índice;2023;119,981
+45205 Yuncos;Índice;2023;122,297
+Resto Toledo;Índice;2023;120,277
+46005 Alaquàs;Índice;2023;124,747
+46007 Albal;Índice;2023;124,175
+46011 Alberic;Índice;2023;111,864
+46013 Alboraia/Alboraya;Índice;2023;124,848
+46015 Alcàsser;Índice;2023;126,997
+46017 Alzira;Índice;2023;120,825
+46019 Alcúdia, l';Índice;2023;124,285
+46021 Aldaia;Índice;2023;125,030
+46022 Alfafar;Índice;2023;121,667
+46029 Algemesí;Índice;2023;122,895
+46031 Alginet;Índice;2023;120,117
+46051 Benaguasil;Índice;2023;122,335
+46054 Benetússer;Índice;2023;121,484
+46060 Benifaió;Índice;2023;121,419
+46070 Bétera;Índice;2023;125,508
+46078 Burjassot;Índice;2023;127,255
+46081 Canals;Índice;2023;104,996
+46083 Carcaixent;Índice;2023;115,733
+46085 Carlet;Índice;2023;115,803
+46094 Catarroja;Índice;2023;123,099
+46102 Quart de Poblet;Índice;2023;121,815
+46105 Cullera;Índice;2023;115,571
+46110 Xirivella;Índice;2023;125,284
+46111 Chiva;Índice;2023;113,879
+46116 Eliana, l';Índice;2023;124,882
+46131 Gandia;Índice;2023;118,675
+46135 Godella;Índice;2023;124,179
+46145 Xàtiva;Índice;2023;120,050
+46147 Llíria;Índice;2023;115,416
+46159 Manises;Índice;2023;122,883
+46164 Massamagrell;Índice;2023;125,369
+46166 Meliana;Índice;2023;123,773
+46169 Mislata;Índice;2023;126,612
+46171 Montcada/Moncada;Índice;2023;128,901
+46181 Oliva;Índice;2023;117,658
+46184 Ontinyent;Índice;2023;124,703
+46186 Paiporta;Índice;2023;124,968
+46190 Paterna;Índice;2023;123,227
+46193 Picanya;Índice;2023;126,019
+46194 Picassent;Índice;2023;125,326
+46202 Pobla de Vallbona, la;Índice;2023;128,520
+46205 Puçol;Índice;2023;126,388
+46213 Requena;Índice;2023;115,691
+46214 Riba-roja de Túria;Índice;2023;132,723
+46220 Sagunt/Sagunto;Índice;2023;124,961
+46223 Sedaví;Índice;2023;123,434
+46230 Silla;Índice;2023;123,082
+46235 Sueca;Índice;2023;115,362
+46238 Tavernes de la Valldigna;Índice;2023;113,940
+46244 Torrent;Índice;2023;123,599
+46249 Utiel;Índice;2023;112,124
+46250 València;Índice;2023;128,869
+46256 Vilamarxant;Índice;2023;122,904
+Resto Valencia/València;Índice;2023;120,579
+47010 Arroyo de la Encomienda;Índice;2023;120,226
+47076 Laguna de Duero;Índice;2023;115,866
+47085 Medina del Campo;Índice;2023;111,064
+47186 Valladolid;Índice;2023;114,596
+Resto Valladolid;Índice;2023;114,801
+49021 Benavente;Índice;2023;109,973
+49275 Zamora;Índice;2023;110,137
+Resto Zamora;Índice;2023;108,273
+50067 Calatayud;Índice;2023;114,454
+50074 Caspe;Índice;2023;105,821
+50089 Cuarte de Huerva;Índice;2023;121,619
+50095 Ejea de los Caballeros;Índice;2023;117,878
+50251 Tarazona;Índice;2023;116,825
+50272 Utebo;Índice;2023;117,260
+50297 Zaragoza;Índice;2023;116,059
+Resto Zaragoza;Índice;2023;116,284
+51001 Ceuta;Índice;2023;108,542
+52001 Melilla;Índice;2023;107,428
