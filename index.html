@@ -25,14 +25,14 @@
 		.app{display:flex;flex-direction:column;height:100vh}
 				
 		/* Título más grande y con buscador flotante */
-		header{position:relative; display:flex;align-items:center;justify-content:center;padding:32px;background:var(--bg);border-bottom:none;}
+		header{position:relative; display:flex;align-items:center;justify-content:center;padding:20px 32px 12px;background:var(--bg);border-bottom:none;}
 		header h1{margin:0;font-size:58px; color:var(--accent);font-weight:800; letter-spacing:0.8px;}
 				
 		.topbar-search{position:absolute; right:55px; top:50%; transform:translateY(-50%); width:320px}
 		.search-input{width:100%;padding:14px 16px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 1px 2px rgba(16,24,40,.03);font-size:16px}
 
 		/* Grid Layout */
-		.container{flex:1;display:grid;grid-template-columns:280px 1fr 395px;grid-template-rows:1fr 315px;gap:var(--gap);padding:18px;min-height:0}
+		.container{flex:1;display:grid;grid-template-columns:280px 1fr 395px;grid-template-rows:1fr 315px;gap:var(--gap);padding:18px 18px 36px;min-height:0}
 		.left{grid-column:1/2;grid-row:1/2;padding:12px;overflow:auto;}
 		.center{grid-column:2/3;grid-row:1/2;background:var(--card);border-radius:10px;padding:8px;display:flex;flex-direction:column;min-height:0;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
 		.right{grid-column:3/4;grid-row:1/2;background:var(--card);padding:12px;border-radius:10px;overflow:auto;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
@@ -45,7 +45,7 @@
 		.card{background:var(--card);border-radius:10px;padding:10px;margin-bottom:10px;box-shadow:0 2px 5px rgba(16,24,40,.03); border:1px solid var(--separator);}
 						
 		.ranking-list-content, .detail-content{
-			padding:0 12px 12px 12px; /* Ajuste para scroll */
+			padding:0 12px 36px 12px; /* Ajuste para scroll y espacio inferior */
 			flex:1;
 			overflow-y:auto; 
 		}
@@ -162,6 +162,13 @@
 		.ranking-item:hover{background:#fcfdfe}
 		.muted{color:var(--muted);font-size:13px}
 		.ranking-item.selected{background:linear-gradient(90deg,var(--separator),#fcfdfe);border-left:4px solid var(--accent-strong);}
+
+		/* etiqueta fija sobre la ruta */
+		.route-label{
+			background: rgba(0,0,0,0.7);
+			color: #fff;
+			padding:6px 8px;border-radius:6px;font-weight:700;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.25);
+		}
 		
 	</style>
 </head>
@@ -244,6 +251,11 @@
 					<input type="checkbox" id="showAllMap">
 					<label for="showAllMap" style="margin-left:6px;margin-top:0">Mostrar todas en mapa</label>
 				</div>
+
+				<div style="margin-top:8px">
+					<input type="checkbox" id="useRouting">
+					<label for="useRouting" style="margin-left:6px;margin-top:0">Trazar ruta por carretera (OSRM)</label>
+				</div>
 			</aside>
 
 			<section class="bottom">
@@ -256,6 +268,7 @@
 					<h3 id="detailTitle" style="padding:0 12px">Selecciona un municipio</h3>
 					<div id="detailContent" class="detail-content"> 
 						<div id="detailProfile" class="muted">Datos: Educación, Sanidad, Ocio, Bienestar y servicios, Movilidad</div>
+						<div id="detailRoute" class="muted" style="margin-top:6px"></div>
 						<h4>BREVE DESCRIPCIÓN DEL MUNICIPIO</h4>
 						<p id="detailDesc">Aquí aparecerá una pequeña descripción cuando selecciones un municipio del ranking.</p>
 					</div>
@@ -277,6 +290,7 @@
 		let municipios = []; 
 		let similaresData = []; // Para almacenar los datos de municipios_similares.csv
 		const markers = {};
+		let lastRouteInfo = null; // {distance: meters, duration: seconds, source: 'osrm'|'straight'}
 
 		// Map setup (Leaflet already included)
 		const map = L.map('map', {zoomControl:true}).setView([40.4168,-3.7038],10);
@@ -286,6 +300,12 @@
 		let currentRankMarkers = {}; 
 		let lastSortedMap = {}; 
 		const areaLayer = L.layerGroup().addTo(map);
+		// layer to show the user's "Lugar de Interés" (single red marker)
+		const interestLayer = L.layerGroup().addTo(map);
+		// layer to draw connection line between selected municipio and interest point
+		const connectionLayer = L.layerGroup().addTo(map);
+		// layer to draw routed path (OSRM)
+		const routeLayer = L.layerGroup().addTo(map);
 		let municipioMap = {}; // Mapa para acceder rápidamente a un municipio por nombre
 
 		// Funcionalidad del botón Buscar (ahora en el HTML)
@@ -362,10 +382,10 @@
 							desc: r.descripcion || r.Descripcion || r.description || r.Description || ''
 						}));
 						csvLoaded = true;
-                        municipioMap = {}; // Reset map
-                        municipios.forEach(m=>{
-                            municipioMap[m.name] = m; // Llenar el mapa
-                        });
+						municipioMap = {}; // Reset map
+						municipios.forEach(m=>{
+							if(m.name) municipioMap[m.name.toLowerCase()] = m; // Llenar el mapa con clave lowercase
+						});
                         resolve();
 					},
 					error: function(err){
@@ -409,7 +429,7 @@
 				{id:3,name:'Getafe',lat:40.308,lon:-3.732,educacion:6, sanidad:6, ocio_cultura:7, bienestar:6, transporte_conectividad:7, economia_empleo:8, desc:'Ciudad con gran actividad industrial y universitaria.'}
 			];
 			municipioMap = {};
-            municipios.forEach(m=>{ municipioMap[m.name] = m; });
+			municipios.forEach(m=>{ if(m.name) municipioMap[m.name.toLowerCase()] = m; });
             csvLoaded = false;
 		}
 
@@ -538,7 +558,7 @@
             });
             document.getElementById('detailProfile').textContent = 'Datos: ' + parts.join(', ');
             document.getElementById('detailDesc').textContent = m.desc || '';
-            if(m.lat && m.lon){ map.setView([m.lat,m.lon],12); 
+			if(m.lat && m.lon){ map.setView([m.lat,m.lon],12); 
                 // Abrir popup si el municipio tiene un marcador de ranking
                 if(currentRankMarkers[m.id]) currentRankMarkers[m.id].openPopup(); 
                 // Si no está en el ranking visible, añadir un marcador temporal si tiene coordenadas.
@@ -547,8 +567,57 @@
                     // Opcional: Centrar el mapa en él.
                     map.setView([m.lat,m.lon],12); 
                 }
+				// Si hay un marcador de interés, dibujar la línea de conexión
+				try{
+					const interestLayers = interestLayer.getLayers();
+					if(interestLayers && interestLayers.length>0){
+						const il = interestLayers[0].getLatLng();
+						drawConnectionBetween(m, il);
+					} else {
+						connectionLayer.clearLayers();
+					}
+				}catch(e){ console.warn('drawConnection error', e); }
             }
         }
+
+		// Dibuja una línea (o ruta) entre el municipio y el punto de interés (interestLatLng puede ser L.LatLng)
+		async function drawConnectionBetween(municipioObj, interestLatLng){
+			connectionLayer.clearLayers();
+			routeLayer.clearLayers();
+			if(!municipioObj || !interestLatLng) return;
+			const a = (municipioObj.lat && municipioObj.lon) ? [municipioObj.lat, municipioObj.lon] : null;
+			let b = null;
+			if(interestLatLng.lat !== undefined){ b = [interestLatLng.lat, interestLatLng.lng !== undefined ? interestLatLng.lng : (interestLatLng.lon || interestLatLng[1])]; }
+			if(!a || !b) return;
+			// Si el usuario ha marcado usar routing, intentarlo con OSRM. Si falla, dibujar polyline simple.
+			const useRouting = document.getElementById('useRouting')?.checked;
+			if(useRouting){
+				const ok = await routeBetweenPoints(a[0], a[1], b[0], b[1]);
+				if(ok) return; // ruta dibujada por OSRM (lastRouteInfo ya configurado)
+			}
+			// Fallback: línea simple (distancia en línea recta)
+			const poly = L.polyline([a,b], {color:'#dc3545', weight:3, dashArray:'6 4'}).addTo(connectionLayer);
+			// calcular distancia Haversine
+			function haversine(lat1,lon1,lat2,lon2){
+				const R = 6371000; // m
+				const toRad = v => v * Math.PI/180;
+				const dLat = toRad(lat2-lat1);
+				const dLon = toRad(lon2-lon1);
+				const a1 = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)*Math.sin(dLon/2);
+				const c = 2 * Math.atan2(Math.sqrt(a1), Math.sqrt(1-a1));
+				return R * c;
+			}
+			const dist = haversine(a[0],a[1],b[0],b[1]);
+			lastRouteInfo = {distance: dist, duration: null, source: 'straight'};
+			updateDetailRoute();
+			// añadir etiqueta sobre la línea en el punto medio
+			try{
+				const mid = [(a[0]+b[0])/2, (a[1]+b[1])/2];
+				const labelText = `Línea: ${(dist/1000).toFixed(2)} km`;
+				poly.bindTooltip(labelText, {permanent:true, direction:'center', className:'route-label', offset:[0,0]}).openTooltip(mid);
+			}catch(e){/* ignore */}
+			try{ const bounds = L.latLngBounds([a,b]); map.fitBounds(bounds.pad(0.15)); }catch(e){}
+		}
 
 		// select ranking item 
 		function selectRankingItem(idOrName){
@@ -644,70 +713,173 @@
 			}
 		}
 
+		// Geocodificación OSM (Nominatim) - devuelve el primer resultado o null
+		async function geocodeOSM(query){
+			if(!query) return null;
+			const base = 'https://nominatim.openstreetmap.org/search';
+			const params = new URLSearchParams({format:'json', q: query, limit: '1', countrycodes: 'es', 'accept-language':'es'});
+			const url = base + '?' + params.toString();
+			try{
+				const res = await fetch(url, {headers:{'Accept':'application/json'}});
+				if(!res.ok) return null;
+				const data = await res.json();
+				if(data && data.length>0) return data[0];
+			}catch(e){
+				console.warn('Nominatim geocode error', e);
+			}
+			return null;
+		}
+
+		// Enrutamiento usando OSRM público: devuelve true si dibujó ruta
+		async function routeBetweenPoints(aLat,aLon,bLat,bLon){
+			routeLayer.clearLayers();
+			connectionLayer.clearLayers();
+			if(!aLat || !aLon || !bLat || !bLon) return false;
+			const url = `https://router.project-osrm.org/route/v1/driving/${aLon},${aLat};${bLon},${bLat}?overview=full&geometries=geojson&alternatives=false&steps=false`;
+			try{
+				const res = await fetch(url);
+				if(!res.ok) throw new Error('OSRM no respondió');
+				const data = await res.json();
+				if(data && data.routes && data.routes.length){
+					const coords = data.routes[0].geometry.coordinates.map(c=>[c[1], c[0]]);
+					const line = L.polyline(coords, {color:'#1e88e5', weight:4}).addTo(routeLayer);
+						const dist = data.routes[0].distance || 0; // meters
+						const dur = data.routes[0].duration || 0; // seconds
+						// store last route info and update UI
+						lastRouteInfo = {distance: dist, duration: dur, source: 'osrm'};
+						updateDetailRoute();
+						line.bindPopup(`Distancia: ${(dist/1000).toFixed(2)} km<br/>Duración: ${Math.round(dur/60)} min`);
+						// añadir etiqueta permanente sobre la ruta (en el centro aproximado)
+						try{
+							const coordsMid = coords[Math.floor(coords.length/2)];
+							const labelText = `Ruta: ${(dist/1000).toFixed(2)} km — ${Math.round(dur/60)} min`;
+							line.bindTooltip(labelText, {permanent:true, direction:'center', className:'route-label', offset:[0,0]}).openTooltip(coordsMid);
+						}catch(e){/* ignore */}
+					return true;
+				}
+			}catch(e){
+				console.warn('OSRM routing failed', e);
+			}
+			return false;
+		}
+
+		// Actualiza el panel de detalle con la información de ruta/linea si existe
+		function updateDetailRoute(){
+			const el = document.getElementById('detailRoute');
+			if(!el) return;
+			if(!lastRouteInfo){ el.textContent = ''; return; }
+			if(lastRouteInfo.source === 'osrm'){
+				const km = (lastRouteInfo.distance/1000).toFixed(2);
+				const min = Math.round((lastRouteInfo.duration||0)/60);
+				el.innerHTML = `<strong>Ruta (carretera)</strong>: ${km} km — ${min} min`;
+			} else if(lastRouteInfo.source === 'straight'){
+				const km = (lastRouteInfo.distance/1000).toFixed(2);
+				el.innerHTML = `<strong>Línea recta</strong>: ${km} km`;
+			} else {
+				el.textContent = '';
+			}
+		}
+
 		// Obtener y renderizar la lista de municipios similares
-        async function updateSimilaresFromCSV(municipioBaseName){
-            const simDiv = document.getElementById('similaresList');
-            simDiv.innerHTML = '';
-            
-            if (!municipioBaseName) {
-                simDiv.innerHTML = '<div class="muted" style="text-align:center;padding:12px;">Selecciona o busca un municipio para ver sus similares.</div>';
-                return;
-            }
+		async function updateSimilaresFromCSV(municipioBaseName){
+			const simDiv = document.getElementById('similaresList');
+			simDiv.innerHTML = '';
 
-            const maxSimilares = Number(document.getElementById('s-similares')?.value) || 5;
-            const placeholderImg = 'assets/municipio-placeholder.jpg'; 
-            
-            // Buscar la fila de datos similares que coincida con el municipio base
-            const simRow = similaresData.find(row => row['municipio'] === municipioBaseName);
+			if (!municipioBaseName) {
+				simDiv.innerHTML = '<div class="muted" style="text-align:center;padding:12px;">Selecciona o busca un municipio para ver sus similares.</div>';
+				return;
+			}
 
-            if (!simRow) {
-                 simDiv.innerHTML = `<div class="muted" style="text-align:center;padding:12px;">No se encontraron municipios similares para **${municipioBaseName}**.</div>`;
-                 return;
-            }
-            
-            let municipiosSimilaresEncontrados = 0;
-            
-            // Iterar sobre los campos sim1, sim2, ... hasta maxSimilares (o hasta que el campo no exista)
-            for (let i = 1; i <= maxSimilares; i++) {
-                const similarName = simRow[`sim${i}`];
-                
-                if (similarName && municipioMap[similarName]) {
-                    const s = municipioMap[similarName]; // Datos del municipio similar de df_indices_categorias
-                    const d = document.createElement('div'); d.className='sim-card';
-                    const thumbDiv = document.createElement('div'); thumbDiv.className='thumb';
-                    
-                    // ... (resto de la lógica de renderizado de la tarjeta)
-                    thumbDiv.innerHTML = '<svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="56" height="40" rx="6" fill="#f3f4f6"/></svg>';
-                    d.appendChild(thumbDiv);
-                    const content = document.createElement('div'); content.style.flex='1';
-                    
-                    content.innerHTML = `<strong style="display:block">${s.name}</strong><div class="muted">Similar a ${municipioBaseName}</div>`;
-                    d.appendChild(content);
-                    
-                    // Usar el nombre para la selección ya que no están en el ranking
-                    d.onclick = ()=> { 
-                        selectRankingItem(s.name);
-                    } 
-                    simDiv.appendChild(d);
-                    municipiosSimilaresEncontrados++;
+			const maxSimilares = Number(document.getElementById('s-similares')?.value) || 5;
+			const placeholderImg = 'assets/municipio-placeholder.jpg';
 
-                    // Async fetch thumbnail
-                    fetchWikiThumbnail(s.name).then(imgUrl=>{
-                        const img = document.createElement('img');
-                        img.alt = s.name;
-                        img.src = imgUrl || placeholderImg;
-                        img.onerror = () => { img.src = placeholderImg; };
-                        thumbDiv.innerHTML = '';
-                        thumbDiv.appendChild(img);
-                    }).catch(()=>{
-                        thumbDiv.innerHTML = `<img src="${placeholderImg}" alt="${s.name}" onerror="this.src='${placeholderImg}'">`;
-                    });
-                }
-            }
-             if (municipiosSimilaresEncontrados === 0) {
-                 simDiv.innerHTML = `<div class="muted" style="text-align:center;padding:12px;">No hay municipios similares válidos para **${municipioBaseName}**.</div>`;
-            }
-        }
+			// Buscar la fila de datos similares que coincida con el municipio base (case-insensitive)
+			let simRow = null;
+			if(Array.isArray(similaresData) && similaresData.length>0){
+				const target = municipioBaseName.toString().trim().toLowerCase();
+				simRow = similaresData.find(row => {
+					const m = (row['municipio'] || row['Municipio'] || row['municipio_base'] || '').toString().trim().toLowerCase();
+					return m && m === target;
+				});
+			}
+
+			// If we have a simRow, use it. Otherwise fallback to top-N from the current ranking or the municipios list.
+			if (simRow) {
+				let municipiosSimilaresEncontrados = 0;
+				for (let i = 1; i <= maxSimilares; i++) {
+					const similarName = simRow[`sim${i}`] || simRow[`SIM${i}`] || simRow[`Sim${i}`];
+					if (similarName) {
+						// try case-insensitive lookup in municipioMap
+						const s = municipioMap[similarName.toString().trim().toLowerCase()];
+						if (s) {
+							const d = document.createElement('div'); d.className='sim-card';
+							const thumbDiv = document.createElement('div'); thumbDiv.className='thumb';
+							thumbDiv.innerHTML = '<svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="56" height="40" rx="6" fill="#f3f4f6"/></svg>';
+							d.appendChild(thumbDiv);
+							const content = document.createElement('div'); content.style.flex='1';
+							content.innerHTML = `<strong style="display:block">${s.name}</strong><div class="muted">Similar a ${municipioBaseName}</div>`;
+							d.appendChild(content);
+							d.onclick = ()=> { selectRankingItem(s.name); }
+							simDiv.appendChild(d);
+							municipiosSimilaresEncontrados++;
+
+							fetchWikiThumbnail(s.name).then(imgUrl=>{
+								const img = document.createElement('img');
+								img.alt = s.name;
+								img.src = imgUrl || placeholderImg;
+								img.onerror = () => { img.src = placeholderImg; };
+								thumbDiv.innerHTML = '';
+								thumbDiv.appendChild(img);
+							}).catch(()=>{ thumbDiv.innerHTML = `<img src="${placeholderImg}" alt="${s.name}" onerror="this.src='${placeholderImg}'">`; });
+						}
+					}
+				}
+				if (municipiosSimilaresEncontrados === 0) {
+					simDiv.innerHTML = `<div class="muted" style="text-align:center;padding:12px;">No hay municipios similares válidos para **${municipioBaseName}**.</div>`;
+				}
+				return;
+			}
+
+			// Fallback: si no hay archivo de similares o no se encontró la fila, tomar top-N del ranking
+			const candidates = Object.values(lastSortedMap).length ? Object.values(lastSortedMap) : municipios;
+			if(!candidates || candidates.length===0){
+				simDiv.innerHTML = `<div class="muted" style="text-align:center;padding:12px;">No hay datos disponibles para generar similares.</div>`;
+				return;
+			}
+
+			let added = 0;
+			const baseLower = municipioBaseName.toString().trim().toLowerCase();
+			for(const item of candidates){
+				if(added >= maxSimilares) break;
+				if(!item || !item.name) continue;
+				if(item.name.toString().trim().toLowerCase() === baseLower) continue; // skip the base itself
+				const s = item;
+				const d = document.createElement('div'); d.className='sim-card';
+				const thumbDiv = document.createElement('div'); thumbDiv.className='thumb';
+				thumbDiv.innerHTML = '<svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="56" height="40" rx="6" fill="#f3f4f6"/></svg>';
+				d.appendChild(thumbDiv);
+				const content = document.createElement('div'); content.style.flex='1';
+				content.innerHTML = `<strong style="display:block">${s.name}</strong><div class="muted">Sugerido — similar por ranking</div>`;
+				d.appendChild(content);
+				d.onclick = ()=> { selectRankingItem(s.id || s.name); }
+				simDiv.appendChild(d);
+
+				fetchWikiThumbnail(s.name).then(imgUrl=>{
+					const img = document.createElement('img');
+					img.alt = s.name;
+					img.src = imgUrl || placeholderImg;
+					img.onerror = () => { img.src = placeholderImg; };
+					thumbDiv.innerHTML = '';
+					thumbDiv.appendChild(img);
+				}).catch(()=>{ thumbDiv.innerHTML = `<img src="${placeholderImg}" alt="${s.name}" onerror="this.src='${placeholderImg}'">`; });
+
+				added++;
+			}
+
+			if(added === 0){
+				simDiv.innerHTML = `<div class="muted" style="text-align:center;padding:12px;">No se encontraron similares (ni CSV ni ranking disponible).</div>`;
+			}
+		}
 
 		// attach slider display update and re-run search 
 		const sliderIds = {educ:'s-educ',sani:'s-sani',ocio:'s-ocio',cost:'s-cost',mov:'s-mov',econ:'s-econ'};
@@ -732,16 +904,64 @@
 			});
 		});
 
-		// place input: center map on typed municipality if matches name 
-		document.getElementById('placeInput').addEventListener('change', (e)=>{
-            const q = e.target.value.toLowerCase();
-            const found = municipios.find(m=>m.name && m.name.toLowerCase().includes(q));
-            if(found) {
-                showDetail(found);
-                // Mostrar similares para el municipio buscado
-                updateSimilaresFromCSV(found.name); 
-            }
-        });
+		// place input: center map on typed municipality; use CSV match or fallback to OSM (Nominatim)
+		document.getElementById('placeInput').addEventListener('change', async (e)=>{
+			const qRaw = (e.target.value || '').trim();
+			const q = qRaw.toLowerCase();
+			if(!q){ interestLayer.clearLayers(); connectionLayer.clearLayers(); routeLayer.clearLayers(); lastRouteInfo = null; updateDetailRoute(); return; }
+
+			// try exact lookup in municipioMap (lowercase keys), then fallback to substring search
+			let found = municipioMap[q] || municipios.find(m=>m.name && m.name.toLowerCase().includes(q));
+
+			// If nothing found and CSV not loaded, try forcing CSV load (maybe user typed early)
+			if(!found && !csvLoaded){
+				try{ await runSearch({forceReload:true}); }catch(err){ console.warn('force reload in placeInput failed', err); }
+				found = municipioMap[q] || municipios.find(m=>m.name && m.name.toLowerCase().includes(q));
+			}
+
+			if(found){
+				showDetail(found);
+				updateSimilaresFromCSV(found.name);
+				if(found.lat && found.lon){
+					// create/update red interest marker
+					interestLayer.clearLayers();
+					const redHtml = `<div style="background:#dc3545;color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.25)">•</div>`;
+					const icon = L.divIcon({className:'interest-icon', html:redHtml, iconSize:[26,26], iconAnchor:[13,13]});
+					const mkr = L.marker([found.lat, found.lon], {icon}).bindPopup(`<strong>Lugar de interés</strong><br/>${found.name}`);
+					mkr.addTo(interestLayer);
+					mkr.openPopup();
+					map.setView([found.lat, found.lon], 12);
+					// Dibujar conexión si hay un municipio seleccionado
+					try{ const sel = document.querySelector('.ranking-item.selected'); if(sel){ const id = parseInt(sel.id.split('-')[2]); const selM = lastSortedMap[id] || municipios.find(x=>x.id===id); if(selM) drawConnectionBetween(selM, mkr.getLatLng()); } }catch(e){console.warn('connect after interest (csv) failed', e);} 
+				} else {
+					alert('Ubicación encontrada pero no tiene coordenadas para mostrar en el mapa.');
+				}
+								// Dibujar conexión si hay un municipio seleccionado
+								try{ const sel = document.querySelector('.ranking-item.selected'); if(sel){ const id = parseInt(sel.id.split('-')[2]); const selM = lastSortedMap[id] || municipios.find(x=>x.id===id); if(selM) drawConnectionBetween(selM, mkr.getLatLng()); } }catch(e){console.warn('connect after interest (osm) failed', e);} 
+			} else {
+				// If not found in CSV, try geocoding against OSM/Nominatim
+				const osm = await geocodeOSM(qRaw);
+				if(osm && osm.lat && osm.lon){
+					const temp = { id: 'osm-'+Date.now(), name: osm.display_name || qRaw, lat: Number(osm.lat), lon: Number(osm.lon), desc: 'Resultado geocodificado desde OpenStreetMap (Nominatim).', isExternal: true };
+					// Show detail but don't try to fetch similares (not in CSV)
+					showDetail(temp);
+					document.getElementById('similaresList').innerHTML = `<div class="muted" style="text-align:center;padding:12px;">Ubicación geocodificada desde OSM: no está en el CSV.</div>`;
+
+					// create/update red interest marker
+					interestLayer.clearLayers();
+					const redHtml = `<div style="background:#dc3545;color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.25)">•</div>`;
+					const icon = L.divIcon({className:'interest-icon', html:redHtml, iconSize:[26,26], iconAnchor:[13,13]});
+					const mkr = L.marker([temp.lat, temp.lon], {icon}).bindPopup(`<strong>Lugar de interés (OSM)</strong><br/>${temp.name}`);
+					mkr.addTo(interestLayer);
+					mkr.openPopup();
+					map.setView([temp.lat, temp.lon], 12);
+					// Dibujar conexión si hay un municipio seleccionado
+					try{ const sel = document.querySelector('.ranking-item.selected'); if(sel){ const id = parseInt(sel.id.split('-')[2]); const selM = lastSortedMap[id] || municipios.find(x=>x.id===id); if(selM) drawConnectionBetween(selM, mkr.getLatLng()); } }catch(e){console.warn('connect after interest (osm) failed', e);} 
+				} else {
+					alert('No se encontró ningún municipio que coincida con: ' + (qRaw||''));
+				}
+			}
+		});
 
 		// initial load
 		runSearch({forceReload:true}).catch(err=>{ console.warn('Initial runSearch failed, falling back', err); loadFallback(); renderRanking(municipios,20); });
