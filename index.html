@@ -25,7 +25,7 @@
 		.app{display:flex;flex-direction:column;height:100vh}
 				
 		/* Título más grande y con buscador flotante */
-		header{position:relative; display:flex;align-items:center;justify-content:center;padding:12px 20px 8px;background:var(--bg);border-bottom:none;}
+		header{position:relative; display:flex;align-items:center;justify-content:center;padding:12px 20px 8px;background:var(--bg);border-bottom:none; margin:12px 0;}
 		header h1{margin:0;font-size:44px; color:var(--accent);font-weight:800; letter-spacing:0.6px;}
 				
 		.topbar-search{position:absolute; right:55px; top:50%; transform:translateY(-50%); width:320px}
@@ -36,6 +36,8 @@
 		.left{grid-column:1/2;grid-row:1/2;padding:8px;overflow:auto;}
 		.center{grid-column:2/3;grid-row:1/2;background:var(--card);border-radius:10px;padding:6px;display:flex;flex-direction:column;min-height:0;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
 		.right{grid-column:3/4;grid-row:1/2;background:var(--card);padding:8px;border-radius:10px;overflow:auto;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
+		/* allow the right column to shrink on small widths so inputs don't overflow */
+		.right{min-width:0}
 						
 		/* Fila inferior con 3 columnas independientes: Ranking | Descripción | Chatbot */
 		/* Aumentamos la fracción de la tercera columna para dar más anchura al Chatbot */
@@ -54,6 +56,9 @@
 		/* Ajustes específicos para el buscador dentro del panel Ranking */
 		.ranking-search{display:block;padding:6px 12px}
 		.ranking-search .search-input{width:100%;max-width:none;padding:10px 12px;border-radius:8px;box-sizing:border-box}
+
+		/* Ensure inputs and textareas inside the right panel never overflow */
+		.right input[type="text"], .right input[type="number"], .right input[type="range"], .right input, .right textarea, #placeInput{ max-width:100%; box-sizing:border-box; }
 						
 		#map{height:100%;border-radius:8px}
 
@@ -80,14 +85,14 @@
 		/* Sponsor slider animation/positioning */
 		.sponsor-rotator{
 			position:fixed;
-			left:19px; 	
-			top:19px; 	
-			width:365px; 
-			height:81px; 
-			overflow-x:hidden; 
+			left:19px;
+			top:19px;
+			width:365px;
+			height:81px;
+			overflow-x:hidden;
 			overflow-y:hidden;
 			z-index:1000;
-			background:transparent; 
+			background:transparent;
 			pointer-events:auto;
 		}
 
