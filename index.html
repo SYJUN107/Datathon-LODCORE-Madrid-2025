@@ -5,42 +5,182 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Búsqueda de Municipios - Madrid</title>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="" crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="" crossorigin=""></script>
+	<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
 	<style>
-		:root{--gap:12px;--panel-bg:#f8f9fb;--card:#ffffff;--accent:#2b7be4}
-		/* full-viewport layout: prevent body scrolling and let internal panels scroll */
-		html,body{height:100vh;width:100vw;margin:0;padding:0;box-sizing:border-box;overflow:hidden;font-family:Inter,Segoe UI,Arial;color:#111}
+		/* --- ESTILOS CONSOLIDADOS --- */
+		:root{
+			--bg: #FBF5EB; 			/* crema */
+			--card: #ffffff;
+			--accent: #1F4E79; 		/* color dominante oscuro */
+			--accent-strong: #2b7be4; /* color de acento para ranking/marcadores */
+			--muted: #6b7280;
+			--separator: rgba(31,78,121,0.08);
+			--gap: 12px;
+		}
+
+		/* body + layout tweaks (from original, enhanced with theme) */
+		html,body{height:100vh;width:100vw;margin:0;padding:0;box-sizing:border-box;overflow:hidden;font-family:Inter,Segoe UI,Arial;color:#0f1724;background:var(--bg)}
 		.app{display:flex;flex-direction:column;height:100vh}
-		header{display:flex;align-items:center;gap:12px;padding:12px;background:linear-gradient(90deg,#fff,#f7f9fc);box-shadow:0 1px 2px rgba(16,24,40,.05)}
-		header h1{margin:0;font-size:18px}
-		.container{flex:1;display:grid;grid-template-columns:220px 0.9fr 320px;grid-template-rows:1fr 360px;gap:var(--gap);padding:12px;min-height:0}
-		/* Left panel (similares) */
-		.left{grid-column:1/2;grid-row:1/2;background:var(--panel-bg);padding:12px;border-radius:8px;overflow:auto}
-		.center{grid-column:2/3;grid-row:1/2;background:#fff;border-radius:8px;padding:8px;display:flex;flex-direction:column;min-height:0}
-		.right{grid-column:3/4;grid-row:1/2;background:var(--panel-bg);padding:12px;border-radius:8px;overflow:auto}
-		.bottom{grid-column:1/4;grid-row:2/3;display:grid;grid-template-columns:1fr 2fr;gap:12px;min-height:0}
-		/* make cards inside bottom stretch and scroll internally */
-		.bottom .card{height:100%;display:flex;flex-direction:column;overflow:auto}
-		.detail{padding:12px;flex:1;overflow:auto}
-		.card{background:var(--card);border-radius:8px;padding:10px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,24,40,.03)}
-		#map{height:100%;border-radius:6px}
-		.sim-card{display:flex;align-items:center;gap:8px;padding:8px;border-radius:6px;border:1px solid #eee}
-		.sliders label{display:flex;justify-content:space-between;font-size:13px;margin-top:8px}
-		input[type=range]{width:100%}
-		.ranking-list{flex:1;overflow:auto;padding:8px}
-		.ranking-item{padding:8px;border-bottom:1px dashed #eee;cursor:pointer}
-		.ranking-item:hover{background:#fbfdff}
-		.detail{padding:12px}
-		.muted{color:#666;font-size:13px}
-		.topbar-search{flex:1}
-		.search-input{width:100%;padding:8px;border-radius:6px;border:1px solid #ddd}
-		@media(max-width:900px){.container{grid-template-columns:1fr;grid-template-rows:200px 1fr 320px} .left{grid-column:1/2;grid-row:3/4} .right{grid-column:1/2;grid-row:2/3} .center{grid-column:1/2;grid-row:1/2} .bottom{grid-row:4/5;grid-column:1/2;grid-template-columns:1fr}}
-		.ranking-item.selected{background:linear-gradient(90deg,#eef7ff,#f7fbff);border-left:4px solid var(--accent);}
+		
+		/* CAMBIO: Título más grande y con buscador flotante */
+		header{position:relative; display:flex;align-items:center;justify-content:center;padding:18px;background:var(--bg);border-bottom:none;}
+		header h1{margin:0;font-size:32px; color:var(--accent);font-weight:800; letter-spacing:0.8px;}
+		
+		.topbar-search{position:absolute; right:12px; top:50%; transform:translateY(-50%); width:260px}
+		.search-input{width:100%;padding:10px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 1px 2px rgba(16,24,40,.03)}
+
+		/* Grid Layout */
+		.container{flex:1;display:grid;grid-template-columns:240px 1fr 340px;grid-template-rows:1fr 360px;gap:var(--gap);padding:18px;min-height:0}
+		.left{grid-column:1/2;grid-row:1/2;padding:12px;overflow:auto;}
+		.center{grid-column:2/3;grid-row:1/2;background:var(--card);border-radius:10px;padding:8px;display:flex;flex-direction:column;min-height:0;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
+		.right{grid-column:3/4;grid-row:1/2;background:var(--card);padding:12px;border-radius:10px;overflow:auto;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
+		
+		/* Nuevo: Fila inferior de 3 columnas (Ranking, Detalle, Chatbot) */
+		.bottom{grid-column:1/4;grid-row:2/3;display:grid;grid-template-columns:1fr 1fr 1fr; gap:12px;min-height:0}
+
+		/* Cards y Contenido Scrolleable */
+		.bottom .card{height:100%;display:flex;flex-direction:column;overflow:hidden;}
+		.card{background:var(--card);border-radius:10px;padding:10px;margin-bottom:10px;box-shadow:0 2px 5px rgba(16,24,40,.03); border:1px solid var(--separator);}
+		
+		.ranking-list-content, .detail-content{
+			padding:0 12px 12px 12px; /* Ajuste para scroll */
+			flex:1;
+			overflow-y:auto; 
+		}
+		
+		#map{height:100%;border-radius:8px}
+
+		/* SIMILARES card look */
+		.sim-card{
+			display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.04);
+			background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.9));
+			cursor: pointer;
+		}
+		.sim-card:hover{background:linear-gradient(180deg,rgba(250,250,250,0.8),rgba(255,255,255,0.95));}
+		.sim-card .thumb{
+			width:56px;height:40px;border-radius:6px;background:#f3f4f6;overflow:hidden;flex:0 0 56px;display:flex;align-items:center;justify-content:center;
+		}
+		.sim-card .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.3s}
+
+		/* Slider look and feel */
+		.sliders label{display:flex;justify-content:space-between;font-size:13px;margin-top:10px;color:var(--muted)}
+		input[type=range]{-webkit-appearance:none;width:100%;height:8px;border-radius:6px;background:linear-gradient(90deg,var(--accent-strong),#a8c7f0);outline:none}
+		input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);box-shadow:0 2px 6px rgba(31,78,121,0.18);border:2px solid #fff;margin-top:-5px}
+		input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid #fff}
+
+		.sep{height:1px;background:var(--separator);margin:12px 0;border-radius:1px}
+
+		/* Sponsor slider animation/positioning */
+		.sponsor-rotator{
+			position:fixed;
+			left:18px; 	
+			top:18px; 	
+			width:260px; 
+			height:64px; 
+			overflow-x:hidden; 
+			overflow-y:hidden;
+			z-index:1000;
+			background:transparent; 
+			pointer-events:auto;
+		}
+
+		.sponsor-track{
+			display:flex;
+			align-items:center;
+			gap:20px;
+			padding:0;
+			box-sizing:border-box;
+			flex-wrap:nowrap;
+			min-width: max-content;
+			animation:slide-left 9s linear infinite; 
+		}
+
+		.sponsor-track img{
+			height:64px; 	
+			width:auto;
+			display:inline-block;
+			object-fit:contain;
+			opacity:0.98;
+			transition:transform .25s ease, opacity .25s ease;
+			flex:0 0 auto;
+		}
+
+		@keyframes slide-left{
+			0%   { transform:translateX(0); }
+			100% { transform:translateX(-50%); } 
+		}
+
+		/* Mobile adjustments */
+		@media (max-width:900px){
+			.container{grid-template-columns:1fr;grid-template-rows:minmax(0, 1fr) 1fr 320px 360px; }
+			.left{grid-column:1/2;grid-row:3/4; height: 320px;} 
+			.right{grid-column:1/2;grid-row:2/3} 
+			.center{grid-column:1/2;grid-row:1/2} 
+			.bottom{grid-row:4/5;grid-column:1/2;grid-template-columns:1fr;} 
+			
+			header {
+				flex-direction: column; 
+				align-items: flex-start;
+				padding: 10px 18px 18px 18px; 
+				min-height: 100px;
+			}
+			header h1 {
+				font-size: 24px;
+				order: 2; 
+				margin-top: 12px;
+			}
+			.topbar-search{
+				position: static; 
+				width: 100%;
+				margin-top: 10px;
+				order: 3; 
+				transform: none; 
+			}
+
+			.sponsor-rotator{
+				position: static; 
+				width: 100%;
+				height: 56px;
+				left: auto;
+				top: auto;
+				overflow-x: auto; 
+				order: 1; 
+			}
+			.sponsor-track{
+				animation: none; 
+				gap: 16px;
+				padding: 0 0 0 4px;
+			}
+			.sponsor-track img{
+				height: 48px; 
+			}
+		}
+
+		.ranking-item{padding:8px;border-bottom:1px dashed var(--separator);cursor:pointer}
+		.ranking-item:hover{background:#fcfdfe}
+		.muted{color:var(--muted);font-size:13px}
+		.ranking-item.selected{background:linear-gradient(90deg,var(--separator),#fcfdfe);border-left:4px solid var(--accent-strong);}
+		
 	</style>
 </head>
 <body>
 	<div class="app">
+		
+		<div class="sponsor-rotator" id="sponsorRot">
+			<div class="sponsor-track" id="sponsorTrack">
+				<img src="logos/logo1.png" alt="Patrocinador 1">
+				<img src="logos/logo2.png" alt="Patrocinador 2">
+				<img src="logos/logo3.png" alt="Patrocinador 3">
+				<img src="logos/logo1.png" alt="Patrocinador 1">
+				<img src="logos/logo2.png" alt="Patrocinador 2">
+				<img src="logos/logo3.png" alt="Patrocinador 3">
+			</div>
+		</div>
+
 		<header>
-			<h1>Búsqueda de municipios</h1>
+			<h1>Búsqueda de tu municipio ideal</h1> 
 			<div class="topbar-search">
 				<input class="search-input" id="mainSearch" placeholder="Búsqueda de municipios" />
 			</div>
@@ -49,18 +189,17 @@
 		<main class="container">
 			<aside class="left card">
 				<h3>SIMILARES</h3>
-				<div id="similaresList">
-					<!-- tarjetas similares -->
-				</div>
+				<div id="similaresList" class="ranking-list-content"> 
+					</div>
 			</aside>
 
-			<section class="center card">
+			<section class="center"> 
 				<div style="flex:1;min-height:0">
 					<div id="map" style="height:100%"></div>
 				</div>
 			</section>
 
-			<aside class="right card">
+			<aside class="right"> 
 				<h3>¿CUÁNTO VALORAS...?</h3>
 				<div class="sliders">
 					<label>Educación <span id="val-educ">5</span></label>
@@ -82,53 +221,70 @@
 					<input type="range" id="s-econ" min="0" max="10" value="5" />
 				</div>
 
-				<hr />
+				<hr class="sep" />
 				<h4>Lugar de Interés</h4>
-				<input id="placeInput" placeholder="Introduce una ubicación que visitas frecuentemente" style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd" />
+				<input id="placeInput" placeholder="Introduce una ubicación que visitas frecuentemente" style="width:100%;padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);margin-bottom:12px" />
+				
+				<button id="buscarBtn" style="width:100%;padding:10px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;">Buscar</button>
+
+				<div style="margin-top:12px;margin-bottom:8px">
+					<input type="checkbox" id="colorZones" checked>
+					<label for="colorZones" style="margin-left:6px;margin-top:0">Colorear zonas (aprox.)</label>
+				</div>
+
+				<div style="margin-top:8px;display:flex;align-items:center;margin-bottom:8px">
+					<label style="margin-right:8px;color:var(--muted);margin-top:0">Mostrar en mapa:</label>
+					<input type="number" id="mapLimit" min="0" max="200" value="20" style="width:72px;padding:6px;border-radius:6px;border:1px solid var(--separator)">
+				</div>
+				
+				<div style="margin-top:6px">
+					<input type="checkbox" id="showAllMap">
+					<label for="showAllMap" style="margin-left:6px;margin-top:0">Mostrar todas en mapa</label>
+				</div>
 			</aside>
 
 			<section class="bottom">
-				<div class="card">
-					<h3>Ranking</h3>
-					<div id="ranking" class="ranking-list"></div>
+				<div class="card"> 
+					<h3 style="padding:0 12px">Ranking</h3>
+					<div id="ranking" class="ranking-list-content"></div> 
 				</div>
-				<div class="card detail">
-					<h3 id="detailTitle">Selecciona un municipio</h3>
-					<div id="detailProfile" class="muted">Datos: Educación, Sanidad, Ocio, Bienestar y servicios, Movilidad</div>
-					<h4>BREVE DESCRIPCIÓN DEL MUNICIPIO</h4>
-					<p id="detailDesc">Aquí aparecerá una pequeña descripción cuando selecciones un municipio del ranking.</p>
+				
+				<div class="card"> 
+					<h3 id="detailTitle" style="padding:0 12px">Selecciona un municipio</h3>
+					<div id="detailContent" class="detail-content"> 
+						<div id="detailProfile" class="muted">Datos: Educación, Sanidad, Ocio, Bienestar y servicios, Movilidad</div>
+						<h4>BREVE DESCRIPCIÓN DEL MUNICIPIO</h4>
+						<p id="detailDesc">Aquí aparecerá una pequeña descripción cuando selecciones un municipio del ranking.</p>
+					</div>
 				</div>
+				
+				<div class="card" id="chatbot-placeholder">
+					<h3 style="padding:0 12px">ChatBot Asistente</h3>
+					<div style="padding:12px; flex:1; display:flex; align-items:center; justify-content:center; color:var(--muted); border-top:1px solid var(--separator); margin-top:10px;">
+						Próximamente...
+					</div>
+				</div>
+				
 			</section>
 		</main>
 	</div>
 
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="" crossorigin=""></script>
-	<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 	<script>
 		// app state
-		let municipios = []; // loaded from CSV or fallback mock
+		let municipios = []; 
 		const markers = {};
 
-		// Map
+		// Map setup (Leaflet already included)
 		const map = L.map('map', {zoomControl:true}).setView([40.4168,-3.7038],10);
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
 
-		// layer to hold ranking-numbered markers
 		const markerLayer = L.layerGroup().addTo(map);
-		let currentRankMarkers = {}; // id -> marker for top results
-		let lastSortedMap = {}; // id -> municipio (latest computed scores)
-		// layer to hold colored area circles (approximate municipal zones)
+		let currentRankMarkers = {}; 
+		let lastSortedMap = {}; 
 		const areaLayer = L.layerGroup().addTo(map);
 
-		// add Buscar button to the right panel
-		const buscarBtn = document.createElement('button');
-		buscarBtn.textContent = 'Buscar';
-		buscarBtn.style.marginTop = '10px';
-		buscarBtn.style.padding = '8px 12px';
-		buscarBtn.style.background = 'var(--accent)';
-		buscarBtn.style.color = '#fff';
-		buscarBtn.style.border = 'none';
-		buscarBtn.style.borderRadius = '6px';
+		// Funcionalidad del botón Buscar (ahora en el HTML)
+		const buscarBtn = document.getElementById('buscarBtn');
 		buscarBtn.onclick = async ()=>{
 			try{
 				buscarBtn.disabled = true;
@@ -142,70 +298,18 @@
 				buscarBtn.textContent = 'Buscar';
 			}
 		};
-		document.querySelector('.right').appendChild(buscarBtn);
 
-		// checkbox: activar coloreado de zonas (aproximado)
-		const colorToggleWrap = document.createElement('div');
-		colorToggleWrap.style.marginTop = '8px';
-		const colorToggle = document.createElement('input');
-		colorToggle.type = 'checkbox';
-		colorToggle.id = 'colorZones';
-		colorToggle.checked = true;
-		const colorToggleLabel = document.createElement('label');
-		colorToggleLabel.htmlFor = 'colorZones';
-		colorToggleLabel.style.marginLeft = '6px';
-		colorToggleLabel.textContent = 'Colorear zonas (aprox.)';
-		colorToggleWrap.appendChild(colorToggle);
-		colorToggleWrap.appendChild(colorToggleLabel);
-		document.querySelector('.right').appendChild(colorToggleWrap);
-
-		// control: cuántos mostrar en el mapa
-		const mapLimitWrap = document.createElement('div');
-		mapLimitWrap.style.marginTop = '8px';
-		mapLimitWrap.style.display = 'flex';
-		mapLimitWrap.style.alignItems = 'center';
-		const mapLimitLabel = document.createElement('label');
-		mapLimitLabel.textContent = 'Mostrar en mapa:';
-		mapLimitLabel.style.marginRight = '8px';
-		const mapLimitInput = document.createElement('input');
-		mapLimitInput.type = 'number';
-		mapLimitInput.id = 'mapLimit';
-		mapLimitInput.min = '0';
-		mapLimitInput.max = '200';
-		mapLimitInput.value = '20';
-		mapLimitInput.style.width = '72px';
-		mapLimitWrap.appendChild(mapLimitLabel);
-		mapLimitWrap.appendChild(mapLimitInput);
-		document.querySelector('.right').appendChild(mapLimitWrap);
-
-		// checkbox: mostrar todas las entradas en el mapa
-		const showAllWrap = document.createElement('div');
-		showAllWrap.style.marginTop = '6px';
-		const showAll = document.createElement('input');
-		showAll.type = 'checkbox';
-		showAll.id = 'showAllMap';
-		showAll.checked = false;
-		const showAllLabel = document.createElement('label');
-		showAllLabel.htmlFor = 'showAllMap';
-		showAllLabel.style.marginLeft = '6px';
-		showAllLabel.textContent = 'Mostrar todas en mapa';
-		showAllWrap.appendChild(showAll);
-		showAllWrap.appendChild(showAllLabel);
-		document.querySelector('.right').appendChild(showAllWrap);
-
-		// auto-run search when any checkbox in the right panel is toggled
-		document.querySelectorAll('.right input[type="checkbox"]').forEach(cb=>{
-			cb.addEventListener('change', ()=>{
-				try{ runSearch({forceReload:false}); }catch(e){ console.error('runSearch error from checkbox change', e); }
+		// Auto-run search when map options change (checkbox/number)
+		document.querySelectorAll('.right input[type="checkbox"], .right input[type="number"]').forEach(input=>{
+			input.addEventListener('change', ()=>{
+				try{ runSearch({forceReload:false}); }catch(e){ console.error('runSearch error from change', e); }
 			});
 		});
 
-		// mapping of slider keys to CSV columns
-		// Columns in CSV: sanidad, educacion, transporte_conectividad, economia_empleo, bienestar, ocio_cultura
-		// We map sliders (Educación, Sanidad, Ocio, Bienestar y servicios, Movilidad, Economía y empleo) to these columns.
+		// mapping of slider keys to CSV columns 
 		const columnMap = { educ:'educacion', sani:'sanidad', ocio:'ocio_cultura', cost:'bienestar', mov:'transporte_conectividad', econ:'economia_empleo' };
 
-		// load CSV from df_indices_categorias.csv
+		// load CSV 
 		let csvLoaded = false;
 		function loadCSV(){
 			return new Promise((resolve, reject)=>{
@@ -232,8 +336,6 @@
 							desc: r.descripcion || r.Descripcion || r.description || r.Description || ''
 						}));
 						csvLoaded = true;
-						// keep positions; markers will be created when rendering ranking
-						// (we only create numbered markers for top results in renderRanking)
 						municipios.forEach(m=>{ /* positions available in m.lat/m.lon */ });
 						resolve();
 					},
@@ -245,27 +347,25 @@
 			});
 		}
 
-		// fallback mock if CSV fails to load
+		// fallback mock 
 		function loadFallback(){
 			municipios = [
-				{id:1,name:'Alcalá de Henares',lat:40.481,lon:-3.363,educacion:8, sanidad:7, ocio_cultura:8, bienestar:6, transporte_conectividad:7, desc:'Ciudad universitaria y con buena oferta cultural.'},
-				{id:2,name:'Majadahonda',lat:40.453,lon:-3.873,educacion:7, sanidad:8, ocio_cultura:6, bienestar:6, transporte_conectividad:8, desc:'Municipio residencial con buen acceso a Madrid.'},
-				{id:3,name:'Getafe',lat:40.308,lon:-3.732,educacion:6, sanidad:6, ocio_cultura:7, bienestar:6, transporte_conectividad:7, desc:'Ciudad con gran actividad industrial y universitaria.'}
+				{id:1,name:'Alcalá de Henares',lat:40.481,lon:-3.363,educacion:8, sanidad:7, ocio_cultura:8, bienestar:6, transporte_conectividad:7, economia_empleo:7, desc:'Ciudad universitaria y con buena oferta cultural.'},
+				{id:2,name:'Majadahonda',lat:40.453,lon:-3.873,educacion:7, sanidad:8, ocio_cultura:6, bienestar:6, transporte_conectividad:8, economia_empleo:6, desc:'Municipio residencial con buen acceso a Madrid.'},
+				{id:3,name:'Getafe',lat:40.308,lon:-3.732,educacion:6, sanidad:6, ocio_cultura:7, bienestar:6, transporte_conectividad:7, economia_empleo:8, desc:'Ciudad con gran actividad industrial y universitaria.'}
 			];
-			// fallback positions kept; markers created during renderRanking
 			municipios.forEach(m=>{});
 			csvLoaded = false;
 		}
 
-		// compute scores using linear weighted sum based on sliders
-		// The CSV already contains normalized scores in [0,1], so we use them directly.
+		// compute scores 
 		function computeScores(weights){
 			const scored = municipios.map(m=>{
 				let s = 0;
 				Object.keys(columnMap).forEach(k=>{
 					const col = columnMap[k];
 					const w = weights[k] || 0;
-					const v = isFinite(m[col])? m[col] : 0; // CSV already 0-1
+					const v = isFinite(m[col])? m[col] : 0; 
 					s += w * v;
 				});
 				return {...m, score: s };
@@ -273,7 +373,7 @@
 			return scored.sort((a,b)=>b.score - a.score);
 		}
 
-		// show top N in ranking (scrollable). default N=20
+		// create numbered marker 
 		function createNumberedMarker(m, rank){
 			const numberHtml = `<div style="background:${rank===1?'#ffc107':'#2b7be4'};color:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.2)">${rank}</div>`;
 			const icon = L.divIcon({className:'number-icon', html:numberHtml, iconSize:[30,30], iconAnchor:[15,30]});
@@ -281,11 +381,9 @@
 			return marker;
 		}
 
-		// map score (0-1) to a color (green->yellow->red)
+		// map score to color 
 		function scoreToColor(score){
-			// Continuous gradient: red (0.0) -> yellow (0.5) -> green (1.0)
 			const s = Math.max(0, Math.min(1, score));
-			// helper: linear interpolate between two colors (r,g,b)
 			function lerpColor(a,b,t){
 				return [
 					Math.round(a[0] + (b[0]-a[0])*t),
@@ -293,21 +391,21 @@
 					Math.round(a[2] + (b[2]-a[2])*t)
 				];
 			}
-			const red = [220,53,69];    // bad
-			const yellow = [255,215,0]; // mid
-			const green = [34,139,34];  // good
+			const red = [220,53,69]; 
+			const yellow = [255,215,0];
+			const green = [34,139,34]; 
 			let rgb;
 			if(s < 0.5){
-				const t = s / 0.5; // 0..1 from red->yellow
+				const t = s / 0.5;
 				rgb = lerpColor(red, yellow, t);
 			} else {
-				const t = (s - 0.5) / 0.5; // 0..1 from yellow->green
+				const t = (s - 0.5) / 0.5;
 				rgb = lerpColor(yellow, green, t);
 			}
 			return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
 		}
 
-		// display names for nicer labels in the detail profile
+		// display names 
 		const displayNames = {
 			'educacion': 'Educación',
 			'sanidad': 'Sanidad',
@@ -317,16 +415,14 @@
 			'economia_empleo': 'Economía y empleo'
 		};
 
-		// render ranking list (all) and add numbered markers/circles only up to mapLimit
+		// render ranking 
 		function renderRanking(sorted, mapLimit=20){
 			const list = document.getElementById('ranking');
 			list.innerHTML = '';
 
-			// clear previous rank markers and areas
 			markerLayer.clearLayers();
 			currentRankMarkers = {};
 			areaLayer.clearLayers();
-			// store lookup for later (so marker clicks can find the object with score)
 			lastSortedMap = {};
 
 			sorted.forEach((m, idx)=>{
@@ -342,11 +438,9 @@
 				div.onmouseleave = ()=> { if(currentRankMarkers[m.id]) currentRankMarkers[m.id].closePopup(); };
 				list.appendChild(div);
 
-				// add numbered marker/area only for top mapLimit entries
 				if(idx < mapLimit && m.lat && m.lon){
 					const mrk = createNumberedMarker(m, rank);
 					mrk.addTo(markerLayer);
-					// clicking marker should select the ranking item and show detail
 					mrk.on('click', ()=> selectRankingItem(m.id));
 					currentRankMarkers[m.id] = mrk;
 					const enableColor = document.getElementById('colorZones')?.checked;
@@ -358,16 +452,12 @@
 					}
 				}
 			});
-
-			// list is styled via CSS; ensure overflow is auto
-			list.style.maxHeight = '';
-			list.style.overflow = 'auto';
 		}
 
+		// show detail 
 		function showDetail(m){
 			document.getElementById('detailTitle').textContent = m.name;
 			const parts = [];
-			// show the main category scores (CSV values are 0-1) using friendly labels
 			['educacion','sanidad','ocio_cultura','bienestar','transporte_conectividad','economia_empleo'].forEach(col=>{
 				if(col in m){
 					const label = displayNames[col] || col.replace('_',' ');
@@ -376,24 +466,21 @@
 			});
 			document.getElementById('detailProfile').textContent = 'Datos: ' + parts.join(', ');
 			document.getElementById('detailDesc').textContent = m.desc || '';
-			if(m.lat && m.lon){ map.setView([m.lat,m.lon],12); if(markers[m.id]) markers[m.id].openPopup(); }
+			if(m.lat && m.lon){ map.setView([m.lat,m.lon],12); if(currentRankMarkers[m.id]) currentRankMarkers[m.id].openPopup(); }
 		}
 
-		// select a ranking item by id: highlight in list, show detail and open popup if available
+		// select ranking item 
 		function selectRankingItem(id){
 			const el = document.getElementById('ranking-item-' + id);
 			if(!el) return;
-			// remove previous selection
 			document.querySelectorAll('.ranking-item.selected').forEach(x=>x.classList.remove('selected'));
 			el.classList.add('selected');
-			// ensure visible
 			try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
-			// find object: prefer lastSortedMap (contains score), fallback to municipios
 			const m = lastSortedMap[id] || municipios.find(x=>x.id===id);
 			if(m) showDetail(m);
 		}
 
-		// get weights from sliders (normalized)
+		// get slider weights 
 		function getSliderWeights(){
 			const prefs = {
 				educ: Number(document.getElementById('s-educ').value),
@@ -410,17 +497,16 @@
 			return weights;
 		}
 
-		// run search: load CSV (if needed), compute scores and render top 10
-		// accepts optional opts: { forceReload: true }
+		// run search 
 		async function runSearch(opts={}){
 			console.log('runSearch called', opts);
 			try{
-				if(opts.forceReload) csvLoaded = false; // force re-download
+				if(opts.forceReload) csvLoaded = false; 
 				await loadCSV().catch(()=>{ loadFallback(); });
 			}catch(e){ console.warn('loadCSV failed, using fallback', e); loadFallback(); }
 			const weights = getSliderWeights();
 			const sorted = computeScores(weights);
-			// decide how many to show on the map: either all if checkbox checked, or the numeric limit
+
 			const showAll = document.getElementById('showAllMap')?.checked;
 			let mapLimit = 0;
 			if(showAll){
@@ -429,51 +515,92 @@
 				mapLimit = Number(document.getElementById('mapLimit')?.value) || 0;
 			}
 			renderRanking(sorted, mapLimit);
-			// update similares (top 3 similar to top result)
 			updateSimilaresFromSorted(sorted);
 		}
+		
+		// Helper para obtener imagen de Wikipedia 
+		async function fetchWikiThumbnail(municipioName){
+			if(!municipioName) return null;
+			const title = municipioName.replace(/ /g, '_');
+			const url = `https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
+			try{
+				const res = await fetch(url);
+				if(!res.ok) return null;
+				const data = await res.json();
+				if(data && data.thumbnail && data.thumbnail.source) return data.thumbnail.source;
+				// fallback: try English wiki
+				const res2 = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
+				if(res2.ok){
+					const d2 = await res2.json();
+					if(d2 && d2.thumbnail && d2.thumbnail.source) return d2.thumbnail.source;
+				}
+				return null;
+			}catch(e){
+				return null;
+			}
+		}
 
-		function updateSimilaresFromSorted(sorted){
+		// MODIFIED: updateSimilaresFromSorted to fetch image and display card 
+		async function updateSimilaresFromSorted(sorted){
 			const simDiv = document.getElementById('similaresList');
 			simDiv.innerHTML='';
 			const top3 = sorted.slice(0,3);
-			top3.forEach(s=>{
+			const placeholderImg = 'assets/municipio-placeholder.jpg'; 
+			
+			for(const s of top3){
 				const d = document.createElement('div'); d.className='sim-card';
-				d.innerHTML = `<div style="flex:1"><strong>${s.name}</strong><div class="muted">Puntuación ${(s.score*100).toFixed(0)}</div></div>`;
-				d.onclick = ()=> { showDetail(s); }
+				const thumbDiv = document.createElement('div'); thumbDiv.className='thumb';
+				
+				// Placeholder mientras carga
+				thumbDiv.innerHTML = '<svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="56" height="40" rx="6" fill="#f3f4f6"/></svg>';
+				d.appendChild(thumbDiv);
+				const content = document.createElement('div'); content.style.flex='1';
+				content.innerHTML = `<strong style="display:block">${s.name}</strong><div class="muted">Puntuación ${(s.score*100).toFixed(0)}</div>`;
+				d.appendChild(content);
+				d.onclick = ()=> { showDetail(s); selectRankingItem(s.id); }
 				simDiv.appendChild(d);
-			});
+
+				// Async fetch thumbnail
+				fetchWikiThumbnail(s.name).then(imgUrl=>{
+					const img = document.createElement('img');
+					img.alt = s.name;
+					img.src = imgUrl || placeholderImg;
+					img.onerror = () => { img.src = placeholderImg; };
+					thumbDiv.innerHTML = '';
+					thumbDiv.appendChild(img);
+				}).catch(()=>{
+					thumbDiv.innerHTML = `<img src="${placeholderImg}" alt="${s.name}" onerror="this.src='${placeholderImg}'">`;
+				});
+			}
 		}
 
-		// attach slider display update
+		// attach slider display update and re-run search (Preservado, con cambio a 'change')
 		const sliderIds = {educ:'s-educ',sani:'s-sani',ocio:'s-ocio',cost:'s-cost',mov:'s-mov',econ:'s-econ'};
-		// attach slider inputs: only update displayed value here
 		Object.keys(sliderIds).forEach(key=>{
 			const el = document.getElementById(sliderIds[key]);
-			const disp = document.getElementById('val-'+(key==='sani'? 'sani': key));
+			const disp = document.getElementById('val-'+(key));
 			el.addEventListener('input', ()=>{ disp.textContent = el.value; });
+			el.addEventListener('change', ()=>{ runSearch({forceReload:false}); });
 		});
 
-		// basic search box filter for the displayed ranking
+		// basic search box filter for the displayed ranking (Preservado)
 		document.getElementById('mainSearch').addEventListener('input', (e)=>{
 			const q = e.target.value.toLowerCase();
-			const list = document.getElementById('ranking');
-			list.querySelectorAll('.ranking-item').forEach(it=>{
-				it.style.display = q? (it.textContent.toLowerCase().includes(q)?'block':'none') : 'block';
+			document.querySelectorAll('.ranking-item').forEach(item=>{
+				const name = item.textContent.split('(')[0].replace(/[#\d\s]/g,'').toLowerCase(); // name filter logic
+				item.style.display = q? (name.includes(q)?'block':'none') : 'block';
 			});
 		});
 
-		// place input: center map on typed municipality if matches name
+		// place input: center map on typed municipality if matches name 
 		document.getElementById('placeInput').addEventListener('change', (e)=>{
 			const q = e.target.value.toLowerCase();
 			const found = municipios.find(m=>m.name && m.name.toLowerCase().includes(q));
 			if(found) showDetail(found);
 		});
 
-		// initial load: run search to load CSV and render results with default slider values (5)
-		// This avoids showing placeholder data by default.
+		// initial load
 		runSearch({forceReload:true}).catch(err=>{ console.warn('Initial runSearch failed, falling back', err); loadFallback(); renderRanking(municipios,20); });
 	</script>
 </body>
 </html>
-
