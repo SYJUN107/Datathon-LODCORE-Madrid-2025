@@ -25,30 +25,35 @@
 		.app{display:flex;flex-direction:column;height:100vh}
 				
 		/* Título más grande y con buscador flotante */
-		header{position:relative; display:flex;align-items:center;justify-content:center;padding:20px 32px 12px;background:var(--bg);border-bottom:none;}
-		header h1{margin:0;font-size:58px; color:var(--accent);font-weight:800; letter-spacing:0.8px;}
+		header{position:relative; display:flex;align-items:center;justify-content:center;padding:12px 20px 8px;background:var(--bg);border-bottom:none;}
+		header h1{margin:0;font-size:44px; color:var(--accent);font-weight:800; letter-spacing:0.6px;}
 				
 		.topbar-search{position:absolute; right:55px; top:50%; transform:translateY(-50%); width:320px}
 		.search-input{width:100%;padding:14px 16px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 1px 2px rgba(16,24,40,.03);font-size:16px}
 
 		/* Grid Layout */
-		.container{flex:1;display:grid;grid-template-columns:280px 1fr 395px;grid-template-rows:1fr 315px;gap:var(--gap);padding:18px 18px 36px;min-height:0}
-		.left{grid-column:1/2;grid-row:1/2;padding:12px;overflow:auto;}
-		.center{grid-column:2/3;grid-row:1/2;background:var(--card);border-radius:10px;padding:8px;display:flex;flex-direction:column;min-height:0;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
-		.right{grid-column:3/4;grid-row:1/2;background:var(--card);padding:12px;border-radius:10px;overflow:auto;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
+		.container{flex:1;display:grid;grid-template-columns:0.3fr 1fr 0.25fr;grid-template-rows:1fr 420px;gap:var(--gap);padding:14px 14px 46px;min-height:0}
+		.left{grid-column:1/2;grid-row:1/2;padding:8px;overflow:auto;}
+		.center{grid-column:2/3;grid-row:1/2;background:var(--card);border-radius:10px;padding:6px;display:flex;flex-direction:column;min-height:0;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
+		.right{grid-column:3/4;grid-row:1/2;background:var(--card);padding:8px;border-radius:10px;overflow:auto;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
 						
-		/* Fila inferior de 3 columnas (Ranking, Detalle, Chatbot) */
-		.bottom{grid-column:1/4;grid-row:2/3;display:grid;grid-template-columns:1fr 1fr 1fr; gap:12px;min-height:0}
+		/* Fila inferior con 3 columnas independientes: Ranking | Descripción | Chatbot */
+		/* Aumentamos la fracción de la tercera columna para dar más anchura al Chatbot */
+		.bottom{grid-column:1/4;grid-row:2/3;display:grid;grid-template-columns:0.4fr 1fr 0.7fr; gap:12px;min-height:0}
 
 		/* Cards y Contenido Scrolleable */
 		.bottom .card{height:100%;display:flex;flex-direction:column;overflow:hidden;}
-		.card{background:var(--card);border-radius:10px;padding:10px;margin-bottom:10px;box-shadow:0 2px 5px rgba(16,24,40,.03); border:1px solid var(--separator);}
+		.card{background:var(--card);border-radius:10px;padding:8px;margin-bottom:10px;box-shadow:0 2px 5px rgba(16,24,40,.03); border:1px solid var(--separator);}
 						
 		.ranking-list-content, .detail-content{
 			padding:0 12px 36px 12px; /* Ajuste para scroll y espacio inferior */
 			flex:1;
 			overflow-y:auto; 
 		}
+
+		/* Ajustes específicos para el buscador dentro del panel Ranking */
+		.ranking-search{display:block;padding:6px 12px}
+		.ranking-search .search-input{width:100%;max-width:none;padding:10px 12px;border-radius:8px;box-sizing:border-box}
 						
 		#map{height:100%;border-radius:8px}
 
@@ -163,6 +168,10 @@
 		.muted{color:var(--muted);font-size:13px}
 		.ranking-item.selected{background:linear-gradient(90deg,var(--separator),#fcfdfe);border-left:4px solid var(--accent-strong);}
 
+		.detail-table{width:100%;border-collapse:collapse;margin-top:8px;margin-bottom:8px;border:1px solid rgba(3,61,74,0.08);box-shadow:0 1px 0 rgba(0,0,0,0.03)}
+		.detail-table th{background:rgba(3,61,74,0.04);color:var(--accent-strong);font-weight:700;padding:8px 10px;border:1px solid rgba(3,61,74,0.12);text-align:left;font-size:13px}
+		.detail-table td{padding:8px 10px;border:1px solid rgba(3,61,74,0.08);font-size:13px;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96))}
+
 		/* etiqueta fija sobre la ruta */
 		.route-label{
 			background: rgba(0,0,0,0.7);
@@ -188,9 +197,6 @@
 
 		<header>
 			<h1>Búsqueda de tu municipio ideal</h1>
-			<div class="topbar-search">
-				<input class="search-input" id="mainSearch" placeholder="Búsqueda de municipios ➤ " />
-			</div>
 		</header>
 
 		<main class="container">
@@ -261,26 +267,33 @@
 			<section class="bottom">
 				<div class="card"> 
 					<h3 style="padding:0 12px">Ranking</h3>
+					<div class="ranking-search" style="padding:0 12px 8px;">
+						<input class="search-input" id="mainSearch" placeholder="Búsqueda de municipios ➤ " />
+					</div>
 					<div id="ranking" class="ranking-list-content"></div> 
 				</div>
-				
+			
 				<div class="card"> 
 					<h3 id="detailTitle" style="padding:0 12px">Selecciona un municipio</h3>
 					<div id="detailContent" class="detail-content"> 
-						<div id="detailProfile" class="muted">Datos: Educación, Sanidad, Ocio, Bienestar y servicios, Movilidad</div>
+						<div id="detailProfile" class="muted">
+							<table class="detail-table">
+								<thead><tr><th>Educación</th><th>Sanidad</th><th>Ocio y cultura</th><th>Bienestar y servicios</th><th>Transporte y conectividad</th><th>Economía y empleo</th></tr></thead>
+								<tbody><tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tbody>
+							</table>
+						</div>
 						<div id="detailRoute" class="muted" style="margin-top:6px"></div>
 						<h4>BREVE DESCRIPCIÓN DEL MUNICIPIO</h4>
 						<p id="detailDesc">Aquí aparecerá una pequeña descripción cuando selecciones un municipio del ranking.</p>
 					</div>
 				</div>
-				
+			
 				<div class="card" id="chatbot-placeholder">
 					<h3 style="padding:0 12px">ChatBot Asistente</h3>
 					<div style="padding:12px; flex:1; display:flex; align-items:center; justify-content:center; color:var(--muted); border-top:1px solid var(--separator); margin-top:10px;">
 						Próximamente...
 					</div>
 				</div>
-				
 			</section>
 		</main>
 	</div>
@@ -548,25 +561,40 @@
 
 		// show detail 
 		function showDetail(m){
-            document.getElementById('detailTitle').textContent = m.name;
-            const parts = [];
-            ['educacion','sanidad','ocio_cultura','bienestar','transporte_conectividad','economia_empleo'].forEach(col=>{
-                if(col in m){
-                    const label = displayNames[col] || col.replace('_',' ');
-                    parts.push(`${label}: ${isFinite(m[col])?m[col].toFixed(2):'—'}`);
-                }
-            });
-            document.getElementById('detailProfile').textContent = 'Datos: ' + parts.join(', ');
-            document.getElementById('detailDesc').textContent = m.desc || '';
+		    document.getElementById('detailTitle').textContent = m.name;
+		    // Build a table of categories
+		    const cols = ['educacion','sanidad','ocio_cultura','bienestar','transporte_conectividad','economia_empleo'];
+		    const headers = cols.map(c=> displayNames[c] || c.replace('_',' '));
+		    const values = cols.map(c=>{
+		        const v = (c in m) ? m[c] : null;
+		        return (v === null || v === undefined || !isFinite(v)) ? '—' : Number(v).toFixed(2);
+		    });
+		    // Render table into detailProfile
+		    const table = document.createElement('table');
+		    table.className = 'detail-table';
+		    const thead = document.createElement('thead');
+		    const trh = document.createElement('tr');
+		    headers.forEach(h=>{ const th = document.createElement('th'); th.textContent = h; trh.appendChild(th); });
+		    thead.appendChild(trh);
+		    const tbody = document.createElement('tbody');
+		    const trv = document.createElement('tr');
+		    values.forEach(v=>{ const td = document.createElement('td'); td.textContent = v; trv.appendChild(td); });
+		    tbody.appendChild(trv);
+		    table.appendChild(thead); table.appendChild(tbody);
+		    const profileEl = document.getElementById('detailProfile');
+		    profileEl.innerHTML = '';
+		    profileEl.appendChild(table);
+
+		    document.getElementById('detailDesc').textContent = m.desc || '';
 			if(m.lat && m.lon){ map.setView([m.lat,m.lon],12); 
-                // Abrir popup si el municipio tiene un marcador de ranking
-                if(currentRankMarkers[m.id]) currentRankMarkers[m.id].openPopup(); 
-                // Si no está en el ranking visible, añadir un marcador temporal si tiene coordenadas.
-                else if (!currentRankMarkers[m.id]){
-                    const tempMarker = L.marker([m.lat,m.lon]).addTo(markerLayer).bindPopup(`<strong>${m.name}</strong><br/>No en el top ${document.getElementById('mapLimit')?.value}`);
-                    // Opcional: Centrar el mapa en él.
-                    map.setView([m.lat,m.lon],12); 
-                }
+		        // Abrir popup si el municipio tiene un marcador de ranking
+		        if(currentRankMarkers[m.id]) currentRankMarkers[m.id].openPopup(); 
+		        // Si no está en el ranking visible, añadir un marcador temporal si tiene coordenadas.
+		        else if (!currentRankMarkers[m.id]){
+		            const tempMarker = L.marker([m.lat,m.lon]).addTo(markerLayer).bindPopup(`<strong>${m.name}</strong><br/>No en el top ${document.getElementById('mapLimit')?.value}`);
+		            // Opcional: Centrar el mapa en él.
+		            map.setView([m.lat,m.lon],12); 
+		        }
 				// Si hay un marcador de interés, dibujar la línea de conexión
 				try{
 					const interestLayers = interestLayer.getLayers();
@@ -577,8 +605,8 @@
 						connectionLayer.clearLayers();
 					}
 				}catch(e){ console.warn('drawConnection error', e); }
-            }
-        }
+		    }
+		}
 
 		// Dibuja una línea (o ruta) entre el municipio y el punto de interés (interestLatLng puede ser L.LatLng)
 		async function drawConnectionBetween(municipioObj, interestLatLng){
@@ -897,10 +925,12 @@
 
 		// basic search box filter for the displayed ranking 
 		document.getElementById('mainSearch').addEventListener('input', (e)=>{
-			const q = e.target.value.toLowerCase();
+			const qRaw = e.target.value.toLowerCase();
+			const q = qRaw.replace(/\s+/g,''); // normalize: remove spaces so searches with spaces match
 			document.querySelectorAll('.ranking-item').forEach(item=>{
 				const name = item.textContent.split('(')[0].replace(/[#\d\s]/g,'').toLowerCase(); // name filter logic
-				item.style.display = q? (name.includes(q)?'block':'none') : 'block';
+				const nameNorm = name.replace(/\s+/g,'');
+				item.style.display = q ? (nameNorm.includes(q) ? 'block' : 'none') : 'block';
 			});
 		});
 
