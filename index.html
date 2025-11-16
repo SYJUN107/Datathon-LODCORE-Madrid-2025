@@ -178,6 +178,23 @@
 			color: #fff;
 			padding:6px 8px;border-radius:6px;font-weight:700;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.25);
 		}
+
+		/* Chatbot styles */
+		#chatbot {
+			display:flex;flex-direction:column;height:100%;gap:8px;
+		}
+		#chatbot .chat-controls{display:flex;gap:8px;align-items:center;padding:0 6px}
+		#chatbot .messages{flex:1;overflow:auto;padding:10px;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));border-radius:6px;border:1px solid rgba(3,61,74,0.04)}
+		.message{margin-bottom:10px;max-width:100%;display:flex}
+		.message.user{justify-content:flex-end}
+		.message .bubble{padding:10px 12px;border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05);font-size:13px}
+		.message.user .bubble{background:#2b7be4;color:#fff;border-bottom-right-radius:2px}
+		.message.assistant .bubble{background:#f3f4f6;color:#0f1724;border-bottom-left-radius:2px}
+		.chat-input{display:flex;gap:8px;padding:6px}
+		.chat-input textarea{flex:1;resize:none;padding:8px;border-radius:8px;border:1px solid var(--separator);min-height:42px}
+		.chat-input button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff}
+		.api-key{flex:1;display:flex;gap:6px;align-items:center}
+		.api-key input{flex:1;padding:6px;border-radius:6px;border:1px solid var(--separator)}
 		
 	</style>
 </head>
@@ -196,7 +213,7 @@
 		</div>
 
 		<header>
-			<h1>Búsqueda de tu municipio ideal</h1>
+			<h1>Tu Municipio Ideal: Un Asistente para Decidir con Datos</h1>
 		</header>
 
 		<main class="container">
@@ -248,9 +265,10 @@
 					<label for="colorZones" style="margin-left:6px;margin-top:0">Colorear zonas (aprox.)</label>
 				</div>
 
-				<div style="margin-top:8px;display:flex;align-items:center;margin-bottom:8px">
+				<div style="margin-top:8px;display:flex;align-items:center;margin-bottom:8px;gap:8px">
 					<label style="margin-right:8px;color:var(--muted);margin-top:0">Mostrar en mapa:</label>
-					<input type="number" id="mapLimit" min="0" max="200" value="10" style="width:72px;padding:6px;border-radius:6px;border:1px solid var(--separator)">
+					<input type="range" id="mapLimitSlider" min="1" max="10" value="10" style="flex:1">
+					<div style="min-width:54px;text-align:right;color:var(--muted)"><strong id="mapLimitVal">10</strong></div>
 				</div>
 				
 				<div style="margin-top:6px">
@@ -290,15 +308,22 @@
 			
 				<div class="card" id="chatbot-placeholder">
 					<h3 style="padding:0 12px">ChatBot Asistente</h3>
-					<div style="padding:12px; flex:1; display:flex; align-items:center; justify-content:center; color:var(--muted); border-top:1px solid var(--separator); margin-top:10px;">
-						Próximamente...
+					<div id="chatbot">
+						<!-- chat-controls removed per request -->
+						<div class="messages" id="chatMessages" aria-live="polite"></div>
+						<div class="chat-input">
+							<textarea id="chatInput" placeholder="Escribe tu pregunta aquí..."></textarea>
+							<button id="sendChatBtn">Enviar</button>
+						</div>
 					</div>
 				</div>
 			</section>
 		</main>
-	</div>
+		</div>
 
-	<script>
+		<!-- Load local secrets (secrets.js) which defines window.SECRETS.OPENROUTER_API_KEY -->
+		<script src="secrets.js"></script>
+		<script>
 		// app state
 		let municipios = []; 
 		let similaresData = []; // Para almacenar los datos de municipios_similares.csv
@@ -337,12 +362,17 @@
 			}
 		};
 
-		// Auto-run search when map options change (checkbox/number)
-		document.querySelectorAll('.right input[type="checkbox"], .right input[type="number"]').forEach(input=>{
-			input.addEventListener('change', ()=>{
-				try{ runSearch({forceReload:false}); }catch(e){ console.error('runSearch error from change', e); }
-			});
+		// Auto-run search when map option checkboxes change
+		document.querySelectorAll('.right input[type="checkbox"]').forEach(input=>{
+			input.addEventListener('change', ()=>{ try{ runSearch({forceReload:false}); }catch(e){ console.error('runSearch error from change', e); } });
 		});
+
+		// Map limit slider (will have its max updated after CSV loads)
+		const mapLimitSlider = document.getElementById('mapLimitSlider');
+		if(mapLimitSlider){
+			mapLimitSlider.addEventListener('input', ()=>{ document.getElementById('mapLimitVal').textContent = mapLimitSlider.value; });
+			mapLimitSlider.addEventListener('change', ()=>{ try{ runSearch({forceReload:false}); }catch(e){ console.error('mapLimit change runSearch error', e); } });
+		}
 
 		// Auto-run search when similares slider changes
         document.getElementById('s-similares').addEventListener('change', ()=>{
@@ -591,7 +621,8 @@
 		        if(currentRankMarkers[m.id]) currentRankMarkers[m.id].openPopup(); 
 		        // Si no está en el ranking visible, añadir un marcador temporal si tiene coordenadas.
 		        else if (!currentRankMarkers[m.id]){
-		            const tempMarker = L.marker([m.lat,m.lon]).addTo(markerLayer).bindPopup(`<strong>${m.name}</strong><br/>No en el top ${document.getElementById('mapLimit')?.value}`);
+					const mapLimitDisplay = document.getElementById('mapLimitSlider') ? document.getElementById('mapLimitSlider').value : document.getElementById('mapLimit')?.value;
+					const tempMarker = L.marker([m.lat,m.lon]).addTo(markerLayer).bindPopup(`<strong>${m.name}</strong><br/>No en el top ${mapLimitDisplay}`);
 		            // Opcional: Centrar el mapa en él.
 		            map.setView([m.lat,m.lon],12); 
 		        }
@@ -697,7 +728,19 @@
             console.log('runSearch called', opts);
             try{
                 if(opts.forceReload) csvLoaded = false; 
-                await loadCSV().catch(()=>{ loadFallback(); });
+				await loadCSV().catch(()=>{ loadFallback(); });
+				// After CSV loads (or fallback), update the mapLimit slider max to the available municipios count
+				try{
+					const slider = document.getElementById('mapLimitSlider');
+					if(slider){
+						const maxCount = municipios && municipios.length ? municipios.length : 10;
+						slider.max = Math.max(1, maxCount);
+						// If current value is greater than max, clamp it
+						if(Number(slider.value) > slider.max) slider.value = slider.max;
+						const display = document.getElementById('mapLimitVal');
+						if(display) display.textContent = slider.value;
+					}
+				}catch(e){console.warn('Failed to update mapLimitSlider max', e);}
             }catch(e){ console.warn('loadCSV failed, using fallback', e); loadFallback(); }
             
             // Cargar similares
@@ -711,11 +754,12 @@
 
             const showAll = document.getElementById('showAllMap')?.checked;
             let mapLimit = 0;
-            if(showAll){
-                mapLimit = sorted.length;
-            } else {
-                mapLimit = Number(document.getElementById('mapLimit')?.value) || 0;
-            }
+			if(showAll){
+				mapLimit = sorted.length;
+			} else {
+				const slider = document.getElementById('mapLimitSlider');
+				mapLimit = slider ? Number(slider.value) || 0 : Number(document.getElementById('mapLimit')?.value) || 0;
+			}
             renderRanking(sorted, mapLimit);
         }
 		
@@ -992,6 +1036,99 @@
 				}
 			}
 		});
+
+		// initial load
+		// Chatbot implementation (front-end demo with optional real API call)
+		function renderChatMessage(role, text){
+			const container = document.getElementById('chatMessages');
+			const wrap = document.createElement('div');
+			wrap.className = 'message ' + (role === 'user' ? 'user' : 'assistant');
+			const bubble = document.createElement('div');
+			bubble.className = 'bubble';
+			bubble.textContent = text;
+			wrap.appendChild(bubble);
+			container.appendChild(wrap);
+			container.scrollTop = container.scrollHeight;
+		}
+
+		async function callOpenRouterAPI(messages, apiKey){
+			const url = "https://openrouter.ai/api/v1/chat/completions";
+			const headers = {
+				"Authorization": `Bearer ${apiKey || 'DUMMY'}`,
+				"Content-Type": "application/json"
+			};
+			const payload = {
+				model: "deepseek/deepseek-chat-v3.1",
+				messages: messages
+			};
+			try{
+				const res = await fetch(url, {method:'POST', headers, body: JSON.stringify(payload)});
+				if(!res.ok) throw new Error('Network response not ok');
+				const data = await res.json();
+				// Try to extract a sensible assistant message from response (demo - may vary by API)
+				if(data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content){
+					return data.choices[0].message.content;
+				}
+				if(data && data.output && data.output[0] && data.output[0].content) return data.output[0].content;
+				return JSON.stringify(data);
+			}catch(err){
+				console.warn('OpenRouter API call failed, falling back to dummy. Error:', err);
+				throw err;
+			}
+		}
+
+		function simulateAssistantReply(userText){
+			// Very simple demo responses; can be enhanced.
+			const u = userText.toLowerCase();
+			if(u.includes('ruta') || u.includes('distancia')) return 'Puedo estimar la distancia y ruta entre municipios si seleccionas un punto de interés.';
+			if(u.includes('educ') || u.includes('escuela')) return 'La educación es uno de los factores que ponderamos. Ajusta el slider para priorizarla.';
+			return 'Esto es una respuesta demo. (API real no configurada o CORS bloqueó la llamada).';
+		}
+
+		// API key loaded from `secrets.js` on the client. If not present, EMBEDDED_API_KEY will be null.
+		// Note: keeping secrets in a client-side file is still not secure for production. Prefer a server-side proxy.
+		const EMBEDDED_API_KEY = (window && window.SECRETS && window.SECRETS.OPENROUTER_API_KEY) ? window.SECRETS.OPENROUTER_API_KEY : null;
+		// Dummy mode disabled by default when control buttons are removed
+		const USE_DUMMY = false;
+		async function sendChatMessage(){
+			const ta = document.getElementById('chatInput');
+			const text = (ta.value || '').trim();
+			if(!text) return;
+			renderChatMessage('user', text);
+			ta.value = '';
+			const apiKey = EMBEDDED_API_KEY;
+			const useDummy = USE_DUMMY;
+			renderChatMessage('assistant', '...');
+			// remove the last assistant placeholder when actual reply arrives
+			const container = document.getElementById('chatMessages');
+			const lastPlaceholder = container.querySelector('.message.assistant:last-child .bubble');
+			try{
+				let reply;
+				if(!useDummy){
+					// Build messages array with a system prompt and user message
+					const messages = [
+						{role:'system', 
+						content: 'Eres un asistente que ayuda a encontrar municipios, procura ser útil y conciso pero humano.'+
+								' No respondas nada que no esté relacionado con Madrid.'+
+								' Si no sabes la respuesta, di que no lo sabes. Tus respuestas deben ser en español.'+
+								' Tienes que devolver texto plano, sin italicas, negritas, ni formato especial.'
+							},
+						{role:'user', content: text}
+					];
+					reply = await callOpenRouterAPI(messages, apiKey);
+				} else {
+					// Dummy response
+					reply = simulateAssistantReply(text);
+				}
+				if(lastPlaceholder) lastPlaceholder.textContent = reply;
+			}catch(err){
+				const fallback = simulateAssistantReply(text);
+				if(lastPlaceholder) lastPlaceholder.textContent = fallback;
+			}
+		}
+
+		document.getElementById('sendChatBtn').addEventListener('click', sendChatMessage);
+		document.getElementById('chatInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendChatMessage(); } });
 
 		// initial load
 		runSearch({forceReload:true}).catch(err=>{ console.warn('Initial runSearch failed, falling back', err); loadFallback(); renderRanking(municipios,20); });
