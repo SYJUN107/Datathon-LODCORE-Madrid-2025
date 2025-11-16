@@ -45,7 +45,7 @@
 
 		/* Cards y Contenido Scrolleable */
 		.bottom .card{height:100%;display:flex;flex-direction:column;overflow:hidden;}
-		.card{background:var(--card);border-radius:10px;padding:8px;margin-bottom:10px;box-shadow:0 2px 5px rgba(16,24,40,.03); border:1px solid var(--separator);}
+		.card{background:var(--card);border-radius:10px;padding:8px;box-shadow:0 2px 5px rgba(16,24,40,.03); border:1px solid var(--separator);}
 						
 		.ranking-list-content, .detail-content{
 			padding:0 12px 36px 12px; /* Ajuste para scroll y espacio inferior */
@@ -333,6 +333,8 @@
 		// app state
 		let municipios = []; 
 		let similaresData = []; // Para almacenar los datos de municipios_similares.csv
+		// Ruta base para los datos (permite cambiar fácilmente la carpeta de origen)
+		const DATA_PATH = 'website_data/';
 		const markers = {};
 		let lastRouteInfo = null; // {distance: meters, duration: seconds, source: 'osrm'|'straight'}
 
@@ -409,7 +411,7 @@
 		function loadCSV(){
 			return new Promise((resolve, reject)=>{
 				if(csvLoaded) return resolve();
-				Papa.parse('df_indices_categorias.csv', {
+				Papa.parse(DATA_PATH + 'df_indices_categorias.csv', {
 					download: true,
 					header: true,
 					dynamicTyping: true,
@@ -450,7 +452,7 @@
         function loadSimilaresCSV(){
             return new Promise((resolve, reject)=>{
                 if(similaresLoaded) return resolve();
-                Papa.parse('municipios_similares.csv', {
+				Papa.parse(DATA_PATH + 'municipios_similares.csv', {
                     download: true,
                     header: true,
                     dynamicTyping: true,
