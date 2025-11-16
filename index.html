@@ -7,22 +7,26 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="" crossorigin=""/>
 	<style>
 		:root{--gap:12px;--panel-bg:#f8f9fb;--card:#ffffff;--accent:#2b7be4}
-		html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial;margin:0;color:#111}
+		/* full-viewport layout: prevent body scrolling and let internal panels scroll */
+		html,body{height:100vh;width:100vw;margin:0;padding:0;box-sizing:border-box;overflow:hidden;font-family:Inter,Segoe UI,Arial;color:#111}
 		.app{display:flex;flex-direction:column;height:100vh}
 		header{display:flex;align-items:center;gap:12px;padding:12px;background:linear-gradient(90deg,#fff,#f7f9fc);box-shadow:0 1px 2px rgba(16,24,40,.05)}
 		header h1{margin:0;font-size:18px}
-		.container{flex:1;display:grid;grid-template-columns:220px 1fr 320px;grid-template-rows:1fr 260px;gap:var(--gap);padding:12px}
+		.container{flex:1;display:grid;grid-template-columns:220px 0.9fr 320px;grid-template-rows:1fr 360px;gap:var(--gap);padding:12px;min-height:0}
 		/* Left panel (similares) */
 		.left{grid-column:1/2;grid-row:1/2;background:var(--panel-bg);padding:12px;border-radius:8px;overflow:auto}
-		.center{grid-column:2/3;grid-row:1/2;background:#fff;border-radius:8px;padding:8px;display:flex;flex-direction:column}
+		.center{grid-column:2/3;grid-row:1/2;background:#fff;border-radius:8px;padding:8px;display:flex;flex-direction:column;min-height:0}
 		.right{grid-column:3/4;grid-row:1/2;background:var(--panel-bg);padding:12px;border-radius:8px;overflow:auto}
-		.bottom{grid-column:1/4;grid-row:2/3;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+		.bottom{grid-column:1/4;grid-row:2/3;display:grid;grid-template-columns:1fr 2fr;gap:12px;min-height:0}
+		/* make cards inside bottom stretch and scroll internally */
+		.bottom .card{height:100%;display:flex;flex-direction:column;overflow:auto}
+		.detail{padding:12px;flex:1;overflow:auto}
 		.card{background:var(--card);border-radius:8px;padding:10px;margin-bottom:10px;box-shadow:0 1px 2px rgba(16,24,40,.03)}
 		#map{height:100%;border-radius:6px}
 		.sim-card{display:flex;align-items:center;gap:8px;padding:8px;border-radius:6px;border:1px solid #eee}
 		.sliders label{display:flex;justify-content:space-between;font-size:13px;margin-top:8px}
 		input[type=range]{width:100%}
-		.ranking-list{overflow:auto;height:100%;padding:8px}
+		.ranking-list{flex:1;overflow:auto;padding:8px}
 		.ranking-item{padding:8px;border-bottom:1px dashed #eee;cursor:pointer}
 		.ranking-item:hover{background:#fbfdff}
 		.detail{padding:12px}
@@ -30,6 +34,7 @@
 		.topbar-search{flex:1}
 		.search-input{width:100%;padding:8px;border-radius:6px;border:1px solid #ddd}
 		@media(max-width:900px){.container{grid-template-columns:1fr;grid-template-rows:200px 1fr 320px} .left{grid-column:1/2;grid-row:3/4} .right{grid-column:1/2;grid-row:2/3} .center{grid-column:1/2;grid-row:1/2} .bottom{grid-row:4/5;grid-column:1/2;grid-template-columns:1fr}}
+		.ranking-item.selected{background:linear-gradient(90deg,#eef7ff,#f7fbff);border-left:4px solid var(--accent);}
 	</style>
 </head>
 <body>
@@ -59,19 +64,22 @@
 				<h3>¿CUÁNTO VALORAS...?</h3>
 				<div class="sliders">
 					<label>Educación <span id="val-educ">5</span></label>
-					<input type="range" id="s-educ" min="1" max="10" value="5" />
+					<input type="range" id="s-educ" min="0" max="10" value="5" />
 
 					<label>Sanidad <span id="val-sani">5</span></label>
-					<input type="range" id="s-sani" min="1" max="10" value="5" />
+					<input type="range" id="s-sani" min="0" max="10" value="5" />
 
 					<label>Ocio y cultura <span id="val-ocio">5</span></label>
-					<input type="range" id="s-ocio" min="1" max="10" value="5" />
+					<input type="range" id="s-ocio" min="0" max="10" value="5" />
 
-					<label>Coste de vida <span id="val-cost">5</span></label>
-					<input type="range" id="s-cost" min="1" max="10" value="5" />
+					<label>Bienestar y servicios <span id="val-cost">5</span></label>
+					<input type="range" id="s-cost" min="0" max="10" value="5" />
 
 					<label>Movilidad <span id="val-mov">5</span></label>
-					<input type="range" id="s-mov" min="1" max="10" value="5" />
+					<input type="range" id="s-mov" min="0" max="10" value="5" />
+
+					<label>Economía y empleo <span id="val-econ">5</span></label>
+					<input type="range" id="s-econ" min="0" max="10" value="5" />
 				</div>
 
 				<hr />
@@ -86,7 +94,7 @@
 				</div>
 				<div class="card detail">
 					<h3 id="detailTitle">Selecciona un municipio</h3>
-					<div id="detailProfile" class="muted">Datos: Educación, Sanidad, Ocio, Coste, Movilidad</div>
+					<div id="detailProfile" class="muted">Datos: Educación, Sanidad, Ocio, Bienestar y servicios, Movilidad</div>
 					<h4>BREVE DESCRIPCIÓN DEL MUNICIPIO</h4>
 					<p id="detailDesc">Aquí aparecerá una pequeña descripción cuando selecciones un municipio del ranking.</p>
 				</div>
@@ -95,109 +103,358 @@
 	</div>
 
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="" crossorigin=""></script>
+	<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 	<script>
-		// Datos de ejemplo (mock)
-		const municipios = [
-			{id:1,name:'Alcalá de Henares',lat:40.481,lon:-3.363,educ:8, sani:7, ocio:8, cost:5, mov:7, desc:'Ciudad universitaria y con buena oferta cultural.'},
-			{id:2,name:'Majadahonda',lat:40.453,lon:-3.873,educ:7, sani:8, ocio:6, cost:6, mov:8, desc:'Municipio residencial con buen acceso a Madrid.'},
-			{id:3,name:'Getafe',lat:40.308,lon:-3.732,educ:6, sani:6, ocio:7, cost:6, mov:7, desc:'Ciudad con gran actividad industrial y universitaria.'},
-			{id:4,name:'San Sebastián de los Reyes',lat:40.545,lon:-3.629,educ:7, sani:7, ocio:6, cost:6, mov:7, desc:'Buena conectividad y zonas comerciales.'},
-			{id:5,name:'Collado Villalba',lat:40.644,lon:-4.006,educ:6, sani:6, ocio:5, cost:7, mov:5, desc:'Zona montañosa y tranquila.'}
-		];
+		// app state
+		let municipios = []; // loaded from CSV or fallback mock
+		const markers = {};
 
 		// Map
 		const map = L.map('map', {zoomControl:true}).setView([40.4168,-3.7038],10);
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
 
-		const markers = {};
-		municipios.forEach(m=>{ markers[m.id] = L.marker([m.lat,m.lon]).addTo(map).bindPopup(m.name); });
+		// layer to hold ranking-numbered markers
+		const markerLayer = L.layerGroup().addTo(map);
+		let currentRankMarkers = {}; // id -> marker for top results
+		let lastSortedMap = {}; // id -> municipio (latest computed scores)
+		// layer to hold colored area circles (approximate municipal zones)
+		const areaLayer = L.layerGroup().addTo(map);
 
-		// UI elements
-		const sliders = ['educ','sani','ocio','cost','mov'];
-		const sliderIds = {educ:'s-educ',sani:'s-sani',ocio:'s-ocio',cost:'s-cost',mov:'s-mov'};
-		function getPrefs(){
-			return {
+		// add Buscar button to the right panel
+		const buscarBtn = document.createElement('button');
+		buscarBtn.textContent = 'Buscar';
+		buscarBtn.style.marginTop = '10px';
+		buscarBtn.style.padding = '8px 12px';
+		buscarBtn.style.background = 'var(--accent)';
+		buscarBtn.style.color = '#fff';
+		buscarBtn.style.border = 'none';
+		buscarBtn.style.borderRadius = '6px';
+		buscarBtn.onclick = async ()=>{
+			try{
+				buscarBtn.disabled = true;
+				buscarBtn.textContent = 'Buscando...';
+				await runSearch({forceReload:true});
+			}catch(e){
+				console.error('Error en buscar:', e);
+				alert('Error al buscar. Mira la consola para más detalles.');
+			}finally{
+				buscarBtn.disabled = false;
+				buscarBtn.textContent = 'Buscar';
+			}
+		};
+		document.querySelector('.right').appendChild(buscarBtn);
+
+		// checkbox: activar coloreado de zonas (aproximado)
+		const colorToggleWrap = document.createElement('div');
+		colorToggleWrap.style.marginTop = '8px';
+		const colorToggle = document.createElement('input');
+		colorToggle.type = 'checkbox';
+		colorToggle.id = 'colorZones';
+		colorToggle.checked = true;
+		const colorToggleLabel = document.createElement('label');
+		colorToggleLabel.htmlFor = 'colorZones';
+		colorToggleLabel.style.marginLeft = '6px';
+		colorToggleLabel.textContent = 'Colorear zonas (aprox.)';
+		colorToggleWrap.appendChild(colorToggle);
+		colorToggleWrap.appendChild(colorToggleLabel);
+		document.querySelector('.right').appendChild(colorToggleWrap);
+
+		// control: cuántos mostrar en el mapa
+		const mapLimitWrap = document.createElement('div');
+		mapLimitWrap.style.marginTop = '8px';
+		mapLimitWrap.style.display = 'flex';
+		mapLimitWrap.style.alignItems = 'center';
+		const mapLimitLabel = document.createElement('label');
+		mapLimitLabel.textContent = 'Mostrar en mapa:';
+		mapLimitLabel.style.marginRight = '8px';
+		const mapLimitInput = document.createElement('input');
+		mapLimitInput.type = 'number';
+		mapLimitInput.id = 'mapLimit';
+		mapLimitInput.min = '0';
+		mapLimitInput.max = '200';
+		mapLimitInput.value = '20';
+		mapLimitInput.style.width = '72px';
+		mapLimitWrap.appendChild(mapLimitLabel);
+		mapLimitWrap.appendChild(mapLimitInput);
+		document.querySelector('.right').appendChild(mapLimitWrap);
+
+		// checkbox: mostrar todas las entradas en el mapa
+		const showAllWrap = document.createElement('div');
+		showAllWrap.style.marginTop = '6px';
+		const showAll = document.createElement('input');
+		showAll.type = 'checkbox';
+		showAll.id = 'showAllMap';
+		showAll.checked = false;
+		const showAllLabel = document.createElement('label');
+		showAllLabel.htmlFor = 'showAllMap';
+		showAllLabel.style.marginLeft = '6px';
+		showAllLabel.textContent = 'Mostrar todas en mapa';
+		showAllWrap.appendChild(showAll);
+		showAllWrap.appendChild(showAllLabel);
+		document.querySelector('.right').appendChild(showAllWrap);
+
+		// auto-run search when any checkbox in the right panel is toggled
+		document.querySelectorAll('.right input[type="checkbox"]').forEach(cb=>{
+			cb.addEventListener('change', ()=>{
+				try{ runSearch({forceReload:false}); }catch(e){ console.error('runSearch error from checkbox change', e); }
+			});
+		});
+
+		// mapping of slider keys to CSV columns
+		// Columns in CSV: sanidad, educacion, transporte_conectividad, economia_empleo, bienestar, ocio_cultura
+		// We map sliders (Educación, Sanidad, Ocio, Bienestar y servicios, Movilidad, Economía y empleo) to these columns.
+		const columnMap = { educ:'educacion', sani:'sanidad', ocio:'ocio_cultura', cost:'bienestar', mov:'transporte_conectividad', econ:'economia_empleo' };
+
+		// load CSV from df_indices_categorias.csv
+		let csvLoaded = false;
+		function loadCSV(){
+			return new Promise((resolve, reject)=>{
+				if(csvLoaded) return resolve();
+				Papa.parse('df_indices_categorias.csv', {
+					download: true,
+					header: true,
+					dynamicTyping: true,
+					skipEmptyLines: true,
+					complete: function(results){
+						municipios = results.data.map((r, i)=>({
+							id: i+1,
+							cod: r.cod_municipio,
+							name: r.municipio || r.nombre || `Municipio ${i+1}`,
+							lat: Number(r.latitud) || Number(r.latitude) || null,
+							lon: Number(r.longitud) || Number(r.longitude) || null,
+							alt: Number(r.altitud) || null,
+							sanidad: Number(r.sanidad) || 0,
+							educacion: Number(r.educacion) || 0,
+							transporte_conectividad: Number(r.transporte_conectividad) || 0,
+							economia_empleo: Number(r.economia_empleo) || 0,
+							bienestar: Number(r.bienestar) || 0,
+							ocio_cultura: Number(r.ocio_cultura) || 0,
+							desc: r.descripcion || r.Descripcion || r.description || r.Description || ''
+						}));
+						csvLoaded = true;
+						// keep positions; markers will be created when rendering ranking
+						// (we only create numbered markers for top results in renderRanking)
+						municipios.forEach(m=>{ /* positions available in m.lat/m.lon */ });
+						resolve();
+					},
+					error: function(err){
+						console.error('CSV load error', err);
+						reject(err);
+					}
+				});
+			});
+		}
+
+		// fallback mock if CSV fails to load
+		function loadFallback(){
+			municipios = [
+				{id:1,name:'Alcalá de Henares',lat:40.481,lon:-3.363,educacion:8, sanidad:7, ocio_cultura:8, bienestar:6, transporte_conectividad:7, desc:'Ciudad universitaria y con buena oferta cultural.'},
+				{id:2,name:'Majadahonda',lat:40.453,lon:-3.873,educacion:7, sanidad:8, ocio_cultura:6, bienestar:6, transporte_conectividad:8, desc:'Municipio residencial con buen acceso a Madrid.'},
+				{id:3,name:'Getafe',lat:40.308,lon:-3.732,educacion:6, sanidad:6, ocio_cultura:7, bienestar:6, transporte_conectividad:7, desc:'Ciudad con gran actividad industrial y universitaria.'}
+			];
+			// fallback positions kept; markers created during renderRanking
+			municipios.forEach(m=>{});
+			csvLoaded = false;
+		}
+
+		// compute scores using linear weighted sum based on sliders
+		// The CSV already contains normalized scores in [0,1], so we use them directly.
+		function computeScores(weights){
+			const scored = municipios.map(m=>{
+				let s = 0;
+				Object.keys(columnMap).forEach(k=>{
+					const col = columnMap[k];
+					const w = weights[k] || 0;
+					const v = isFinite(m[col])? m[col] : 0; // CSV already 0-1
+					s += w * v;
+				});
+				return {...m, score: s };
+			});
+			return scored.sort((a,b)=>b.score - a.score);
+		}
+
+		// show top N in ranking (scrollable). default N=20
+		function createNumberedMarker(m, rank){
+			const numberHtml = `<div style="background:${rank===1?'#ffc107':'#2b7be4'};color:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.2)">${rank}</div>`;
+			const icon = L.divIcon({className:'number-icon', html:numberHtml, iconSize:[30,30], iconAnchor:[15,30]});
+			const marker = L.marker([m.lat,m.lon], {icon}).bindPopup(`<strong>#${rank} ${m.name}</strong><br/>Puntuación: ${(m.score*100).toFixed(1)}`);
+			return marker;
+		}
+
+		// map score (0-1) to a color (green->yellow->red)
+		function scoreToColor(score){
+			// Continuous gradient: red (0.0) -> yellow (0.5) -> green (1.0)
+			const s = Math.max(0, Math.min(1, score));
+			// helper: linear interpolate between two colors (r,g,b)
+			function lerpColor(a,b,t){
+				return [
+					Math.round(a[0] + (b[0]-a[0])*t),
+					Math.round(a[1] + (b[1]-a[1])*t),
+					Math.round(a[2] + (b[2]-a[2])*t)
+				];
+			}
+			const red = [220,53,69];    // bad
+			const yellow = [255,215,0]; // mid
+			const green = [34,139,34];  // good
+			let rgb;
+			if(s < 0.5){
+				const t = s / 0.5; // 0..1 from red->yellow
+				rgb = lerpColor(red, yellow, t);
+			} else {
+				const t = (s - 0.5) / 0.5; // 0..1 from yellow->green
+				rgb = lerpColor(yellow, green, t);
+			}
+			return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+		}
+
+		// display names for nicer labels in the detail profile
+		const displayNames = {
+			'educacion': 'Educación',
+			'sanidad': 'Sanidad',
+			'ocio_cultura': 'Ocio y cultura',
+			'bienestar': 'Bienestar y servicios',
+			'transporte_conectividad': 'Transporte y conectividad',
+			'economia_empleo': 'Economía y empleo'
+		};
+
+		// render ranking list (all) and add numbered markers/circles only up to mapLimit
+		function renderRanking(sorted, mapLimit=20){
+			const list = document.getElementById('ranking');
+			list.innerHTML = '';
+
+			// clear previous rank markers and areas
+			markerLayer.clearLayers();
+			currentRankMarkers = {};
+			areaLayer.clearLayers();
+			// store lookup for later (so marker clicks can find the object with score)
+			lastSortedMap = {};
+
+			sorted.forEach((m, idx)=>{
+				lastSortedMap[m.id] = m;
+				const rank = idx+1;
+				const div = document.createElement('div');
+				div.className = 'ranking-item';
+				div.id = 'ranking-item-' + m.id;
+				const scoreText = isFinite(m.score)? `(Puntuación: ${(m.score*100).toFixed(1)})` : '';
+				div.innerHTML = `<strong>#${rank} ${m.name}</strong> <div class="muted">${scoreText}</div>`;
+				div.onclick = ()=> { selectRankingItem(m.id); };
+				div.onmouseenter = ()=> { if(currentRankMarkers[m.id]) currentRankMarkers[m.id].openPopup(); };
+				div.onmouseleave = ()=> { if(currentRankMarkers[m.id]) currentRankMarkers[m.id].closePopup(); };
+				list.appendChild(div);
+
+				// add numbered marker/area only for top mapLimit entries
+				if(idx < mapLimit && m.lat && m.lon){
+					const mrk = createNumberedMarker(m, rank);
+					mrk.addTo(markerLayer);
+					// clicking marker should select the ranking item and show detail
+					mrk.on('click', ()=> selectRankingItem(m.id));
+					currentRankMarkers[m.id] = mrk;
+					const enableColor = document.getElementById('colorZones')?.checked;
+					if(enableColor){
+						const radius = 1250;
+						const c = L.circle([m.lat,m.lon], {radius: radius, color: scoreToColor(m.score), fillColor: scoreToColor(m.score), fillOpacity: 0.25, weight:1}).bindPopup(`<strong>#${rank} ${m.name}</strong><br/>Puntuación: ${(m.score*100).toFixed(1)}`);
+						c.addTo(areaLayer);
+						c.on('click', ()=> selectRankingItem(m.id));
+					}
+				}
+			});
+
+			// list is styled via CSS; ensure overflow is auto
+			list.style.maxHeight = '';
+			list.style.overflow = 'auto';
+		}
+
+		function showDetail(m){
+			document.getElementById('detailTitle').textContent = m.name;
+			const parts = [];
+			// show the main category scores (CSV values are 0-1) using friendly labels
+			['educacion','sanidad','ocio_cultura','bienestar','transporte_conectividad','economia_empleo'].forEach(col=>{
+				if(col in m){
+					const label = displayNames[col] || col.replace('_',' ');
+					parts.push(`${label}: ${isFinite(m[col])?m[col].toFixed(2):'—'}`);
+				}
+			});
+			document.getElementById('detailProfile').textContent = 'Datos: ' + parts.join(', ');
+			document.getElementById('detailDesc').textContent = m.desc || '';
+			if(m.lat && m.lon){ map.setView([m.lat,m.lon],12); if(markers[m.id]) markers[m.id].openPopup(); }
+		}
+
+		// select a ranking item by id: highlight in list, show detail and open popup if available
+		function selectRankingItem(id){
+			const el = document.getElementById('ranking-item-' + id);
+			if(!el) return;
+			// remove previous selection
+			document.querySelectorAll('.ranking-item.selected').forEach(x=>x.classList.remove('selected'));
+			el.classList.add('selected');
+			// ensure visible
+			try{ el.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+			// find object: prefer lastSortedMap (contains score), fallback to municipios
+			const m = lastSortedMap[id] || municipios.find(x=>x.id===id);
+			if(m) showDetail(m);
+		}
+
+		// get weights from sliders (normalized)
+		function getSliderWeights(){
+			const prefs = {
 				educ: Number(document.getElementById('s-educ').value),
 				sani: Number(document.getElementById('s-sani').value),
 				ocio: Number(document.getElementById('s-ocio').value),
 				cost: Number(document.getElementById('s-cost').value),
 				mov: Number(document.getElementById('s-mov').value),
-			}
-		}
-
-		// display slider values and attach events
-		Object.keys(sliderIds).forEach(key=>{
-			const el = document.getElementById(sliderIds[key]);
-			const disp = document.getElementById('val-'+(key==='sani'? 'sani': key));
-			el.addEventListener('input', ()=>{ document.getElementById('val-'+(key==='sani'? 'sani': key)).textContent = el.value; computeRanking(); updateSimilares(); });
-		});
-
-		// compute ranking: normalize preferences to weights, and compute weighted sum (municipio scores are 1-10)
-		function computeRanking(){
-			const prefs = getPrefs();
+				econ: Number(document.getElementById('s-econ').value)
+			};
 			const vals = Object.values(prefs);
 			const sum = vals.reduce((a,b)=>a+b,0) || 1;
 			const weights = {};
 			Object.keys(prefs).forEach(k=> weights[k] = prefs[k]/sum);
-
-			const scored = municipios.map(m=>{
-				// convert scores 1-10 to 0-1
-				const sc = (m.educ/10)*weights.educ + (m.sani/10)*weights.sani + (m.ocio/10)*weights.ocio + ((10-m.cost)/10)*weights.cost + (m.mov/10)*weights.mov;
-				return {...m,score:sc};
-			}).sort((a,b)=>b.score - a.score);
-
-			const list = document.getElementById('ranking');
-			list.innerHTML = '';
-			scored.forEach((m,idx)=>{
-				const div = document.createElement('div');
-				div.className = 'ranking-item';
-				div.innerHTML = `<strong>#${idx+1} ${m.name}</strong> <div class="muted">Puntuación: ${(m.score*100).toFixed(1)}</div>`;
-				div.onclick = ()=> showDetail(m);
-				div.onmouseenter = ()=> markers[m.id].openPopup();
-				div.onmouseleave = ()=> markers[m.id].closePopup();
-				list.appendChild(div);
-			});
+			return weights;
 		}
 
-		function showDetail(m){
-			document.getElementById('detailTitle').textContent = m.name;
-			document.getElementById('detailProfile').textContent = `Datos: Educación ${m.educ}, Sanidad ${m.sani}, Ocio ${m.ocio}, Coste ${m.cost}, Movilidad ${m.mov}`;
-			document.getElementById('detailDesc').textContent = m.desc;
-			map.setView([m.lat,m.lon],12);
-			markers[m.id].openPopup();
-		}
-
-		// similares: simple distancia al vector preferencia (coseno sobre puntuaciones normalizadas)
-		function updateSimilares(){
-			const prefs = getPrefs();
-			// target vector map: note cost is inverse (lower cost better)
-			const target = [prefs.educ, prefs.sani, prefs.ocio, (11-prefs.cost), prefs.mov];
-			const norm = v=> Math.sqrt(v.reduce((a,b)=>a+a*b,0));
-			function cosSim(a,b){
-				const dot = a.reduce((s,ai,i)=>s+ai*b[i],0);
-				const na = Math.sqrt(a.reduce((s,x)=>s+x*x,0));
-				const nb = Math.sqrt(b.reduce((s,x)=>s+x*x,0));
-				return dot/(na*nb || 1);
+		// run search: load CSV (if needed), compute scores and render top 10
+		// accepts optional opts: { forceReload: true }
+		async function runSearch(opts={}){
+			console.log('runSearch called', opts);
+			try{
+				if(opts.forceReload) csvLoaded = false; // force re-download
+				await loadCSV().catch(()=>{ loadFallback(); });
+			}catch(e){ console.warn('loadCSV failed, using fallback', e); loadFallback(); }
+			const weights = getSliderWeights();
+			const sorted = computeScores(weights);
+			// decide how many to show on the map: either all if checkbox checked, or the numeric limit
+			const showAll = document.getElementById('showAllMap')?.checked;
+			let mapLimit = 0;
+			if(showAll){
+				mapLimit = sorted.length;
+			} else {
+				mapLimit = Number(document.getElementById('mapLimit')?.value) || 0;
 			}
-			const sims = municipios.map(m=>{
-				const v = [m.educ,m.sani,m.ocio, (11-m.cost), m.mov];
-				return {...m,sim:cosSim(target,v)}
-			}).sort((a,b)=>b.sim-a.sim);
+			renderRanking(sorted, mapLimit);
+			// update similares (top 3 similar to top result)
+			updateSimilaresFromSorted(sorted);
+		}
 
+		function updateSimilaresFromSorted(sorted){
 			const simDiv = document.getElementById('similaresList');
 			simDiv.innerHTML='';
-			sims.slice(0,3).forEach(s=>{
+			const top3 = sorted.slice(0,3);
+			top3.forEach(s=>{
 				const d = document.createElement('div'); d.className='sim-card';
-				d.innerHTML = `<div style="flex:1"><strong>${s.name}</strong><div class="muted">Similitud ${(s.sim*100).toFixed(0)}%</div></div>`;
+				d.innerHTML = `<div style="flex:1"><strong>${s.name}</strong><div class="muted">Puntuación ${(s.score*100).toFixed(0)}</div></div>`;
 				d.onclick = ()=> { showDetail(s); }
 				simDiv.appendChild(d);
 			});
 		}
 
-		// initial render
-		computeRanking(); updateSimilares();
+		// attach slider display update
+		const sliderIds = {educ:'s-educ',sani:'s-sani',ocio:'s-ocio',cost:'s-cost',mov:'s-mov',econ:'s-econ'};
+		// attach slider inputs: only update displayed value here
+		Object.keys(sliderIds).forEach(key=>{
+			const el = document.getElementById(sliderIds[key]);
+			const disp = document.getElementById('val-'+(key==='sani'? 'sani': key));
+			el.addEventListener('input', ()=>{ disp.textContent = el.value; });
+		});
 
-		// search box (simple filter)
+		// basic search box filter for the displayed ranking
 		document.getElementById('mainSearch').addEventListener('input', (e)=>{
 			const q = e.target.value.toLowerCase();
 			const list = document.getElementById('ranking');
@@ -209,9 +466,13 @@
 		// place input: center map on typed municipality if matches name
 		document.getElementById('placeInput').addEventListener('change', (e)=>{
 			const q = e.target.value.toLowerCase();
-			const found = municipios.find(m=>m.name.toLowerCase().includes(q));
+			const found = municipios.find(m=>m.name && m.name.toLowerCase().includes(q));
 			if(found) showDetail(found);
 		});
+
+		// initial load: run search to load CSV and render results with default slider values (5)
+		// This avoids showing placeholder data by default.
+		runSearch({forceReload:true}).catch(err=>{ console.warn('Initial runSearch failed, falling back', err); loadFallback(); renderRanking(municipios,20); });
 	</script>
 </body>
 </html>
