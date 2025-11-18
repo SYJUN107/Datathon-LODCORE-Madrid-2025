@@ -12,22 +12,26 @@
 	<style>
 		/* --- ESTILOS CONSOLIDADOS --- */
 		:root{
-			--bg: #dcfcf3; 			/* azul crema*/
-			--card: #c0ebe6;
-			--accent: #011b30; 		/* color dominante oscuro */
-			--accent-strong: #033d4a; /* color de acento para ranking/marcadores */
-			--muted: #19191c;
-			--separator: rgba(31,78,121,0.08);
+			--bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background */
+			--card: linear-gradient(145deg, #ffffff, #f0f4f8); /* Subtle card gradient */
+			--accent: #8a2be2; /* Vibrant purple */
+			--accent-strong: #ff6b35; /* Bright orange for highlights */
+			--accent-secondary: #00d2ff; /* Cyan for accents */
+			--muted: #4a5568;
+			--separator: rgba(138,43,226,0.1);
 			--gap: 12px;
+			--shadow: 0 10px 30px rgba(0,0,0,0.1);
+			--text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 		}
         
 	    /* body + layout tweaks (from original, enhanced with theme) */
 		html,body{height:100vh;width:100vw;margin:0;padding:0;box-sizing:border-box;overflow:hidden;font-family:'Roboto',Inter,Segoe UI,Arial;color:#0f1724;background:var(--bg)}
 		.app{display:flex;flex-direction:column;height:100vh}
 				
-	/* Header with absolute rotator */
-	header{position:relative; padding:12px 20px 8px; background:var(--bg); border-bottom:none;}
-	header h1{margin:0 auto; font-size:48px; color:var(--accent); font-weight:700; white-space:normal; text-align:center; max-width:calc(100vw - 400px);}
+/* Header with absolute rotator */
+header{position:relative; padding:20px; background:var(--bg); border-bottom:none; box-shadow:var(--shadow);}
+header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-space:normal; text-align:center; max-width:calc(100vw - 400px); text-shadow:var(--text-shadow); animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse { 0%, 100% { opacity:1; } 50% { opacity:0.8; } }
 				
 		.topbar-search{position:absolute; right:55px; top:50%; transform:translateY(-50%); width:320px}
 		.search-input{width:100%;padding:14px 16px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 1px 2px rgba(16,24,40,.03);font-size:16px}
@@ -35,8 +39,10 @@
 		/* Grid Layout */
 		.container{flex:1;display:grid;grid-template-columns:0.3fr 1fr 0.25fr;grid-template-rows:1fr 420px;gap:var(--gap);padding:14px 14px 46px;min-height:0}
 		.left{grid-column:1/2;grid-row:1/2;padding:8px;overflow:auto;}
-		.center{grid-column:2/3;grid-row:1/2;background:var(--card);border-radius:10px;padding:6px;display:flex;flex-direction:column;min-height:0;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
-		.right{grid-column:3/4;grid-row:1/2;background:var(--card);padding:8px;border-radius:10px;overflow:auto;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03)}
+		.center{grid-column:2/3;grid-row:1/2;background:var(--card);border-radius:10px;padding:6px;display:flex;flex-direction:column;min-height:0;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03);transition:transform 0.3s ease, box-shadow 0.3s ease;}
+		.center:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+		.right{grid-column:3/4;grid-row:1/2;background:var(--card);padding:8px;border-radius:10px;overflow:auto;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03);transition:transform 0.3s ease, box-shadow 0.3s ease;}
+		.right:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
 		/* allow the right column to shrink on small widths so inputs don't overflow */
 		.right{min-width:0}
 						
@@ -46,7 +52,8 @@
 
 		/* Cards y Contenido Scrolleable */
 		.bottom .card{height:100%;display:flex;flex-direction:column;overflow:hidden;}
-		.card{background:var(--card);border-radius:10px;padding:8px;box-shadow:0 2px 5px rgba(16,24,40,.03); border:1px solid var(--separator);}
+		.card{background:var(--card);border-radius:10px;padding:10px;margin:2px 0;transition:all 0.3s ease;border:1px solid var(--separator);position:relative;}
+		.card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,0.12), 0 0 15px rgba(0,213,255,0.1);border-color:var(--accent-secondary);background:linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);}
 						
 		.ranking-list-content, .detail-content{
 			padding:0 12px 36px 12px; /* Ajuste para scroll y espacio inferior */
@@ -68,8 +75,9 @@
 			display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.04);
 			background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.9));
 			cursor: pointer;
+			transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 		}
-		.sim-card:hover{background:linear-gradient(180deg,rgba(250,250,250,0.8),rgba(255,255,255,0.95));}
+		.sim-card:hover{background:linear-gradient(45deg, var(--accent-secondary), var(--accent)); transform:translateY(-2px); box-shadow:var(--shadow); color:#fff;}
 		.sim-card .thumb{
 			width:56px;height:40px;border-radius:6px;background:#f3f4f6;overflow:hidden;flex:0 0 56px;display:flex;align-items:center;justify-content:center;
 		}
@@ -121,8 +129,8 @@
 		}
 
 		@keyframes slide-left{
-			0%   { transform:translateX(0); }
-			100% { transform:translateX(-50%); } 
+			0% { transform:translateX(0); }
+			100% { transform:translateX(-50%); }
 		}
 
 		/* Mobile adjustments */
@@ -188,10 +196,12 @@
 			}
 		}
 
-		.ranking-item{padding:8px;border-bottom:1px dashed var(--separator);cursor:pointer}
-		.ranking-item:hover{background:#fcfdfe}
+		.ranking-item{padding:8px;border-bottom:1px dashed var(--separator);cursor:pointer;transition:background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;border-radius:6px;margin:2px 0;}
+		.ranking-item:hover{background:linear-gradient(135deg, #e0f7fa, #b2ebf2);transform:translateY(-1px);box-shadow:0 4px 8px rgba(0,0,0,0.1);}
 		.muted{color:var(--muted);font-size:13px}
-		.ranking-item.selected{background:linear-gradient(90deg,var(--separator),#fcfdfe);border-left:4px solid var(--accent-strong);}
+		.ranking-item.selected{background:linear-gradient(90deg,var(--accent),var(--accent-secondary));color:#fff;border-left:4px solid var(--accent-strong);box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+		.ranking-item.selected:hover{background:linear-gradient(90deg, rgba(138,43,226,0.8), rgba(0,213,255,0.8));transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,0.3);}
+		.ranking-item:hover strong{color:var(--accent);}
 
 		.detail-table{width:100%;border-collapse:collapse;margin-top:8px;margin-bottom:8px;border:1px solid rgba(3,61,74,0.08);box-shadow:0 1px 0 rgba(0,0,0,0.03)}
 		.detail-table th{background:rgba(3,61,74,0.04);color:var(--accent-strong);font-weight:700;padding:8px 10px;border:1px solid rgba(3,61,74,0.12);text-align:left;font-size:13px}
@@ -202,6 +212,41 @@
 			background: rgba(0,0,0,0.7);
 			color: #fff;
 			padding:6px 8px;border-radius:6px;font-weight:700;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.25);
+		}
+
+		/* Custom scrollbar styling - remove white rectangle backgrounds */
+		/* Webkit browsers (Chrome, Safari, Edge) */
+		.ranking-list-content::-webkit-scrollbar,
+		.detail-content::-webkit-scrollbar,
+		#chatbot .messages::-webkit-scrollbar {
+			width: 16px;
+			background: transparent;
+		}
+
+		.ranking-list-content::-webkit-scrollbar-track,
+		.detail-content::-webkit-scrollbar-track,
+		#chatbot .messages::-webkit-scrollbar-track {
+			background: transparent;
+			border-radius: 4px;
+		}
+
+		.ranking-list-content::-webkit-scrollbar-thumb,
+		.detail-content::-webkit-scrollbar-thumb,
+		#chatbot .messages::-webkit-scrollbar-thumb {
+			background: rgba(0,213,255,0.3);
+			border-radius: 4px;
+		}
+
+		.ranking-list-content::-webkit-scrollbar-thumb:hover,
+		.detail-content::-webkit-scrollbar-thumb:hover,
+		#chatbot .messages::-webkit-scrollbar-thumb:hover {
+			background: rgba(0,213,255,0.5);
+		}
+
+		/* Firefox */
+		* {
+			scrollbar-width: thick;
+			scrollbar-color: rgba(0,213,255,0.3) transparent;
 		}
 
 		/* Modal styles */
@@ -252,7 +297,8 @@
 		.message.assistant .bubble{background:#f3f4f6;color:#0f1724;border-bottom-left-radius:2px}
 		.chat-input{display:flex;gap:8px;padding:6px; flex:0 0 auto}
 		.chat-input textarea{flex:1;resize:none;padding:8px;border-radius:8px;border:1px solid var(--separator);min-height:42px}
-		.chat-input button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff}
+		.chat-input button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;transition:background 0.3s ease, transform 0.2s ease;}
+		.chat-input button:hover{background:var(--accent-strong);transform:scale(1.05);}
 		.api-key{flex:1;display:flex;gap:6px;align-items:center}
 		.api-key input{flex:1;padding:6px;border-radius:6px;border:1px solid var(--separator)}
 		
@@ -319,7 +365,7 @@
 				<h4>Lugar de Interés</h4>
 				<input id="placeInput" placeholder="Introduce una ubicación que visitas frecuentemente" style="width:100%;padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);margin-bottom:12px" />
 				
-				<button id="buscarBtn" style="width:100%;padding:10px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;">Buscar</button>
+				<button id="buscarBtn" style="width:100%;padding:10px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:background 0.3s ease, transform 0.2s ease;margin-bottom:8px;">Buscar</button>
 
 				<div style="margin-top:12px;margin-bottom:8px">
 					<input type="checkbox" id="colorZones" checked>
@@ -394,8 +440,9 @@
 		<script src="secrets.js"></script>
 		<script>
 		// app state
-		let municipios = []; 
+		let municipios = [];
 		let similaresData = []; // Para almacenar los datos de municipios_similares.csv
+		let conversationHistory = []; // Historial de conversación para mantener memoria en el chatbot
 		// Ruta base para los datos (permite cambiar fácilmente la carpeta de origen)
 		const DATA_PATH = 'website_data/';
 		const markers = {};
@@ -670,8 +717,20 @@
 		    const headers = cols.map(c=> displayNames[c] || c.replace('_',' '));
 		    const values = cols.map(c=>{
 		        const v = (c in m) ? m[c] : null;
-		        return (v === null || v === undefined || !isFinite(v)) ? '—' : Number(v).toFixed(2);
+		        return (v === null || v === undefined || !isFinite(v)) ? '—' : (Number(v) * 100).toFixed(0);
 		    });
+
+		    // Calculate average of valid numeric values (multiply by 100)
+		    const validValues = values.map(v => {
+		        const num = parseFloat(v);
+		        return isNaN(num) ? null : num;
+		    }).filter(v => v !== null);
+		    const average = validValues.length > 0 ? Math.round(validValues.reduce((sum, val) => sum + val, 0) / validValues.length) : '—';
+
+		    // Add average header and value
+		    headers.push('Promedio');
+		    values.push(average);
+
 		    // Add Info header and value
 		    headers.push('Info');
 		    values.push('<button onclick="showInfoModal()" style="padding: 4px 8px; background: rgba(0,0,0,0.08); border: none; border-radius: 3px; cursor: pointer;">?</button>');
@@ -1191,16 +1250,19 @@
 			try{
 				let reply;
 				if(!useDummy){
-					// Build messages array with a system prompt and user message
+					// Añadir el mensaje del usuario al historial de conversación
+					conversationHistory.push({role: 'user', content: text});
+					// Construir el array de mensajes con el prompt del sistema y el historial completo
 					const messages = [
-						{role:'system', 
+						{role:'system',
 						content: 'Eres un asistente que ayuda a encontrar municipios, procura ser útil y conciso pero humano.'+
 								' Respondes solo preguntas relacionadas con municipios de la Comunidad de Madrid.'+
 								' Si no sabes la respuesta, di que no lo sabes. Tus respuestas deben ser en español.'+
 								' Tienes que devolver texto plano, sin italicas, negritas, ni formato especial.' +
 								' Tienes que responder en el idioma de la pregunta.'
 							},
-						{role:'user', content: text}
+						// Incluir el historial de conversación para mantener la memoria
+						...conversationHistory
 					];
 					reply = await callOpenRouterAPI(messages, apiKey);
 				} else {
@@ -1208,9 +1270,13 @@
 					reply = simulateAssistantReply(text);
 				}
 				if(lastPlaceholder) lastPlaceholder.textContent = reply;
+				// Añadir la respuesta del asistente al historial de conversación
+				conversationHistory.push({role: 'assistant', content: reply});
 			}catch(err){
 				const fallback = simulateAssistantReply(text);
 				if(lastPlaceholder) lastPlaceholder.textContent = fallback;
+				// Incluir también las respuestas de fallback en el historial
+				conversationHistory.push({role: 'assistant', content: fallback});
 			}
 		}
 
