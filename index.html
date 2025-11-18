@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Búsqueda de Municipios - Madrid</title>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="" crossorigin=""/>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="" crossorigin=""></script>
 	<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
@@ -21,12 +22,12 @@
 		}
         
 	    /* body + layout tweaks (from original, enhanced with theme) */
-		html,body{height:100vh;width:100vw;margin:0;padding:0;box-sizing:border-box;overflow:hidden;font-family:Inter,Segoe UI,Arial;color:#0f1724;background:var(--bg)}
+		html,body{height:100vh;width:100vw;margin:0;padding:0;box-sizing:border-box;overflow:hidden;font-family:'Roboto',Inter,Segoe UI,Arial;color:#0f1724;background:var(--bg)}
 		.app{display:flex;flex-direction:column;height:100vh}
 				
-		/* Título más grande y con buscador flotante */
-		header{position:relative; display:flex;align-items:center;justify-content:center;padding:12px 20px 8px;background:var(--bg);border-bottom:none; margin:12px 0;}
-		header h1{margin:0;font-size:44px; color:var(--accent);font-weight:800; letter-spacing:0.6px;}
+	/* Header with absolute rotator */
+	header{position:relative; padding:12px 20px 8px; background:var(--bg); border-bottom:none;}
+	header h1{margin:0 auto; font-size:48px; color:var(--accent); font-weight:700; white-space:normal; text-align:center; max-width:calc(100vw - 400px);}
 				
 		.topbar-search{position:absolute; right:55px; top:50%; transform:translateY(-50%); width:320px}
 		.search-input{width:100%;padding:14px 16px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 1px 2px rgba(16,24,40,.03);font-size:16px}
@@ -82,33 +83,35 @@
 
 		.sep{height:1px;background:var(--separator);margin:12px 0;border-radius:1px}
 
-		/* Sponsor slider animation/positioning */
+		/* Sponsor slider inside header */
 		.sponsor-rotator{
-			position:fixed;
-			left:19px;
-			top:19px;
-			width:365px;
-			height:81px;
+			position:absolute;
+			left:20px;
+			top:50%;
+			transform:translateY(-50%);
+			width: clamp(250px, 20vw, 350px);
+			height: clamp(70px, 9vh, 90px);
 			overflow-x:hidden;
 			overflow-y:hidden;
-			z-index:1000;
 			background:transparent;
 			pointer-events:auto;
+			display: flex;
+			align-items: center;
 		}
 
 		.sponsor-track{
 			display:flex;
 			align-items:center;
-			gap:25px;
+			gap: clamp(8px, 2vw, 20px);
 			padding:0;
 			box-sizing:border-box;
 			flex-wrap:nowrap;
 			min-width: max-content;
-			animation:slide-left 9s linear infinite; 
+			animation:slide-left 6s linear infinite;
 		}
 
 		.sponsor-track img{
-			height:81px; 	
+			height: clamp(30px, 4vh, 48px);
 			width:auto;
 			display:inline-block;
 			object-fit:contain;
@@ -125,46 +128,63 @@
 		/* Mobile adjustments */
 		@media (max-width:900px){
 			.container{grid-template-columns:1fr;grid-template-rows:minmax(0, 1fr) 1fr 320px 360px; }
-			.left{grid-column:1/2;grid-row:3/4; height: 320px;} 
-			.right{grid-column:1/2;grid-row:2/3} 
-			.center{grid-column:1/2;grid-row:1/2} 
-			.bottom{grid-row:4/5;grid-column:1/2;grid-template-columns:1fr;} 
-			
+			.left{grid-column:1/2;grid-row:3/4; height: 320px;}
+			.right{grid-column:1/2;grid-row:2/3}
+			.center{grid-column:1/2;grid-row:1/2}
+			.bottom{grid-row:4/5;grid-column:1/2;grid-template-columns:1fr;}
+
 			header {
-				flex-direction: column; 
+				flex-direction: column;
 				align-items: flex-start;
-				padding: 10px 18px 18px 18px; 
+				padding: 10px 18px 18px 18px;
 				min-height: 100px;
 			}
 			header h1 {
 				font-size: 24px;
-				order: 2; 
+				order: 2;
 				margin-top: 12px;
 			}
 			.topbar-search{
-				position: static; 
+				position: static;
 				width: 100%;
 				margin-top: 10px;
-				order: 3; 
-				transform: none; 
+				order: 3;
+				transform: none;
 			}
 
 			.sponsor-rotator{
-				position: static; 
+				position: static;
 				width: 100%;
 				height: 56px;
 				left: auto;
 				top: auto;
-				overflow-x: auto; 
-				order: 1; 
+				overflow-x: auto;
+				order: 1;
 			}
 			.sponsor-track{
-				animation: none; 
+				animation: none;
 				gap: 16px;
 				padding: 0 0 0 4px;
 			}
 			.sponsor-track img{
-				height: 48px; 
+				height: 48px;
+			}
+		}
+		@media (max-width:700px){
+			header {
+				flex-direction: column;
+				gap: 10px;
+			}
+			header h1 {
+				flex: none;
+				text-align: left;
+				line-height: 1.2;
+				margin: 0;
+				font-size: 22px;
+			}
+			.sponsor-rotator {
+				width: 100%;
+				margin-bottom: 5px;
 			}
 		}
 
@@ -184,6 +204,40 @@
 			padding:6px 8px;border-radius:6px;font-weight:700;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.25);
 		}
 
+		/* Modal styles */
+		.modal-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 10000;
+		}
+		.modal {
+			background: #fff;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+			max-width: 500px;
+			font-size: 14px;
+			line-height: 1.5;
+			text-align: left;
+			position: relative;
+		}
+		.modal button {
+			margin-top: 15px;
+			padding: 8px 16px;
+			background: var(--accent);
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
 		/* Chatbot styles */
 		/* Make the chat container use flex so messages area stays scrollable
 		   and the input/button remain pinned to the bottom. */
@@ -193,7 +247,7 @@
 		#chatbot .messages{flex:1; min-height:0; overflow:auto; padding:10px; background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96)); border-radius:6px; border:1px solid rgba(3,61,74,0.04)}
 		.message{margin-bottom:10px;max-width:100%;display:flex}
 		.message.user{justify-content:flex-end}
-		.message .bubble{padding:10px 12px;border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05);font-size:13px}
+		.message .bubble{padding:10px 12px;border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05);font-size:17px}
 		.message.user .bubble{background:#2b7be4;color:#fff;border-bottom-right-radius:2px}
 		.message.assistant .bubble{background:#f3f4f6;color:#0f1724;border-bottom-left-radius:2px}
 		.chat-input{display:flex;gap:8px;padding:6px; flex:0 0 auto}
@@ -206,20 +260,21 @@
 </head>
 <body>
 	<div class="app">
-		
-		<div class="sponsor-rotator" id="sponsorRot">
-			<div class="sponsor-track" id="sponsorTrack">
-				<img src="logos/logo1.png" alt="Patrocinador 1">
-				<img src="logos/logo2.png" alt="Patrocinador 2">
-				<img src="logos/logo3.png" alt="Patrocinador 3">
-				<img src="logos/logo1.png" alt="Patrocinador 1">
-				<img src="logos/logo2.png" alt="Patrocinador 2">
-				<img src="logos/logo3.png" alt="Patrocinador 3">
-			</div>
-		</div>
 
-		<header>
-			<h1>Tu Municipio Ideal: Un Asistente para Decidir con Datos</h1>
+	<header>
+			<div class="title-container">
+				<h1>Tu Municipio Ideal: Un Asistente para Decidir con Datos</h1>
+			</div>
+			<div class="sponsor-rotator" id="sponsorRot">
+				<div class="sponsor-track" id="sponsorTrack">
+					<img src="logos/logo1.png" alt="Patrocinador 1">
+					<img src="logos/logo2.png" alt="Patrocinador 2">
+					<img src="logos/logo3.png" alt="Patrocinador 3">
+					<img src="logos/logo1.png" alt="Patrocinador 1">
+					<img src="logos/logo2.png" alt="Patrocinador 2">
+					<img src="logos/logo3.png" alt="Patrocinador 3">
+				</div>
+			</div>
 		</header>
 
 		<main class="container">
@@ -325,6 +380,14 @@
 				</div>
 			</section>
 		</main>
+		</div>
+
+		<!-- Modal for info explanation -->
+		<div id="infoModal" class="modal-overlay" style="display:none;">
+			<div class="modal">
+				<p></p>
+				<button onclick="hideInfoModal()">Cerrar</button>
+			</div>
 		</div>
 
 		<!-- Load local secrets (secrets.js) which defines window.SECRETS.OPENROUTER_API_KEY -->
@@ -597,7 +660,9 @@
             }
         }
 
-		// show detail 
+		// show detail
+		const explanation = 'El cálculo del puntuaje de las distintas categorías dependen de diferentes aspectos, como la cantidad de servicios disponibles (por ejemplo, número de centros de salud por cada 10.000 habitantes), las opiniones de los usuarios sobre esos servicios (como las valoraciones en Google Maps), y factores económicos como la tasa de desempleo, los cuales se combinan de manera equilibrada para obtener una puntuación final que refleja la calidad de vida en cada municipio.';
+
 		function showDetail(m){
 		    document.getElementById('detailTitle').textContent = m.name;
 		    // Build a table of categories
@@ -607,6 +672,9 @@
 		        const v = (c in m) ? m[c] : null;
 		        return (v === null || v === undefined || !isFinite(v)) ? '—' : Number(v).toFixed(2);
 		    });
+		    // Add Info header and value
+		    headers.push('Info');
+		    values.push('<button onclick="showInfoModal()" style="padding: 4px 8px; background: rgba(0,0,0,0.08); border: none; border-radius: 3px; cursor: pointer;">?</button>');
 		    // Render table into detailProfile
 		    const table = document.createElement('table');
 		    table.className = 'detail-table';
@@ -616,7 +684,7 @@
 		    thead.appendChild(trh);
 		    const tbody = document.createElement('tbody');
 		    const trv = document.createElement('tr');
-		    values.forEach(v=>{ const td = document.createElement('td'); td.textContent = v; trv.appendChild(td); });
+		    values.forEach(v=>{ const td = document.createElement('td'); td.innerHTML = v; trv.appendChild(td); });
 		    tbody.appendChild(trv);
 		    table.appendChild(thead); table.appendChild(tbody);
 		    const profileEl = document.getElementById('detailProfile');
@@ -975,7 +1043,7 @@
         const similaresDisp = document.getElementById('val-similares');
         similaresSlider.addEventListener('input', ()=>{ similaresDisp.textContent = similaresSlider.value; });
 
-		// basic search box filter for the displayed ranking 
+		// basic search box filter for the displayed ranking
 		document.getElementById('mainSearch').addEventListener('input', (e)=>{
 			const qRaw = e.target.value.toLowerCase();
 			const q = qRaw.replace(/\s+/g,''); // normalize: remove spaces so searches with spaces match
@@ -985,6 +1053,16 @@
 				item.style.display = q ? (nameNorm.includes(q) ? 'block' : 'none') : 'block';
 			});
 		});
+
+		// Modal functions for info
+		function showInfoModal() {
+			const p = document.getElementById('infoModal').querySelector('p');
+			p.innerHTML = explanation;
+			document.getElementById('infoModal').style.display = 'flex';
+		}
+		function hideInfoModal() {
+			document.getElementById('infoModal').style.display = 'none';
+		}
 
 		// place input: center map on typed municipality; use CSV match or fallback to OSM (Nominatim)
 		document.getElementById('placeInput').addEventListener('change', async (e)=>{
