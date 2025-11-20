@@ -1,156 +1,156 @@
-cod_municipio,municipio,sanidad_medicos_familia,sanidad_farmacias,educacion_colegios_institutos,transporte_conectividad_paradas_bus,transporte_conectividad_estaciones,economia_empleo_total_pct,economia_empleo_paro_pct,bienestar_gimnasios,bienestar_parques,bienestar_aq_aqi,bienestar_aq_co_value,bienestar_aq_no2_value,bienestar_aq_o3_value,bienestar_aq_pm10_value,bienestar_aq_pm25_value,bienestar_aq_so2_value,ocio_cultura_restaurantes,ocio_cultura_cafeterias,ocio_cultura_bares,ocio_cultura_cines,servicios_bancos,servicios_cajeros,servicios_centros_comerciales,servicios_conveniencia,servicios_supermercados,servicios_gasolineras,servicios_bomberos,servicios_comisarias
-14,Acebeda (La),0,0,1,20,4,44.0,4.0,0,1,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,1,0,0,0,0,0,0,0,0,0
-29,Ajalvir,6,4,11,21,20,44.0,4.0,11,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,13,20,0,8,11,0,4,6,5,0,3
-35,Alameda del Valle,0,1,1,22,10,35.0,7.0,0,19,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,0,5,0,0,0,0,1,0,0,0,0
-40,Álamo (El),2,3,5,21,20,36.0,5.0,5,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,4,13,0,4,4,2,3,4,7,0,1
-88,Aldea del Fresno,3,1,2,21,8,32.0,6.0,2,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,7,1,11,0,2,2,0,0,2,3,1,2
-91,Algete,7,6,13,22,20,46.0,4.0,14,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,5,20,0,6,7,2,1,12,6,0,2
-105,Alpedrete,9,4,16,21,21,43.0,4.0,15,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,15,20,1,3,3,1,3,10,10,0,1
-112,Ambite,1,1,2,20,7,34.0,6.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,2,0,3,0,0,0,0,0,0,0,0,0
-127,Anchuelo,0,1,0,20,1,37.0,5.0,0,6,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,4,1,2,0,0,0,0,0,1,0,0,0
-151,Arroyomolinos,7,13,20,21,20,39.0,3.0,19,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,15,18,0,7,5,2,1,8,1,0,2
-164,Atazar (El),0,0,0,20,1,40.0,9.0,0,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,1,0,0,0,0,0,0,0,0,0
-170,Batres,0,1,1,20,1,34.0,4.0,0,0,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,1,0,1,0,0,0,0,1,0,0,0,0
-186,Becerril de la Sierra,6,3,3,21,20,41.0,5.0,7,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,5,15,0,3,2,0,2,2,1,0,2
-199,Belmonte de Tajo,0,2,1,21,8,37.0,6.0,1,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,3,1,5,0,1,1,0,0,1,0,0,0
-210,Berrueco (El),0,1,1,20,9,29.0,5.0,1,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,1,3,0,0,0,0,0,1,0,0,0
-203,Berzosa del Lozoya,0,0,0,22,11,24.0,1.0,0,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,3,0,0,0,0,0,1,0,0,0
-231,Boalo (El),0,2,9,22,20,41.0,4.0,5,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,6,13,0,1,2,0,0,3,2,0,2
-246,Braojos,0,1,1,23,9,47.0,3.0,0,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,4,1,3,0,0,0,0,0,0,2,0,0
-259,Brea de Tajo,0,2,3,20,3,34.0,6.0,3,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,1,0,4,0,0,1,0,0,1,0,0,0
-262,Brunete,8,4,8,22,20,45.0,4.0,10,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,12,10,0,4,5,0,3,6,2,0,2
-278,Buitrago del Lozoya,1,1,3,23,13,45.0,4.0,1,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,4,14,0,2,2,0,2,4,3,0,1
-284,Bustarviejo,0,1,2,20,15,38.0,5.0,0,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,10,2,9,0,2,2,0,2,3,0,0,1
-297,Cabanillas de la Sierra,1,2,4,23,17,39.0,3.0,1,10,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,0,5,0,1,1,0,1,1,0,0,0
-301,Cabrera (La),2,1,4,22,16,40.0,5.0,3,19,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,18,6,8,0,1,1,0,1,3,4,2,1
-318,Cadalso de los Vidrios,1,0,2,21,7,33.0,7.0,0,11,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,11,3,16,0,3,4,0,2,4,2,0,0
-323,Camarma de Esteruelas,0,2,7,21,20,40.0,6.0,3,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,10,3,6,0,2,3,0,2,2,0,0,0
-339,Campo Real,4,2,3,21,7,43.0,5.0,3,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,5,11,0,4,4,0,1,2,1,0,2
-344,Canencia,0,1,1,20,2,30.0,5.0,0,9,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,4,1,3,0,0,0,0,0,1,0,0,0
-357,Carabaña,0,2,3,20,15,37.0,5.0,0,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,0,9,0,0,0,0,0,2,0,0,1
-360,Casarrubuelos,7,7,14,20,20,38.0,5.0,6,16,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,7,12,1,2,2,3,2,6,4,0,1
-376,Cenicientos,0,1,2,20,8,31.0,8.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,11,2,10,0,3,3,0,2,4,3,1,1
-382,Cercedilla,4,3,10,20,21,42.0,5.0,3,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,10,18,0,3,3,0,2,4,2,0,2
-395,Cervera de Buitrago,0,0,0,20,10,22.0,7.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,1,0,0,0,0,0,0,0,0,0
-513,Chapinería,0,1,6,21,2,35.0,5.0,2,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,8,2,3,2,2,3,0,0,1,0,0,0
-528,Chinchón,2,2,5,20,12,38.0,6.0,3,11,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,4,20,0,3,3,1,4,2,1,0,2
-409,Ciempozuelos,11,8,14,20,21,40.0,5.0,10,14,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,10,20,0,10,11,0,4,9,8,0,2
-416,Cobeña,4,2,6,20,16,43.0,3.0,3,16,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,3,11,0,3,4,1,2,6,4,0,1
-468,Collado Mediano,1,3,8,20,20,42.0,5.0,3,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,15,6,10,0,3,2,0,2,5,2,0,1
-437,Colmenar de Oreja,2,3,4,20,12,38.0,6.0,3,11,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,15,5,9,0,4,4,0,1,6,1,0,2
-421,Colmenar del Arroyo,0,2,2,21,13,33.0,6.0,1,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,4,1,4,0,0,0,0,0,1,0,0,0
-442,Colmenarejo,13,8,20,23,20,43.0,5.0,13,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,18,20,0,7,7,0,4,13,8,0,1
-480,Corpa,0,1,1,20,16,37.0,6.0,3,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,1,3,0,0,0,0,2,1,3,0,0
-506,Cubas de la Sagra,7,5,11,20,20,39.0,4.0,5,19,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,15,3,6,0,4,4,1,1,6,0,0,1
-534,Daganzo de Arriba,4,4,13,21,20,46.0,4.0,12,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,12,20,1,8,11,0,3,5,5,0,3
-549,Escorial (El),15,11,21,21,20,41.0,4.0,20,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,20,20,0,8,10,3,10,10,6,1,1
-552,Estremera,1,1,3,21,6,34.0,6.0,0,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,4,1,2,0,1,2,0,0,1,1,0,1
-565,Fresnedillas de la Oliva,1,1,3,21,16,37.0,7.0,3,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,6,1,4,0,0,1,0,0,2,0,0,0
-571,Fresno de Torote,0,0,0,8,3,36.0,5.0,0,0,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,0,0,0,0,0,0,0,0,0,0,0,0
-590,Fuente el Saz de Jarama,3,3,7,20,20,43.0,4.0,5,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,4,19,0,2,2,2,3,5,4,0,1
-604,Fuentidueña de Tajo,1,1,2,21,7,31.0,7.0,2,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,4,1,6,0,2,2,0,0,3,1,0,1
-611,Galapagar,14,11,20,23,20,47.0,4.0,14,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,18,20,0,7,8,0,5,14,10,1,2
-626,Garganta de los Montes,0,1,0,21,11,36.0,4.0,0,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,2,0,0,0,0,0,1,0,0,0
-632,Gargantilla del Lozoya y Pinilla de Buitrago,0,1,1,21,14,29.0,6.0,0,10,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,7,1,5,0,0,0,0,0,2,0,0,0
-647,Gascones,0,1,1,23,12,44.0,4.0,0,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,7,0,6,0,0,0,0,0,0,2,0,0
-663,Griñón,9,4,18,20,20,42.0,4.0,9,16,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,5,17,0,8,7,2,2,7,5,0,2
-679,Guadalix de la Sierra,1,3,8,21,17,41.0,5.0,3,9,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,6,16,0,2,2,0,1,4,2,0,0
-685,Guadarrama,6,4,11,21,20,43.0,4.0,12,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,14,20,0,3,3,0,2,11,5,0,2
-698,Hiruela (La),0,0,0,20,1,11.0,5.0,0,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,2,0,0,0,0,2,0,0,1,0
-702,Horcajo de la Sierra,1,0,1,22,11,27.0,5.0,0,7,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,3,0,0,0,0,0,0,0,0,0
-719,Horcajuelo de la Sierra,0,2,1,22,7,46.0,4.0,1,14,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,1,4,0,0,0,0,0,1,0,1,0
-724,Hoyo de Manzanares,3,3,5,21,19,40.0,4.0,4,18,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,4,16,1,5,6,0,2,3,1,0,1
-730,Humanes de Madrid,6,8,16,21,20,45.0,5.0,17,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,19,20,1,7,10,1,3,12,14,0,1
-758,Loeches,3,3,6,21,20,45.0,5.0,4,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,18,6,14,1,4,4,0,3,3,2,0,1
-761,Lozoya,0,1,3,20,3,32.0,5.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,12,3,9,0,1,1,0,0,1,1,0,0
-9015,Lozoyuela-Navas-Sieteiglesias,1,1,2,23,19,34.0,5.0,3,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,4,1,3,0,1,1,1,0,1,2,1,1
-783,Madarcos,1,0,1,23,9,43.0,1.0,0,16,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,3,0,4,0,0,0,0,0,0,0,0,0
-822,Manzanares el Real,3,2,7,21,9,40.0,4.0,9,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,3,16,1,3,2,0,2,3,2,0,2
-838,Meco,1,4,6,20,20,39.0,4.0,5,17,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,18,7,6,0,5,5,1,1,8,3,0,2
-843,Mejorada del Campo,12,7,15,21,20,45.0,5.0,12,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,17,20,0,8,11,0,3,13,7,0,1
-856,Miraflores de la Sierra,4,3,5,20,8,40.0,5.0,4,17,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,3,19,1,2,2,0,1,5,2,0,1
-869,Molar (El),3,3,12,21,20,40.0,5.0,4,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,11,20,0,4,5,0,3,5,3,0,2
-875,Molinos (Los),4,3,5,20,20,42.0,5.0,5,9,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,0,16,0,1,1,0,1,2,2,0,2
-881,Montejo de la Sierra,0,2,1,22,7,30.0,3.0,1,11,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,1,4,0,0,0,0,0,1,0,1,0
-894,Moraleja de Enmedio,1,1,6,22,20,44.0,4.0,8,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,6,14,0,3,3,0,3,4,5,0,1
-908,Moralzarzal,7,3,13,21,19,40.0,4.0,18,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,10,20,0,4,4,2,0,6,4,0,1
-915,Morata de Tajuña,4,2,4,20,20,40.0,6.0,3,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,16,5,12,1,4,5,0,4,4,2,0,2
-936,Navacerrada,5,1,4,20,20,38.0,4.0,2,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,4,20,0,1,2,0,0,2,2,1,1
-941,Navalafuente,1,2,2,20,15,39.0,7.0,2,15,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,3,2,3,0,1,0,0,0,2,1,0,0
-954,Navalagamella,0,1,3,21,5,36.0,6.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,4,0,5,0,2,3,0,0,1,0,0,1
-967,Navalcarnero,20,9,17,21,20,40.0,5.0,20,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,13,20,0,7,10,4,5,12,9,0,2
-973,Navarredonda y San Mamés,1,0,0,21,8,24.0,5.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,2,0,0,0,0,0,0,0,0,0
-992,Navas del Rey,2,2,3,21,8,34.0,6.0,2,7,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,8,6,10,0,3,1,0,2,4,2,0,2
-1006,Nuevo Baztán,3,3,5,22,20,35.0,5.0,3,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,3,18,0,1,2,4,0,4,1,0,0
-1013,Olmeda de las Fuentes,3,2,4,21,12,36.0,7.0,0,18,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,10,1,6,0,0,0,0,0,2,1,0,0
-1028,Orusco de Tajuña,0,1,2,20,6,35.0,7.0,1,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,2,0,3,0,0,1,0,0,2,1,0,0
-1049,Paracuellos de Jarama,8,7,13,21,20,42.0,3.0,17,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,15,20,0,7,8,1,6,8,7,0,2
-1071,Patones,2,3,4,20,20,25.0,3.0,0,11,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,0,8,0,1,2,0,1,2,1,0,0
-1087,Pedrezuela,3,3,11,21,20,39.0,5.0,4,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,11,20,0,4,5,0,3,5,0,0,1
-1090,Pelayos de la Presa,1,1,4,20,9,31.0,8.0,5,14,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,18,4,11,1,3,5,1,1,1,2,0,1
-1104,Perales de Tajuña,0,1,1,21,10,38.0,7.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,8,4,7,0,2,2,0,2,2,4,0,1
-1111,Pezuela de las Torres,0,2,2,20,3,29.0,4.0,0,19,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,1,3,0,0,0,0,0,2,0,0,1
-1126,Pinilla del Valle,0,1,1,21,6,31.0,3.0,1,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,7,0,3,0,0,0,0,1,0,0,0,0
-1147,Piñuécar-Gandullas,1,0,1,24,11,41.0,4.0,0,16,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,1,4,0,0,0,0,0,0,2,0,0
-1163,Pozuelo del Rey,0,1,2,20,5,38.0,6.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,1,1,0,0,0,0,0,0,0,0,0
-1179,Prádena del Rincón,0,2,1,22,7,40.0,4.0,1,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,1,4,0,0,0,0,0,1,0,1,0
-1185,Puebla de la Sierra,0,0,1,20,1,20.0,3.0,0,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,1,0,0,0,0,0,0,0,0,0
-9020,Puentes Viejas,0,0,0,21,5,33.0,3.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,2,0,0,0,0,0,0,0,0,0
-1198,Quijorna,0,1,4,21,8,42.0,4.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,0,3,0,1,1,1,0,1,0,0,0
-1202,Rascafría,0,1,2,20,13,39.0,4.0,0,19,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,19,3,14,0,2,2,1,1,2,1,0,1
-1219,Redueña,1,2,3,21,14,44.0,3.0,1,7,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,7,0,7,0,1,1,0,1,1,0,0,0
-1224,Ribatejada,0,2,3,20,12,32.0,7.0,0,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,3,1,2,0,0,0,0,0,3,0,0,0
-1245,Robledillo de la Jara,0,0,0,20,11,29.0,7.0,0,18,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,2,0,0,0,0,0,1,0,0,0
-1258,Robledo de Chavela,1,2,3,20,21,34.0,6.0,2,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,17,3,12,2,2,3,0,1,2,2,1,2
-1261,Robregordo,0,0,0,20,7,22.0,8.0,0,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,0,0,1,0,0,0,0,0,0,1,0,0
-1283,Rozas de Puerto Real,1,1,5,21,9,23.0,5.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,7,0,9,0,0,1,0,0,0,0,0,0
-1296,San Agustín del Guadalix,10,3,8,20,15,46.0,4.0,8,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,5,19,0,5,6,1,5,11,3,0,2
-1300,San Fernando de Henares,20,20,27,20,21,51.0,5.0,20,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,20,20,2,20,20,12,20,20,20,1,5
-1317,San Lorenzo de El Escorial,15,11,20,21,21,42.0,4.0,20,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,20,20,0,8,10,3,10,10,6,1,1
-1322,San Martín de la Vega,7,6,16,20,20,42.0,6.0,11,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,8,20,0,6,5,1,5,11,1,0,2
-1338,San Martín de Valdeiglesias,9,4,8,21,10,35.0,6.0,4,10,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,19,6,20,1,4,5,1,7,10,2,1,2
-1356,Santa María de la Alameda,0,0,0,20,6,33.0,8.0,0,12,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,3,0,1,0,0,0,0,0,0,0,0,0
-1369,Santorcaz,0,2,2,20,3,35.0,5.0,2,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,1,4,0,0,0,0,0,1,0,0,0
-1375,Santos de la Humosa (Los),0,2,2,20,3,35.0,5.0,2,10,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,4,0,0,0,0,1,1,0,0,0
-1381,Serna del Monte (La),0,1,1,24,11,32.0,5.0,0,17,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,6,1,6,0,0,0,0,0,0,2,0,0
-1408,Serranillos del Valle,2,3,5,20,20,42.0,4.0,6,11,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,9,0,7,0,3,4,0,0,3,4,0,1
-1415,Sevilla la Nueva,2,7,12,21,17,44.0,4.0,6,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,19,6,15,0,4,3,0,3,2,1,0,1
-1436,Somosierra,0,0,0,20,4,34.0,5.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,1,0,0,0,0,0,0,1,2,1,0
-1441,Soto del Real,9,3,7,20,20,42.0,3.0,8,15,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,6,20,0,3,3,2,1,3,1,0,1
-1454,Talamanca de Jarama,0,2,3,20,11,38.0,4.0,3,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,10,2,10,0,0,1,0,0,4,1,0,0
-1467,Tielmes,1,1,2,20,8,40.0,7.0,0,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,0,5,0,3,3,0,2,1,1,0,0
-1473,Titulcia,0,1,2,20,4,41.0,7.0,1,8,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,6,1,2,0,0,0,0,2,0,0,1,0
-1492,Torrejón de la Calzada,9,5,12,20,20,39.0,4.0,8,17,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,11,18,0,6,8,0,5,9,2,0,1
-1505,Torrejón de Velasco,7,6,9,20,20,40.0,4.0,9,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,10,17,0,6,8,0,5,9,4,0,2
-1512,Torrelaguna,2,1,5,20,10,41.0,5.0,4,7,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,16,5,8,0,4,4,0,3,4,1,0,1
-1527,Torrelodones,20,10,20,24,21,43.0,3.0,20,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,16,20,2,7,13,5,4,11,2,0,2
-1533,Torremocha de Jarama,2,2,5,20,17,30.0,4.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,0,3,0,0,1,0,1,1,0,0,0
-1548,Torres de la Alameda,3,4,4,20,20,44.0,6.0,2,12,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,17,5,13,0,2,2,0,2,4,4,0,2
-1551,Valdaracete,0,1,2,20,4,39.0,8.0,0,0,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,0,0,1,0,0,0,0,0,0,0,0,0
-1564,Valdeavero,0,6,4,21,11,35.0,6.0,3,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,2,7,0,3,5,1,0,1,1,0,0
-1570,Valdelaguna,0,0,4,20,14,23.0,6.0,3,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,0,0,2,0,0,0,0,1,0,0,0,0
-1586,Valdemanco,1,1,1,20,11,38.0,4.0,0,17,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,4,3,2,0,0,0,0,0,1,0,0,0
-1599,Valdemaqueda,0,1,1,20,11,35.0,9.0,1,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,0,5,0,0,0,0,0,1,0,0,0
-1603,Valdemorillo,2,4,8,21,20,43.0,4.0,8,19,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,6,20,0,3,4,2,3,5,1,0,2
-1625,Valdeolmos-Alalpardo,2,1,6,23,18,41.0,3.0,2,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,1,7,0,1,1,0,0,2,0,0,0
-1631,Valdepiélagos,0,1,2,20,2,43.0,6.0,1,4,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,0,0,0,0,0,0,0,0,0,0
-1646,Valdetorres de Jarama,2,2,3,21,15,40.0,6.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,2,11,0,1,1,0,2,4,1,0,1
-1659,Valdilecha,0,1,1,20,4,40.0,5.0,1,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,1,3,0,2,2,1,0,3,1,0,0
-1662,Valverde de Alcalá,2,2,5,20,20,32.0,4.0,4,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,11,3,8,0,2,2,0,2,5,3,0,1
-1678,Velilla de San Antonio,5,6,10,21,20,45.0,5.0,13,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,11,20,0,5,5,2,1,5,5,0,1
-1684,Vellón (El),0,1,3,21,19,37.0,6.0,2,18,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,1,8,0,1,1,0,1,1,0,0,0
-1697,Venturada,1,1,2,23,17,38.0,3.0,2,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,8,0,6,0,2,0,0,1,2,1,0,0
-1718,Villa del Prado,3,3,4,20,11,39.0,5.0,3,11,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,12,5,8,1,4,6,0,2,5,3,0,1
-1701,Villaconejos,0,2,2,20,13,41.0,6.0,2,5,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,10,1,8,0,2,2,0,1,5,3,0,0
-1723,Villalbilla,2,2,5,20,20,39.0,3.0,5,14,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,13,4,8,0,2,2,0,2,5,5,0,1
-1739,Villamanrique de Tajo,0,1,1,20,3,33.0,8.0,0,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,1,0,3,0,0,0,0,1,2,0,0,0
-1744,Villamanta,1,1,3,21,9,35.0,6.0,3,4,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,2,3,0,1,1,0,1,1,1,0,2
-1757,Villamantilla,1,1,2,21,7,39.0,6.0,1,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,1,0,0,0,0,1,1,0,0,0
-1760,Villanueva de la Cañada,20,7,19,20,20,42.0,3.0,17,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,11,20,0,7,9,1,5,9,3,1,2
-1782,Villanueva de Perales,1,1,7,22,11,41.0,6.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,1,1,1,0,0,0,1,0,1,0,0,0
-1776,Villanueva del Pardillo,15,5,16,22,20,47.0,3.0,18,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,11,16,0,4,5,0,4,7,2,0,2
-1795,Villar del Olmo,0,1,3,20,5,53.0,5.0,1,14,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,1,3,0,0,0,0,0,0,0,0,0
-1809,Villarejo de Salvanés,4,3,7,21,20,40.0,6.0,3,4,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,7,20,0,4,4,1,2,2,4,0,1
-1816,Villaviciosa de Odón,20,9,20,21,20,41.0,3.0,20,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,20,20,3,12,14,3,5,12,7,1,2
-1821,Villavieja del Lozoya,0,1,3,21,6,35.0,4.0,0,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,1,3,0,0,0,0,0,0,0,0,0
-1837,Zarzalejo,2,1,4,20,17,36.0,7.0,3,19,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,6,0,2,0,1,2,0,0,2,0,0,0
+cod_municipio,municipio,poblacion,sanidad_medicos_familia,sanidad_farmacias,educacion_colegios_institutos,transporte_conectividad_paradas_bus,transporte_conectividad_estaciones,economia_empleo_total_pct,economia_empleo_paro_pct,bienestar_gimnasios,bienestar_parques,bienestar_aq_aqi,bienestar_aq_co_value,bienestar_aq_no2_value,bienestar_aq_o3_value,bienestar_aq_pm10_value,bienestar_aq_pm25_value,bienestar_aq_so2_value,ocio_cultura_restaurantes,ocio_cultura_cafeterias,ocio_cultura_bares,ocio_cultura_cines,servicios_bancos,servicios_cajeros,servicios_centros_comerciales,servicios_conveniencia,servicios_supermercados,servicios_gasolineras,servicios_bomberos,servicios_comisarias
+14,Acebeda (La),68.0,0,0,1,20,4,44.0,4.0,0,1,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,1,0,0,0,0,0,0,0,0,0
+29,Ajalvir,4946.0,6,4,11,21,20,44.0,4.0,11,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,13,20,0,8,11,0,4,6,5,0,3
+35,Alameda del Valle,256.0,0,1,1,22,10,35.0,7.0,0,19,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,0,5,0,0,0,0,1,0,0,0,0
+40,Álamo (El),10413.0,2,3,5,21,20,36.0,5.0,5,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,4,13,0,4,4,2,3,4,7,0,1
+88,Aldea del Fresno,3422.0,3,1,2,21,8,32.0,6.0,2,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,7,1,11,0,2,2,0,0,2,3,1,2
+91,Algete,21134.0,7,6,13,22,20,46.0,4.0,14,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,5,20,0,6,7,2,1,12,6,0,2
+105,Alpedrete,15655.0,9,4,16,21,21,43.0,4.0,15,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,15,20,1,3,3,1,3,10,10,0,1
+112,Ambite,701.0,1,1,2,20,7,34.0,6.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,2,0,3,0,0,0,0,0,0,0,0,0
+127,Anchuelo,1393.0,0,1,0,20,1,37.0,5.0,0,6,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,4,1,2,0,0,0,0,0,1,0,0,0
+151,Arroyomolinos,37299.0,7,13,20,21,20,39.0,3.0,19,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,15,18,0,7,5,2,1,8,1,0,2
+164,Atazar (El),107.0,0,0,0,20,1,40.0,9.0,0,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,1,0,0,0,0,0,0,0,0,0
+170,Batres,1957.0,0,1,1,20,1,34.0,4.0,0,0,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,1,0,1,0,0,0,0,1,0,0,0,0
+186,Becerril de la Sierra,6553.0,6,3,3,21,20,41.0,5.0,7,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,5,15,0,3,2,0,2,2,1,0,2
+199,Belmonte de Tajo,1919.0,0,2,1,21,8,37.0,6.0,1,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,3,1,5,0,1,1,0,0,1,0,0,0
+210,Berrueco (El),828.0,0,1,1,20,9,29.0,5.0,1,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,1,3,0,0,0,0,0,1,0,0,0
+203,Berzosa del Lozoya,234.0,0,0,0,22,11,24.0,1.0,0,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,3,0,0,0,0,0,1,0,0,0
+231,Boalo (El),8548.0,0,2,9,22,20,41.0,4.0,5,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,6,13,0,1,2,0,0,3,2,0,2
+246,Braojos,219.0,0,1,1,23,9,47.0,3.0,0,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,4,1,3,0,0,0,0,0,0,2,0,0
+259,Brea de Tajo,567.0,0,2,3,20,3,34.0,6.0,3,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,1,0,4,0,0,1,0,0,1,0,0,0
+262,Brunete,11263.0,8,4,8,22,20,45.0,4.0,10,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,12,10,0,4,5,0,3,6,2,0,2
+278,Buitrago del Lozoya,1970.0,1,1,3,23,13,45.0,4.0,1,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,4,14,0,2,2,0,2,4,3,0,1
+284,Bustarviejo,2833.0,0,1,2,20,15,38.0,5.0,0,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,10,2,9,0,2,2,0,2,3,0,0,1
+297,Cabanillas de la Sierra,949.0,1,2,4,23,17,39.0,3.0,1,10,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,0,5,0,1,1,0,1,1,0,0,0
+301,Cabrera (La),2952.0,2,1,4,22,16,40.0,5.0,3,19,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,18,6,8,0,1,1,0,1,3,4,2,1
+318,Cadalso de los Vidrios,3274.0,1,0,2,21,7,33.0,7.0,0,11,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,11,3,16,0,3,4,0,2,4,2,0,0
+323,Camarma de Esteruelas,8107.0,0,2,7,21,20,40.0,6.0,3,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,10,3,6,0,2,3,0,2,2,0,0,0
+339,Campo Real,6766.0,4,2,3,21,7,43.0,5.0,3,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,5,11,0,4,4,0,1,2,1,0,2
+344,Canencia,468.0,0,1,1,20,2,30.0,5.0,0,9,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,4,1,3,0,0,0,0,0,1,0,0,0
+357,Carabaña,2375.0,0,2,3,20,15,37.0,5.0,0,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,0,9,0,0,0,0,0,2,0,0,1
+360,Casarrubuelos,4225.0,7,7,14,20,20,38.0,5.0,6,16,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,7,12,1,2,2,3,2,6,4,0,1
+376,Cenicientos,2141.0,0,1,2,20,8,31.0,8.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,11,2,10,0,3,3,0,2,4,3,1,1
+382,Cercedilla,7646.0,4,3,10,20,21,42.0,5.0,3,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,10,18,0,3,3,0,2,4,2,0,2
+395,Cervera de Buitrago,161.0,0,0,0,20,10,22.0,7.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,1,0,0,0,0,0,0,0,0,0
+513,Chapinería,2634.0,0,1,6,21,2,35.0,5.0,2,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,8,2,3,2,2,3,0,0,1,0,0,0
+528,Chinchón,5820.0,2,2,5,20,12,38.0,6.0,3,11,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,4,20,0,3,3,1,4,2,1,0,2
+409,Ciempozuelos,26046.0,11,8,14,20,21,40.0,5.0,10,14,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,10,20,0,10,11,0,4,9,8,0,2
+416,Cobeña,7742.0,4,2,6,20,16,43.0,3.0,3,16,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,3,11,0,3,4,1,2,6,4,0,1
+468,Collado Mediano,7564.0,1,3,8,20,20,42.0,5.0,3,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,15,6,10,0,3,2,0,2,5,2,0,1
+437,Colmenar de Oreja,8982.0,2,3,4,20,12,38.0,6.0,3,11,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,15,5,9,0,4,4,0,1,6,1,0,2
+421,Colmenar del Arroyo,2013.0,0,2,2,21,13,33.0,6.0,1,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,4,1,4,0,0,0,0,0,1,0,0,0
+442,Colmenarejo,9741.0,13,8,20,23,20,43.0,5.0,13,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,18,20,0,7,7,0,4,13,8,0,1
+480,Corpa,795.0,0,1,1,20,16,37.0,6.0,3,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,1,3,0,0,0,0,2,1,3,0,0
+506,Cubas de la Sagra,6984.0,7,5,11,20,20,39.0,4.0,5,19,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,15,3,6,0,4,4,1,1,6,0,0,1
+534,Daganzo de Arriba,10673.0,4,4,13,21,20,46.0,4.0,12,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,12,20,1,8,11,0,3,5,5,0,3
+549,Escorial (El),17262.0,15,11,21,21,20,41.0,4.0,20,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,20,20,0,8,10,3,10,10,6,1,1
+552,Estremera,1451.0,1,1,3,21,6,34.0,6.0,0,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,4,1,2,0,1,2,0,0,1,1,0,1
+565,Fresnedillas de la Oliva,1833.0,1,1,3,21,16,37.0,7.0,3,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,6,1,4,0,0,1,0,0,2,0,0,0
+571,Fresno de Torote,2547.0,0,0,0,8,3,36.0,5.0,0,0,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,0,0,0,0,0,0,0,0,0,0,0,0
+590,Fuente el Saz de Jarama,7384.0,3,3,7,20,20,43.0,4.0,5,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,4,19,0,2,2,2,3,5,4,0,1
+604,Fuentidueña de Tajo,2319.0,1,1,2,21,7,31.0,7.0,2,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,4,1,6,0,2,2,0,0,3,1,0,1
+611,Galapagar,36112.0,14,11,20,23,20,47.0,4.0,14,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,18,20,0,7,8,0,5,14,10,1,2
+626,Garganta de los Montes,415.0,0,1,0,21,11,36.0,4.0,0,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,2,0,0,0,0,0,1,0,0,0
+632,Gargantilla del Lozoya y Pinilla de Buitrago,401.0,0,1,1,21,14,29.0,6.0,0,10,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,7,1,5,0,0,0,0,0,2,0,0,0
+647,Gascones,236.0,0,1,1,23,12,44.0,4.0,0,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,7,0,6,0,0,0,0,0,0,2,0,0
+663,Griñón,10714.0,9,4,18,20,20,42.0,4.0,9,16,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,5,17,0,8,7,2,2,7,5,0,2
+679,Guadalix de la Sierra,6912.0,1,3,8,21,17,41.0,5.0,3,9,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,6,16,0,2,2,0,1,4,2,0,0
+685,Guadarrama,17069.0,6,4,11,21,20,43.0,4.0,12,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,14,20,0,3,3,0,2,11,5,0,2
+698,Hiruela (La),84.0,0,0,0,20,1,11.0,5.0,0,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,2,0,0,0,0,2,0,0,1,0
+702,Horcajo de la Sierra,231.0,1,0,1,22,11,27.0,5.0,0,7,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,3,0,0,0,0,0,0,0,0,0
+719,Horcajuelo de la Sierra,111.0,0,2,1,22,7,46.0,4.0,1,14,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,1,4,0,0,0,0,0,1,0,1,0
+724,Hoyo de Manzanares,9186.0,3,3,5,21,19,40.0,4.0,4,18,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,4,16,1,5,6,0,2,3,1,0,1
+730,Humanes de Madrid,20054.0,6,8,16,21,20,45.0,5.0,17,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,19,20,1,7,10,1,3,12,14,0,1
+758,Loeches,9253.0,3,3,6,21,20,45.0,5.0,4,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,18,6,14,1,4,4,0,3,3,2,0,1
+761,Lozoya,620.0,0,1,3,20,3,32.0,5.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,12,3,9,0,1,1,0,0,1,1,0,0
+9015,Lozoyuela-Navas-Sieteiglesias,1479.0,1,1,2,23,19,34.0,5.0,3,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,4,1,3,0,1,1,1,0,1,2,1,1
+783,Madarcos,70.0,1,0,1,23,9,43.0,1.0,0,16,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,3,0,4,0,0,0,0,0,0,0,0,0
+822,Manzanares el Real,9539.0,3,2,7,21,9,40.0,4.0,9,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,3,16,1,3,2,0,2,3,2,0,2
+838,Meco,15812.0,1,4,6,20,20,39.0,4.0,5,17,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,18,7,6,0,5,5,1,1,8,3,0,2
+843,Mejorada del Campo,24632.0,12,7,15,21,20,45.0,5.0,12,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,17,20,0,8,11,0,3,13,7,0,1
+856,Miraflores de la Sierra,7209.0,4,3,5,20,8,40.0,5.0,4,17,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,3,19,1,2,2,0,1,5,2,0,1
+869,Molar (El),10079.0,3,3,12,21,20,40.0,5.0,4,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,11,20,0,4,5,0,3,5,3,0,2
+875,Molinos (Los),4812.0,4,3,5,20,20,42.0,5.0,5,9,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,0,16,0,1,1,0,1,2,2,0,2
+881,Montejo de la Sierra,374.0,0,2,1,22,7,30.0,3.0,1,11,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,1,4,0,0,0,0,0,1,0,1,0
+894,Moraleja de Enmedio,5630.0,1,1,6,22,20,44.0,4.0,8,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,6,14,0,3,3,0,3,4,5,0,1
+908,Moralzarzal,14504.0,7,3,13,21,19,40.0,4.0,18,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,10,20,0,4,4,2,0,6,4,0,1
+915,Morata de Tajuña,8294.0,4,2,4,20,20,40.0,6.0,3,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,16,5,12,1,4,5,0,4,4,2,0,2
+936,Navacerrada,3307.0,5,1,4,20,20,38.0,4.0,2,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,4,20,0,1,2,0,0,2,2,1,1
+941,Navalafuente,1703.0,1,2,2,20,15,39.0,7.0,2,15,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,3,2,3,0,1,0,0,0,2,1,0,0
+954,Navalagamella,3119.0,0,1,3,21,5,36.0,6.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,4,0,5,0,2,3,0,0,1,0,0,1
+967,Navalcarnero,32684.0,20,9,17,21,20,40.0,5.0,20,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,13,20,0,7,10,4,5,12,9,0,2
+973,Navarredonda y San Mamés,154.0,1,0,0,21,8,24.0,5.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,2,0,0,0,0,0,0,0,0,0
+992,Navas del Rey,3344.0,2,2,3,21,8,34.0,6.0,2,7,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,8,6,10,0,3,1,0,2,4,2,0,2
+1006,Nuevo Baztán,7393.0,3,3,5,22,20,35.0,5.0,3,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,3,18,0,1,2,4,0,4,1,0,0
+1013,Olmeda de las Fuentes,409.0,3,2,4,21,12,36.0,7.0,0,18,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,10,1,6,0,0,0,0,0,2,1,0,0
+1028,Orusco de Tajuña,1504.0,0,1,2,20,6,35.0,7.0,1,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,2,0,3,0,0,1,0,0,2,1,0,0
+1049,Paracuellos de Jarama,27241.0,8,7,13,21,20,42.0,3.0,17,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,15,20,0,7,8,1,6,8,7,0,2
+1071,Patones,604.0,2,3,4,20,20,25.0,3.0,0,11,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,0,8,0,1,2,0,1,2,1,0,0
+1087,Pedrezuela,6475.0,3,3,11,21,20,39.0,5.0,4,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,11,20,0,4,5,0,3,5,0,0,1
+1090,Pelayos de la Presa,3106.0,1,1,4,20,9,31.0,8.0,5,14,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,18,4,11,1,3,5,1,1,1,2,0,1
+1104,Perales de Tajuña,3195.0,0,1,1,21,10,38.0,7.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,8,4,7,0,2,2,0,2,2,4,0,1
+1111,Pezuela de las Torres,990.0,0,2,2,20,3,29.0,4.0,0,19,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,1,3,0,0,0,0,0,2,0,0,1
+1126,Pinilla del Valle,199.0,0,1,1,21,6,31.0,3.0,1,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,7,0,3,0,0,0,0,1,0,0,0,0
+1147,Piñuécar-Gandullas,185.0,1,0,1,24,11,41.0,4.0,0,16,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,1,4,0,0,0,0,0,0,2,0,0
+1163,Pozuelo del Rey,1302.0,0,1,2,20,5,38.0,6.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,1,1,0,0,0,0,0,0,0,0,0
+1179,Prádena del Rincón,139.0,0,2,1,22,7,40.0,4.0,1,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,1,4,0,0,0,0,0,1,0,1,0
+1185,Puebla de la Sierra,93.0,0,0,1,20,1,20.0,3.0,0,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,1,0,0,0,0,0,0,0,0,0
+9020,Puentes Viejas,774.0,0,0,0,21,5,33.0,3.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,2,0,0,0,0,0,0,0,0,0
+1198,Quijorna,3987.0,0,1,4,21,8,42.0,4.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,0,3,0,1,1,1,0,1,0,0,0
+1202,Rascafría,1712.0,0,1,2,20,13,39.0,4.0,0,19,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,19,3,14,0,2,2,1,1,2,1,0,1
+1219,Redueña,292.0,1,2,3,21,14,44.0,3.0,1,7,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,7,0,7,0,1,1,0,1,1,0,0,0
+1224,Ribatejada,911.0,0,2,3,20,12,32.0,7.0,0,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,3,1,2,0,0,0,0,0,3,0,0,0
+1245,Robledillo de la Jara,132.0,0,0,0,20,11,29.0,7.0,0,18,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,2,0,0,0,0,0,1,0,0,0
+1258,Robledo de Chavela,4763.0,1,2,3,20,21,34.0,6.0,2,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,17,3,12,2,2,3,0,1,2,2,1,2
+1261,Robregordo,73.0,0,0,0,20,7,22.0,8.0,0,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,0,0,1,0,0,0,0,0,0,1,0,0
+1283,Rozas de Puerto Real,581.0,1,1,5,21,9,23.0,5.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,7,0,9,0,0,1,0,0,0,0,0,0
+1296,San Agustín del Guadalix,13849.0,10,3,8,20,15,46.0,4.0,8,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,5,19,0,5,6,1,5,11,3,0,2
+1300,San Fernando de Henares,38969.0,20,20,27,20,21,51.0,5.0,20,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,20,20,2,20,20,12,20,20,20,1,5
+1317,San Lorenzo de El Escorial,18772.0,15,11,20,21,21,42.0,4.0,20,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,20,20,0,8,10,3,10,10,6,1,1
+1322,San Martín de la Vega,20664.0,7,6,16,20,20,42.0,6.0,11,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,8,20,0,6,5,1,5,11,1,0,2
+1338,San Martín de Valdeiglesias,9120.0,9,4,8,21,10,35.0,6.0,4,10,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,19,6,20,1,4,5,1,7,10,2,1,2
+1356,Santa María de la Alameda,1516.0,0,0,0,20,6,33.0,8.0,0,12,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,3,0,1,0,0,0,0,0,0,0,0,0
+1369,Santorcaz,998.0,0,2,2,20,3,35.0,5.0,2,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,1,4,0,0,0,0,0,1,0,0,0
+1375,Santos de la Humosa (Los),2797.0,0,2,2,20,3,35.0,5.0,2,10,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,4,0,0,0,0,1,1,0,0,0
+1381,Serna del Monte (La),105.0,0,1,1,24,11,32.0,5.0,0,17,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,6,1,6,0,0,0,0,0,0,2,0,0
+1408,Serranillos del Valle,4632.0,2,3,5,20,20,42.0,4.0,6,11,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,9,0,7,0,3,4,0,0,3,4,0,1
+1415,Sevilla la Nueva,9694.0,2,7,12,21,17,44.0,4.0,6,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,19,6,15,0,4,3,0,3,2,1,0,1
+1436,Somosierra,98.0,0,0,0,20,4,34.0,5.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,1,0,0,0,0,0,0,1,2,1,0
+1441,Soto del Real,9436.0,9,3,7,20,20,42.0,3.0,8,15,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,6,20,0,3,3,2,1,3,1,0,1
+1454,Talamanca de Jarama,4526.0,0,2,3,20,11,38.0,4.0,3,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,10,2,10,0,0,1,0,0,4,1,0,0
+1467,Tielmes,2807.0,1,1,2,20,8,40.0,7.0,0,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,0,5,0,3,3,0,2,1,1,0,0
+1473,Titulcia,1393.0,0,1,2,20,4,41.0,7.0,1,8,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,6,1,2,0,0,0,0,2,0,0,1,0
+1492,Torrejón de la Calzada,10366.0,9,5,12,20,20,39.0,4.0,8,17,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,11,18,0,6,8,0,5,9,2,0,1
+1505,Torrejón de Velasco,4887.0,7,6,9,20,20,40.0,4.0,9,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,10,17,0,6,8,0,5,9,4,0,2
+1512,Torrelaguna,4992.0,2,1,5,20,10,41.0,5.0,4,7,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,16,5,8,0,4,4,0,3,4,1,0,1
+1527,Torrelodones,25250.0,20,10,20,24,21,43.0,3.0,20,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Muy alto,Bueno,20,16,20,2,7,13,5,4,11,2,0,2
+1533,Torremocha de Jarama,1134.0,2,2,5,20,17,30.0,4.0,0,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,0,3,0,0,1,0,1,1,0,0,0
+1548,Torres de la Alameda,7742.0,3,4,4,20,20,44.0,6.0,2,12,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,17,5,13,0,2,2,0,2,4,4,0,2
+1551,Valdaracete,653.0,0,1,2,20,4,39.0,8.0,0,0,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,0,0,1,0,0,0,0,0,0,0,0,0
+1564,Valdeavero,1817.0,0,6,4,21,11,35.0,6.0,3,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,2,7,0,3,5,1,0,1,1,0,0
+1570,Valdelaguna,1079.0,0,0,4,20,14,23.0,6.0,3,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,0,0,2,0,0,0,0,1,0,0,0,0
+1586,Valdemanco,1065.0,1,1,1,20,11,38.0,4.0,0,17,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,4,3,2,0,0,0,0,0,1,0,0,0
+1599,Valdemaqueda,836.0,0,1,1,20,11,35.0,9.0,1,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,0,5,0,0,0,0,0,1,0,0,0
+1603,Valdemorillo,14139.0,2,4,8,21,20,43.0,4.0,8,19,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,6,20,0,3,4,2,3,5,1,0,2
+1625,Valdeolmos-Alalpardo,4579.0,2,1,6,23,18,41.0,3.0,2,12,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,1,7,0,1,1,0,0,2,0,0,0
+1631,Valdepiélagos,623.0,0,1,2,20,2,43.0,6.0,1,4,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,1,0,0,0,0,0,0,0,0,0,0,0
+1646,Valdetorres de Jarama,5050.0,2,2,3,21,15,40.0,6.0,0,8,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,2,11,0,1,1,0,2,4,1,0,1
+1659,Valdilecha,3228.0,0,1,1,20,4,40.0,5.0,1,6,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,5,1,3,0,2,2,1,0,3,1,0,0
+1662,Valverde de Alcalá,555.0,2,2,5,20,20,32.0,4.0,4,13,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,11,3,8,0,2,2,0,2,5,3,0,1
+1678,Velilla de San Antonio,14008.0,5,6,10,21,20,45.0,5.0,13,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,20,11,20,0,5,5,2,1,5,5,0,1
+1684,Vellón (El),2160.0,0,1,3,21,19,37.0,6.0,2,18,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,9,1,8,0,1,1,0,1,1,0,0,0
+1697,Venturada,2577.0,1,1,2,23,17,38.0,3.0,2,5,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,8,0,6,0,2,0,0,1,2,1,0,0
+1718,Villa del Prado,7424.0,3,3,4,20,11,39.0,5.0,3,11,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,12,5,8,1,4,6,0,2,5,3,0,1
+1701,Villaconejos,3487.0,0,2,2,20,13,41.0,6.0,2,5,Moderado,Peligroso,Bueno,Bueno,Moderado,Moderado,Bueno,10,1,8,0,2,2,0,1,5,3,0,0
+1723,Villalbilla,17967.0,2,2,5,20,20,39.0,3.0,5,14,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,13,4,8,0,2,2,0,2,5,5,0,1
+1739,Villamanrique de Tajo,820.0,0,1,1,20,3,33.0,8.0,0,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,1,0,3,0,0,0,0,1,2,0,0,0
+1744,Villamanta,2855.0,1,1,3,21,9,35.0,6.0,3,4,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,5,2,3,0,1,1,0,1,1,1,0,2
+1757,Villamantilla,1620.0,1,1,2,21,7,39.0,6.0,1,2,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,0,1,0,0,0,0,1,1,0,0,0
+1760,Villanueva de la Cañada,23714.0,20,7,19,20,20,42.0,3.0,17,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,11,20,0,7,9,1,5,9,3,1,2
+1782,Villanueva de Perales,1718.0,1,1,7,22,11,41.0,6.0,1,9,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,1,1,1,0,0,0,1,0,1,0,0,0
+1776,Villanueva del Pardillo,17994.0,15,5,16,22,20,47.0,3.0,18,20,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,20,11,16,0,4,5,0,4,7,2,0,2
+1795,Villar del Olmo,2274.0,0,1,3,20,5,53.0,5.0,1,14,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,1,3,0,0,0,0,0,0,0,0,0
+1809,Villarejo de Salvanés,7887.0,4,3,7,21,20,40.0,6.0,3,4,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,20,7,20,0,4,4,1,2,2,4,0,1
+1816,Villaviciosa de Odón,29294.0,20,9,20,21,20,41.0,3.0,20,20,Moderado,Peligroso,Bueno,Bueno,Bueno,Moderado,Bueno,20,20,20,3,12,14,3,5,12,7,1,2
+1821,Villavieja del Lozoya,327.0,0,1,3,21,6,35.0,4.0,0,3,Moderado,Peligroso,Bueno,Bueno,Bueno,Bueno,Bueno,2,1,3,0,0,0,0,0,0,0,0,0
+1837,Zarzalejo,1870.0,2,1,4,20,17,36.0,7.0,3,19,Moderado,Peligroso,Bueno,Bueno,Moderado,Alto,Bueno,6,0,2,0,1,2,0,0,2,0,0,0
