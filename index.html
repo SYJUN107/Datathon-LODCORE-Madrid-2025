@@ -8,6 +8,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="" crossorigin=""></script>
 	<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
 
 	<style>
 		/* --- ESTILOS CONSOLIDADOS --- */
@@ -393,8 +395,11 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 					<label>Ocio y cultura <span id="val-ocio">5</span></label>
 					<input type="range" id="s-ocio" min="0" max="10" value="5" />
 
-					<label>Bienestar y servicios <span id="val-cost">5</span></label>
+					<label>Bienestar <span id="val-cost">5</span></label>
 					<input type="range" id="s-cost" min="0" max="10" value="5" />
+
+					<label>Servicios <span id="val-serv">5</span></label>
+					<input type="range" id="s-serv" min="0" max="10" value="5" />
 
 					<label>Movilidad <span id="val-mov">5</span></label>
 					<input type="range" id="s-mov" min="0" max="10" value="5" />
@@ -406,8 +411,17 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 				<hr class="sep" />
 				<h4>Distancia de viaje desde municipio hacia ...</h4>
 				<input id="placeInput" placeholder="Introduce una ubicación que visitas frecuentemente" style="width:100%;padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);margin-bottom:12px" />
-				
-				<button id="buscarBtn" style="width:100%;padding:10px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:background 0.3s ease, transform 0.2s ease;margin-bottom:8px;">Buscar</button>
+
+				<!-- Rango de población: min / max -->
+				<div style="margin-top:8px;">
+					<label style="display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)">
+						<span>Población (rango)</span>
+						<span class="muted"><strong><span id="popMinVal">0</span> — <span id="popMaxVal">0</span></strong></span>
+					</label>
+					<div id="population-slider" style="margin-top:6px"></div>
+				</div>
+
+				<button id="buscarBtn" style="width:100%;padding:10px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;margin-top:12px">Buscar</button>
 
 				<div style="margin-top:12px;margin-bottom:8px">
 					<input type="checkbox" id="colorZones" checked>
@@ -446,8 +460,8 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 					<div id="detailContent" class="detail-content"> 
 						<div id="detailProfile" class="muted">
 							<table class="detail-table">
-								<thead><tr><th>Educación</th><th>Sanidad</th><th>Ocio y cultura</th><th>Bienestar y servicios</th><th>Transporte y conectividad</th><th>Economía y empleo</th></tr></thead>
-								<tbody><tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tbody>
+								<thead><tr><th>Educación</th><th>Sanidad</th><th>Ocio y cultura</th><th>Bienestar</th><th>Servicios</th><th>Transporte y conectividad</th><th>Economía y empleo</th><th>Población</th></tr></thead>
+								<tbody><tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tbody>
 							</table>
 						</div>
 						<div id="detailRoute" class="muted" style="margin-top:6px"></div>
@@ -497,7 +511,7 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 		// Ruta base para los datos (permite cambiar fácilmente la carpeta de origen)
 		const DATA_PATH = 'website_data/';
 		const markers = {};
-		let lastRouteInfo = null; // {distance: meters, duration: seconds, source: 'osrm'|'straight'}
+		let populationSlider;
 
 		// Map setup (Leaflet already included)
 		const map = L.map('map', {zoomControl:true}).setView([40.4168,-3.7038],10);
@@ -564,8 +578,8 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
             }
         });
 
-		// mapping of slider keys to CSV columns 
-		const columnMap = { educ:'educacion', sani:'sanidad', ocio:'ocio_cultura', cost:'bienestar', mov:'transporte_conectividad', econ:'economia_empleo' };
+		// mapping of slider keys to CSV columns
+		const columnMap = { educ:'educacion', sani:'sanidad', ocio:'ocio_cultura', cost:'bienestar', serv:'servicios', mov:'transporte_conectividad', econ:'economia_empleo' };
 
 		// load CSV 
 		let csvLoaded = false;
@@ -590,7 +604,9 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 							transporte_conectividad: Number(r.transporte_conectividad) || 0,
 							economia_empleo: Number(r.economia_empleo) || 0,
 							bienestar: Number(r.bienestar) || 0,
+							servicios: Number(r.servicios) || 0,
 							ocio_cultura: Number(r.ocio_cultura) || 0,
+							poblacion: Number(r.poblacion) || 0,
 							desc: r.descripcion || r.Descripcion || r.description || r.Description || ''
 						}));
 						csvLoaded = true;
@@ -645,9 +661,10 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
             csvLoaded = false;
 		}
 
-		// compute scores 
-		function computeScores(weights){
-			const scored = municipios.map(m=>{
+		// compute scores - accepts an optional list of municipios to score
+		function computeScores(weights, sourceMunicipios){
+			const baseList = (Array.isArray(sourceMunicipios) && sourceMunicipios.length) ? sourceMunicipios : municipios;
+			const scored = baseList.map(m=>{
 				let s = 0;
 				Object.keys(columnMap).forEach(k=>{
 					const col = columnMap[k];
@@ -692,14 +709,16 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 			return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
 		}
 
-		// display names 
+		// display names
 		const displayNames = {
 			'educacion': 'Educación',
 			'sanidad': 'Sanidad',
 			'ocio_cultura': 'Ocio y cultura',
-			'bienestar': 'Bienestar y servicios',
+			'bienestar': 'Bienestar',
+			'servicios': 'Servicios',
 			'transporte_conectividad': 'Transporte y conectividad',
-			'economia_empleo': 'Economía y empleo'
+			'economia_empleo': 'Economía y empleo',
+			'poblacion': 'Población'
 		};
 
 		// render ranking
@@ -783,18 +802,26 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 		function showDetail(m){
 		    document.getElementById('detailTitle').textContent = m.name;
 		    // Build a table of categories
-		    const cols = ['educacion','sanidad','ocio_cultura','bienestar','transporte_conectividad','economia_empleo'];
+		    const cols = ['educacion','sanidad','ocio_cultura','bienestar','servicios','transporte_conectividad','economia_empleo','poblacion'];
 		    const headers = cols.map(c=> displayNames[c] || c.replace('_',' '));
 		    const values = cols.map(c=>{
 		        const v = (c in m) ? m[c] : null;
-		        return (v === null || v === undefined || !isFinite(v)) ? '—' : (Number(v) * 100).toFixed(0);
+		        if(c === 'poblacion'){
+		            return (v === null || v === undefined || !isFinite(v)) ? '—' : v.toString();
+		        } else {
+		            return (v === null || v === undefined || !isFinite(v)) ? '—' : (Number(v) * 100).toFixed(0);
+		        }
 		    });
 
-		    // Calculate average of valid numeric values (multiply by 100)
-		    const validValues = values.map(v => {
-		        const num = parseFloat(v);
-		        return isNaN(num) ? null : num;
-		    }).filter(v => v !== null);
+		    // Calculate average of valid numeric values (multiply by 100), excluding poblacion
+		    const colsExcludingPoblacion = cols.filter(c => c !== 'poblacion');
+		    const validValues = [];
+		    for(const c of colsExcludingPoblacion){
+		        const v = (c in m) ? m[c] : null;
+		        if(v !== null && v !== undefined && isFinite(v)){
+		            validValues.push(Number(v) * 100);
+		        }
+		    }
 		    const average = validValues.length > 0 ? Math.round(validValues.reduce((sum, val) => sum + val, 0) / validValues.length) : '—';
 
 		    // Add average header and value
@@ -821,7 +848,7 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 		    profileEl.appendChild(table);
 
 		    document.getElementById('detailDesc').textContent = m.desc || '';
-			if(m.lat && m.lon){ map.setView([m.lat,m.lon],12); 
+			if(m.lat && m.lon){ map.setView([m.lat,m.lon],12);
 		        // Abrir popup si el municipio tiene un marcador de ranking
 		        if(currentRankMarkers[m.id]) currentRankMarkers[m.id].openPopup(); 
 		        // Si no está en el ranking visible, añadir un marcador temporal si tiene coordenadas.
@@ -929,44 +956,86 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 			return weights;
 		}
 
-		// run search 
+		// run search
 		async function runSearch(opts={}){
             console.log('runSearch called', opts);
             try{
-                if(opts.forceReload) csvLoaded = false; 
+                if(opts.forceReload) csvLoaded = false;
 				await loadCSV().catch(()=>{ loadFallback(); });
-				// After CSV loads (or fallback), update the mapLimit slider max to the available municipios count
+
+				// After CSV loads, initialize population sliders (min/max) and compute filtered list
 				try{
+					// derive min/max from available data
+					const popVals = municipios.map(m=> isFinite(m.poblacion) ? Number(m.poblacion) : null).filter(v=>v !== null && isFinite(v));
+					if(popVals.length > 0 && populationSlider){
+						const minPop = Math.max(0, Math.floor(Math.min(...popVals)));
+						const maxPop = Math.max(minPop+1, Math.ceil(Math.max(...popVals)));
+						populationSlider.updateOptions({
+							range: {
+								'min': minPop,
+								'max': maxPop
+							}
+						});
+						// clamp current values
+						const currentValues = populationSlider.get();
+						const clampedMin = Math.max(minPop, Math.min(maxPop, Number(currentValues[0])));
+						const clampedMax = Math.max(minPop, Math.min(maxPop, Number(currentValues[1])));
+						populationSlider.set([clampedMin, clampedMax]);
+					}
+
+					// build filtered list according to selected population range (if present)
+					const popValues = populationSlider ? populationSlider.get() : [0, Number.POSITIVE_INFINITY];
+					const minPobl = Number(popValues[0]);
+					const maxPobl = Number(popValues[1]);
+					const filteredMunicipios = municipios.filter(m => {
+						if(!isFinite(m.poblacion)) return true; // keep those without population data
+						return m.poblacion >= minPobl && m.poblacion <= maxPobl;
+					});
+
+					// After CSV loads (or fallback), update the mapLimit slider max to the filtered municipios count
 					const slider = document.getElementById('mapLimitSlider');
 					if(slider){
-						const maxCount = municipios && municipios.length ? municipios.length : 10;
+						const maxCount = filteredMunicipios && filteredMunicipios.length ? filteredMunicipios.length : 10;
 						slider.max = Math.max(1, maxCount);
 						// If current value is greater than max, clamp it
 						if(Number(slider.value) > slider.max) slider.value = slider.max;
 						const display = document.getElementById('mapLimitVal');
 						if(display) display.textContent = slider.value;
 					}
-				}catch(e){console.warn('Failed to update mapLimitSlider max', e);}
-            }catch(e){ console.warn('loadCSV failed, using fallback', e); loadFallback(); }
-            
+
+					// Compute scores on filtered list
+					const weights = getSliderWeights();
+					var sorted = computeScores(weights, filteredMunicipios);
+				}catch(e){console.warn('Failed to update mapLimitSlider or population sliders', e);
+					var weights = getSliderWeights();
+					var sorted = computeScores(weights, municipios);
+				}
+
+				const showAll = document.getElementById('showAllMap')?.checked;
+				let mapLimit = 0;
+				if(showAll){
+					mapLimit = sorted.length;
+				} else {
+					const slider = document.getElementById('mapLimitSlider');
+					mapLimit = slider ? Number(slider.value) || 0 : Number(document.getElementById('mapLimit')?.value) || 0;
+				}
+				renderRanking(sorted, mapLimit);
+			}catch(e){ console.warn('loadCSV failed, using fallback', e); loadFallback();
+				// For fallback, do similar filtering if needed
+				const minPobl = Number(document.getElementById('poblacion').value) || 0;
+				const filteredMunicipios = municipios.filter(m =>
+					isFinite(m.poblacion) && m.poblacion >= minPobl
+				);
+				const weights = getSliderWeights();
+				const sorted = computeScores(weights, filteredMunicipios);
+				renderRanking(sorted, 20);
+			}
+
             // Cargar similares
             try{
                 if(opts.forceReload) similaresLoaded = false;
                 await loadSimilaresCSV();
             }catch(e){ console.warn('loadSimilaresCSV failed, skipping similares', e); }
-
-            const weights = getSliderWeights();
-            const sorted = computeScores(weights);
-
-            const showAll = document.getElementById('showAllMap')?.checked;
-            let mapLimit = 0;
-			if(showAll){
-				mapLimit = sorted.length;
-			} else {
-				const slider = document.getElementById('mapLimitSlider');
-				mapLimit = slider ? Number(slider.value) || 0 : Number(document.getElementById('mapLimit')?.value) || 0;
-			}
-            renderRanking(sorted, mapLimit);
         }
 		
 		// Helper para obtener imagen de Wikipedia 
@@ -1207,6 +1276,43 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
         const similaresSlider = document.getElementById('s-similares');
         const similaresDisp = document.getElementById('val-similares');
         similaresSlider.addEventListener('input', ()=>{ similaresDisp.textContent = similaresSlider.value; });
+
+		// Population range sliders wiring (min / max) with noUiSlider
+		(function(){
+			const sliderEl = document.getElementById('population-slider');
+			const minDisplay = document.getElementById('popMinVal');
+			const maxDisplay = document.getElementById('popMaxVal');
+			function updateDisplays(values){
+				if(minDisplay) minDisplay.textContent = Number(values[0]).toLocaleString('es-ES');
+				if(maxDisplay) maxDisplay.textContent = Number(values[1]).toLocaleString('es-ES');
+			}
+			if(sliderEl && typeof noUiSlider !== 'undefined'){
+				populationSlider = noUiSlider.create(sliderEl, {
+					start: [0, 100000],
+					connect: true,
+					range: {
+						'min': 0,
+						'max': 100000
+					},
+					step: 1000,
+					tooltips: false,
+					format: {
+						to: function (value) {
+							return Math.round(value);
+						},
+						from: function (value) {
+							return Number(value);
+						}
+					}
+				});
+				populationSlider.on('update', function (values, handle) {
+					updateDisplays(values);
+				});
+				populationSlider.on('change', function (values, handle) {
+					runSearch({forceReload:false});
+				});
+			}
+		})();
 
 		// basic search box filter for the displayed ranking
 		document.getElementById('mainSearch').addEventListener('input', (e)=>{
