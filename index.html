@@ -37,7 +37,7 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 		.search-input{width:100%;padding:14px 16px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 1px 2px rgba(16,24,40,.03);font-size:16px}
 
 		/* Grid Layout */
-		.container{flex:1;display:grid;grid-template-columns:0.3fr 1fr 0.25fr;grid-template-rows:1fr 420px;gap:var(--gap);padding:14px 14px 46px;min-height:0}
+		.container{flex:1;display:grid;grid-template-columns:0.4fr 1.2fr 0.5fr;grid-template-rows:1fr 420px;gap:var(--gap);padding:14px 14px 46px;min-height:0}
 		.left{grid-column:1/2;grid-row:1/2;padding:8px;overflow:auto;}
 		.center{grid-column:2/3;grid-row:1/2;background:var(--card);border-radius:10px;padding:6px;display:flex;flex-direction:column;min-height:0;border:1px solid var(--separator);box-shadow:0 2px 5px rgba(16,24,40,.03);transition:transform 0.3s ease, box-shadow 0.3s ease;}
 		.center:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
@@ -105,6 +105,31 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 			pointer-events:auto;
 			display: flex;
 			align-items: center;
+		}
+
+		.header-help-btn{
+			position:absolute;
+			right:20px;
+			top:50%;
+			transform:translateY(-50%);
+			width:40px;
+			height:40px;
+			border-radius:50%;
+			background: var(--accent);
+			color:#fff;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			font-size:20px;
+			font-weight:700;
+			cursor:pointer;
+			box-shadow:0 4px 12px rgba(0,0,0,0.2);
+			transition:background 0.3s ease, transform 0.2s ease;
+		}
+		.header-help-btn:hover{
+			background: var(--accent-strong);
+			transform:scale(1.1);
+			box-shadow:0 6px 16px rgba(0,0,0,0.3);
 		}
 
 		.sponsor-track{
@@ -196,7 +221,9 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 			}
 		}
 
-		.ranking-item{padding:8px;border-bottom:1px dashed var(--separator);cursor:pointer;transition:background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;border-radius:6px;margin:2px 0;}
+		.ranking-item{display:flex;align-items:center;gap:10px;padding:8px;border-bottom:1px dashed var(--separator);cursor:pointer;transition:background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;border-radius:6px;margin:2px 0;}
+		.ranking-item .thumb{width:56px;height:40px;border-radius:6px;background:#f3f4f6;overflow:hidden;flex:0 0 56px;display:flex;align-items:center;justify-content:center;}
+		.ranking-item .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.3s}
 		.ranking-item:hover{background:linear-gradient(135deg, #e0f7fa, #b2ebf2);transform:translateY(-1px);box-shadow:0 4px 8px rgba(0,0,0,0.1);}
 		.muted{color:var(--muted);font-size:13px}
 		.ranking-item.selected{background:linear-gradient(90deg,var(--accent),var(--accent-secondary));color:#fff;border-left:4px solid var(--accent-strong);box-shadow:0 4px 12px rgba(0,0,0,0.2);}
@@ -249,6 +276,21 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 			scrollbar-color: rgba(0,213,255,0.3) transparent;
 		}
 
+		/* Municipality description justification */
+		#detailDesc {
+			text-align: justify;
+		}
+
+		/* Map pop-ups justification */
+		.leaflet-popup-content {
+			text-align: justify;
+		}
+
+		/* Chatbot messages justification */
+		.message .bubble {
+			text-align: justify;
+		}
+
 		/* Modal styles */
 		.modal-overlay {
 			position: fixed;
@@ -270,7 +312,7 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 			max-width: 500px;
 			font-size: 14px;
 			line-height: 1.5;
-			text-align: left;
+			text-align: justify;
 			position: relative;
 		}
 		.modal button {
@@ -321,16 +363,16 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 					<img src="logos/logo3.png" alt="Patrocinador 3">
 				</div>
 			</div>
+			<div class="header-help-btn" onclick="showHelpModal()">?</div>
 		</header>
 
 		<main class="container">
 			<aside class="left card">
-				<h3>SIMILARES</h3>
-				<label>Número de similares a mostrar: <span id="val-similares">10</span></label>
-                <input type="range" id="s-similares" min="1" max="10" value="10" />
-                <hr class="sep" />
-                <div id="similaresList" class="ranking-list-content"> 
-                    </div>
+				<h3>RANKING EN BASE A PREFERENCIAS</h3>
+				<div class="ranking-search" style="padding:0 12px">
+					<input class="search-input" id="mainSearch" placeholder="Búsqueda de municipios ➤ " />
+				</div>
+				<div id="ranking" class="ranking-list-content"></div>
 			</aside>
 
 			<section class="center"> 
@@ -362,7 +404,7 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 				</div>
 
 				<hr class="sep" />
-				<h4>Lugar de Interés</h4>
+				<h4>Distancia de viaje desde municipio hacia ...</h4>
 				<input id="placeInput" placeholder="Introduce una ubicación que visitas frecuentemente" style="width:100%;padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);margin-bottom:12px" />
 				
 				<button id="buscarBtn" style="width:100%;padding:10px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:background 0.3s ease, transform 0.2s ease;margin-bottom:8px;">Buscar</button>
@@ -390,12 +432,13 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 			</aside>
 
 			<section class="bottom">
-				<div class="card"> 
-					<h3 style="padding:0 12px">Ranking</h3>
-					<div class="ranking-search" style="padding:0 12px 8px;">
-						<input class="search-input" id="mainSearch" placeholder="Búsqueda de municipios ➤ " />
+				<div class="card">
+					<h3 id="similares-title">SIMILARES A MUNICIPIO QUE SE ELIGE</h3>
+					<label>Número de similares a mostrar: <span id="val-similares">10</span></label>
+					<input type="range" id="s-similares" min="1" max="10" value="10" />
+					<hr class="sep" />
+					<div id="similaresList" class="ranking-list-content">
 					</div>
-					<div id="ranking" class="ranking-list-content"></div> 
 				</div>
 			
 				<div class="card"> 
@@ -433,6 +476,14 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 			<div class="modal">
 				<p></p>
 				<button onclick="hideInfoModal()">Cerrar</button>
+			</div>
+		</div>
+
+		<!-- Modal for help explanation -->
+		<div id="helpModal" class="modal-overlay" style="display:none;">
+			<div class="modal">
+				<p></p>
+				<button onclick="hideHelpModal()">Cerrar</button>
 			</div>
 		</div>
 
@@ -651,7 +702,7 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 			'economia_empleo': 'Economía y empleo'
 		};
 
-		// render ranking 
+		// render ranking
 		function renderRanking(sorted, mapLimit=20){
             const list = document.getElementById('ranking');
             list.innerHTML = '';
@@ -668,9 +719,28 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
                 div.className = 'ranking-item';
                 div.id = 'ranking-item-' + m.id;
                 const scoreText = isFinite(m.score)? `(Puntuación: ${(m.score*100).toFixed(1)})` : '';
-                div.innerHTML = `<strong>#${rank} ${m.name}</strong> <div class="muted">${scoreText}</div>`;
-                div.onclick = ()=> { 
-                    selectRankingItem(m.id); 
+
+                const thumbDiv = document.createElement('div');
+                thumbDiv.className = 'thumb';
+                thumbDiv.innerHTML = '<svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="56" height="40" rx="6" fill="#f3f4f6"/></svg>';
+                div.appendChild(thumbDiv);
+
+                const content = document.createElement('div');
+                content.style.flex = '1';
+                content.innerHTML = `<strong>#${rank} ${m.name}</strong> <div class="muted">${scoreText}</div>`;
+                div.appendChild(content);
+
+                fetchWikiThumbnail(m.name).then(imgUrl=>{
+                    const img = document.createElement('img');
+                    img.alt = m.name;
+                    img.src = imgUrl || 'assets/municipio-placeholder.jpg';
+                    img.onerror = () => { img.src = 'assets/municipio-placeholder.jpg'; };
+                    thumbDiv.innerHTML = '';
+                    thumbDiv.appendChild(img);
+                }).catch(()=>{ thumbDiv.innerHTML = `<img src="assets/municipio-placeholder.jpg" alt="${m.name}" onerror="this.src='assets/municipio-placeholder.jpg'">`; });
+
+                div.onclick = ()=> {
+                    selectRankingItem(m.id);
                     updateSimilaresFromCSV(m.name); // NUEVO: Actualizar similares al hacer clic
                 };
                 div.onmouseenter = ()=> { if(currentRankMarkers[m.id]) currentRankMarkers[m.id].openPopup(); };
@@ -757,9 +827,10 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 		        // Si no está en el ranking visible, añadir un marcador temporal si tiene coordenadas.
 		        else if (!currentRankMarkers[m.id]){
 					const mapLimitDisplay = document.getElementById('mapLimitSlider') ? document.getElementById('mapLimitSlider').value : document.getElementById('mapLimit')?.value;
-					const tempMarker = L.marker([m.lat,m.lon]).addTo(markerLayer).bindPopup(`<strong>${m.name}</strong><br/>No en el top ${mapLimitDisplay}`);
+					const popupText = isFinite(m.score) ? `<strong>${m.name}</strong><br/>Puntuación: ${(m.score*100).toFixed(1)}` : `<strong>${m.name}</strong><br/>No en el top ${mapLimitDisplay}`;
+					const tempMarker = L.marker([m.lat,m.lon]).addTo(markerLayer).bindPopup(popupText).openPopup();
 		            // Opcional: Centrar el mapa en él.
-		            map.setView([m.lat,m.lon],12); 
+		            map.setView([m.lat,m.lon],12);
 		        }
 				// Si hay un marcador de interés, dibujar la línea de conexión
 				try{
@@ -989,6 +1060,7 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 
 		// Obtener y renderizar la lista de municipios similares
 		async function updateSimilaresFromCSV(municipioBaseName){
+			document.getElementById('similares-title').textContent = municipioBaseName ? "SIMILARES A " + municipioBaseName.toUpperCase() : "SIMILARES A MUNICIPIO QUE SE ELIGE";
 			const simDiv = document.getElementById('similaresList');
 			simDiv.innerHTML = '';
 
@@ -1020,13 +1092,30 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 						const s = municipioMap[similarName.toString().trim().toLowerCase()];
 						if (s) {
 							const d = document.createElement('div'); d.className='sim-card';
+							const scoreTextTitle = isFinite(s.score) ? `Puntuación: ${(s.score*100).toFixed(1)}` : 'Fuera del Ranking';
+							d.title = `${s.name} - ${scoreTextTitle}`;
 							const thumbDiv = document.createElement('div'); thumbDiv.className='thumb';
 							thumbDiv.innerHTML = '<svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="56" height="40" rx="6" fill="#f3f4f6"/></svg>';
 							d.appendChild(thumbDiv);
 							const content = document.createElement('div'); content.style.flex='1';
 							content.innerHTML = `<strong style="display:block">${s.name}</strong><div class="muted">Similar a ${municipioBaseName}</div>`;
 							d.appendChild(content);
-							d.onclick = ()=> { selectRankingItem(s.name); }
+							d.onmouseenter = ()=>{
+								if(currentRankMarkers[s.id]) { currentRankMarkers[s.id].openPopup(); }
+								else if(s.lat && s.lon){
+									const popupContent = isFinite(s.score) ? `<strong>${s.name}</strong><br/>Puntuación: ${(s.score*100).toFixed(1)}` : `<strong>${s.name}</strong><br/>Fuera del Ranking`;
+									const tempMarker = L.marker([s.lat,s.lon]).addTo(markerLayer).bindPopup(popupContent).openPopup();
+									d._tempMarker = tempMarker;
+								}
+							};
+							d.onmouseleave = ()=>{
+								if(currentRankMarkers[s.id]) { currentRankMarkers[s.id].closePopup(); }
+								else if(d._tempMarker){
+									markerLayer.removeLayer(d._tempMarker);
+									delete d._tempMarker;
+								}
+							};
+							d.onclick = ()=> { if(s.lat && s.lon) map.setView([s.lat, s.lon], 12); selectRankingItem(s.name); }
 							simDiv.appendChild(d);
 							municipiosSimilaresEncontrados++;
 
@@ -1062,12 +1151,29 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 				if(item.name.toString().trim().toLowerCase() === baseLower) continue; // skip the base itself
 				const s = item;
 				const d = document.createElement('div'); d.className='sim-card';
+				const scoreTextTitle = isFinite(s.score) ? `Puntuación: ${(s.score*100).toFixed(1)}` : 'Fuera del Ranking';
+				d.title = `${s.name} - ${scoreTextTitle}`;
 				const thumbDiv = document.createElement('div'); thumbDiv.className='thumb';
 				thumbDiv.innerHTML = '<svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="56" height="40" rx="6" fill="#f3f4f6"/></svg>';
 				d.appendChild(thumbDiv);
 				const content = document.createElement('div'); content.style.flex='1';
 				content.innerHTML = `<strong style="display:block">${s.name}</strong><div class="muted">Sugerido — similar por ranking</div>`;
 				d.appendChild(content);
+				d.onmouseenter = ()=>{
+					if(currentRankMarkers[s.id]) { currentRankMarkers[s.id].openPopup(); }
+					else if(s.lat && s.lon){
+						const popupContent = isFinite(s.score) ? `<strong>${s.name}</strong><br/>Puntuación: ${(s.score*100).toFixed(1)}` : `<strong>${s.name}</strong><br/>Fuera del Ranking`;
+						const tempMarker = L.marker([s.lat,s.lon]).addTo(markerLayer).bindPopup(popupContent).openPopup();
+						d._tempMarker = tempMarker;
+					}
+				};
+				d.onmouseleave = ()=>{
+					if(currentRankMarkers[s.id]) { currentRankMarkers[s.id].closePopup(); }
+					else if(d._tempMarker){
+						markerLayer.removeLayer(d._tempMarker);
+						delete d._tempMarker;
+					}
+				};
 				d.onclick = ()=> { selectRankingItem(s.id || s.name); }
 				simDiv.appendChild(d);
 
@@ -1121,6 +1227,34 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 		}
 		function hideInfoModal() {
 			document.getElementById('infoModal').style.display = 'none';
+		}
+
+		// Modal functions for help
+		function showHelpModal() {
+			const p = document.getElementById('helpModal').querySelector('p');
+			p.innerHTML = `
+			<h3>🤔 Sobre esta plataforma</h3>
+			Descubre tu próximo municipio en la Comunidad de Madrid con datos y recomendaciones personalizadas. Nuestra plataforma está diseñada para ayudarte a tomar una decisión informada si estás pensando en mudarte de la capital a un municipio pequeño (menos de 50.000 habitantes).
+			<br><br>
+			🔎 <strong>¿Cómo funciona?</strong>
+			<br>
+			Analizamos accesibilidad y distancia a los principales servicios públicos.
+			<br>
+			Evaluamos la disponibilidad de recursos esenciales como sanidad, educación, transporte y ocio.
+			<br>
+			Incorporamos tus preferencias personales para recomendarte el municipio que mejor se adapta a tu estilo de vida.
+			<br><br>
+			📊 <strong>Basado en datos reales</strong>
+			<br>
+			La herramienta combina información oficial y criterios ciudadanos para que tu calidad de vida no se vea afectada al cambiar de entorno.
+			<br><br>
+			✨ <strong>Tu decisión, con respaldo objetivo</strong>
+			<br>
+			No se trata solo de mudarse, sino de elegir un lugar donde vivir mejor. Nuestra web te ofrece un sistema de recomendación multicriterio que convierte tus prioridades en resultados claros y comparables.`;
+			document.getElementById('helpModal').style.display = 'flex';
+		}
+		function hideHelpModal() {
+			document.getElementById('helpModal').style.display = 'none';
 		}
 
 		// place input: center map on typed municipality; use CSV match or fallback to OSM (Nominatim)
