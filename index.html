@@ -87,9 +87,15 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 
 		/* Slider look and feel */
 		.sliders label{display:flex;justify-content:space-between;font-size:13px;margin-top:10px;color:var(--muted)}
-	    input[type=range]{-webkit-appearance:none;width:100%;height:8px;border-radius:6px;background:linear-gradient(90deg,var(--accent-strong),#a8c7f0);outline:none}
+	    input[type=range]{-webkit-appearance:none;width:100%;height:8px;border-radius:6px;background:linear-gradient(90deg,#a8c7f0,var(--accent-strong));outline:none}
 		input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);box-shadow:0 2px 6px rgba(31,78,121,0.18);border:2px solid #fff;margin-top:-5px}
 		input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid #fff}
+
+		/* noUiSlider styling */
+		.noUi-target{background:linear-gradient(90deg,#a8c7f0,var(--accent-strong));border-radius:6px;border:none;box-shadow:inset 0 1px 2px rgba(0,0,0,0.1);height:8px}
+		.noUi-connect{background:var(--accent)}
+		.noUi-handle{border-radius:50%;background:var(--accent);box-shadow:0 2px 6px rgba(31,78,121,0.18);border:2px solid #fff;width:18px;height:18px;right:-9px;top:-5px}
+		.noUi-handle:before, .noUi-handle:after{display:none}
 
 		.sep{height:1px;background:var(--separator);margin:12px 0;border-radius:1px}
 
@@ -408,18 +414,18 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 					<input type="range" id="s-econ" min="0" max="10" value="5" />
 				</div>
 
-				<hr class="sep" />
-				<h4>Distancia de viaje desde municipio hacia ...</h4>
-				<input id="placeInput" placeholder="Introduce una ubicación que visitas frecuentemente" style="width:100%;padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);margin-bottom:12px" />
-
 				<!-- Rango de población: min / max -->
 				<div style="margin-top:8px;">
 					<label style="display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)">
 						<span>Población (rango)</span>
 						<span class="muted"><strong><span id="popMinVal">0</span> — <span id="popMaxVal">0</span></strong></span>
 					</label>
-					<div id="population-slider" style="margin-top:6px"></div>
+					<div id="population-slider" style="margin-top:6px; width:90%; margin-left:auto; margin-right:auto;"></div>
 				</div>
+
+				<hr class="sep" />
+				<h4>Distancia de viaje desde municipio hacia ...</h4>
+				<input id="placeInput" placeholder="Introduce una ubicación que visites frecuentemente" style="width:100%;padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);margin-bottom:12px" />
 
 				<button id="buscarBtn" style="width:100%;padding:10px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;margin-top:12px">Buscar</button>
 
@@ -797,7 +803,18 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
         }
 
 		// show detail
-		const explanation = 'El cálculo del puntuaje de las distintas categorías dependen de diferentes aspectos, como la cantidad de servicios disponibles (por ejemplo, número de centros de salud por cada 10.000 habitantes), las opiniones de los usuarios sobre esos servicios (como las valoraciones en Google Maps), y factores económicos como la tasa de desempleo, los cuales se combinan de manera equilibrada para obtener una puntuación final que refleja la calidad de vida en cada municipio.';
+		const explanation = `<h3>📊 ¿Qué aspectos se tienen en cuenta para calcular los índices?</h3>
+<p>Las puntuaciones que ves en la tabla de detalles (como "Educación: 85%") son <strong>índices normalizados de 0 a 100%</strong>, donde 100% indica el mejor desempeño posible en esa categoría para los municipios de la Comunidad de Madrid. Estos índices se basan en datos reales oficiales y combinan varios aspectos relacionados para formar una evaluación equilibrada. A continuación, te explicamos brevemente qué aspectos se consideran para cada categoría y qué representan:</p>
+<ul>
+<li><strong>Educación</strong>: Número de escuelas infantiles y colegios/institutos, incluyendo sus valoraciones promedio de Google. Representa la oferta educativa y la opinión pública sobre los centros educativos.</li>
+<li><strong>Sanidad</strong>: Número de médicos de familia y farmacias, incluidas sus valoraciones promedio de Google, más centros de salud disponibles. Indica la accesibilidad y calidad percibida de la atención médica primaria.</li>
+<li><strong>Ocio y cultura</strong>: Número de restaurantes, bares, cafeterías y cines, con sus valoraciones promedio de Google, más intereses culturales (museos, teatros, etc.). Mide la vitalidad social y la oferta de entretenimiento y cultura.</li>
+<li><strong>Bienestar</strong>: Número de gimnasios y parques (en escala logarítmica), incluyendo sus valoraciones promedio de Google, más índices de calidad del aire (PM10, PM2.5, O3, NO2, CO, ...). Representa la promoción de la salud física, espacios verdes y calidad ambiental.</li>
+<li><strong>Servicios</strong>: Número de bancos, cajeros, centros comerciales, tiendas de conveniencia, supermercados, gasolineras, bomberos (log) y comisarias (log), con sus valoraciones promedio de Google. Cubre instituciones financieras, comercio cotidiano, seguridad y servicios de emergencia.</li>
+<li><strong>Transporte y conectividad</strong>: Número de paradas de bus y estaciones principales (en escala logarítmica), incluyendo sus valoraciones promedio de Google. Indica la disponibilidad y calidad del transporte público.</li>
+<li><strong>Economía y empleo</strong>: Número de afiliados en agricultura, construcción, minería/industria, servicios varios, servicios empresariales/financieros y distribución/hostelería, total de paro registrado, y renta municipal (escala logarítmica). Mide el dinamismo económico, diversidad laboral y prosperidad por habitante.</li>
+</ul>
+<p>Estos índices se normalizan para comparar municipios de manera justa, considerando factores como población y densidad.</p>`;
 
 		function showDetail(m){
 		    document.getElementById('detailTitle').textContent = m.name;
@@ -946,6 +963,7 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 				sani: Number(document.getElementById('s-sani').value),
 				ocio: Number(document.getElementById('s-ocio').value),
 				cost: Number(document.getElementById('s-cost').value),
+				serv: Number(document.getElementById('s-serv').value),
 				mov: Number(document.getElementById('s-mov').value),
 				econ: Number(document.getElementById('s-econ').value)
 			};
@@ -1264,7 +1282,7 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 		}
 
 		// attach slider display update and re-run search 
-		const sliderIds = {educ:'s-educ',sani:'s-sani',ocio:'s-ocio',cost:'s-cost',mov:'s-mov',econ:'s-econ'};
+		const sliderIds = {educ:'s-educ',sani:'s-sani',ocio:'s-ocio',cost:'s-cost',serv:'s-serv',mov:'s-mov',econ:'s-econ'};
         Object.keys(sliderIds).forEach(key=>{
             const el = document.getElementById(sliderIds[key]);
             const disp = document.getElementById('val-'+(key));
@@ -1499,7 +1517,8 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 								' Respondes solo preguntas relacionadas con municipios de la Comunidad de Madrid.'+
 								' Si no sabes la respuesta, di que no lo sabes. Tus respuestas deben ser en español.'+
 								' Tienes que devolver texto plano, sin italicas, negritas, ni formato especial.' +
-								' Tienes que responder en el idioma de la pregunta.'
+								' Tienes que responder en el idioma de la pregunta.' +
+								' Información de contexto sobre los índices: ' + explanation.replace(/<[^>]*>?/gm, ' ')
 							},
 						// Incluir el historial de conversación para mantener la memoria
 						...conversationHistory
