@@ -36,7 +36,7 @@ export default async function handler(req, res) {
             "HTTP-Referer": req.headers.referer || "https://tu-dominio.vercel.app"
         },
         body: JSON.stringify({
-            model: "deepseek/deepseek-chat-v3.1", // Usar el modelo correcto
+            model: "deepseek/deepseek-v3.2", // Usar el modelo correcto
             messages: messages
         })
     });
