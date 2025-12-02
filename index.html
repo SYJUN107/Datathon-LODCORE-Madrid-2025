@@ -1500,29 +1500,23 @@ header h1{margin:0 auto; font-size:48px; color:#fff; font-weight:700; white-spac
 		}
 
 		async function callOpenRouterAPI(messages, apiKey){
-			const url = "https://openrouter.ai/api/v1/chat/completions";
-			const headers = {
-				"Authorization": `Bearer ${apiKey || 'DUMMY'}`,
-				"Content-Type": "application/json"
-			};
-			const payload = {
-				model: "deepseek/deepseek-chat-v3.1",
-				messages: messages
-			};
-			try{
-				const res = await fetch(url, {method:'POST', headers, body: JSON.stringify(payload)});
-				if(!res.ok) throw new Error('Network response not ok');
-				const data = await res.json();
-				// Try to extract a sensible assistant message from response (demo - may vary by API)
-				if(data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content){
-					return data.choices[0].message.content;
-				}
-				if(data && data.output && data.output[0] && data.output[0].content) return data.output[0].content;
-				return JSON.stringify(data);
-			}catch(err){
-				console.warn('OpenRouter API call failed, falling back to dummy. Error:', err);
-				throw err;
+			// CAMBIO: Ahora llama al backend propio en lugar de OpenRouter directamente
+			const response = await fetch('/api/chat', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ messages })
+			});
+
+			if (!response.ok) {
+				throw new Error('Backend call failed');
 			}
+
+			const data = await response.json();
+
+			// La respuesta viene en formato diferente ahora
+			return data.content || 'Respuesta no disponible';
 		}
 
 		function simulateAssistantReply(userText){
