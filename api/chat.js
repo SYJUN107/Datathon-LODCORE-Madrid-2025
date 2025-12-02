@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         headers: {
             "Authorization": `Bearer ${apiKey}`, // API key hard-coded para demo
             "Content-Type": "application/json",
-            "HTTP-Referer": req.headers.referer || "https://tu-dominio.vercel.app"
+            "HTTP-Referer": req.headers.referer || "https://datathon-lodcore-madrid-2025.vercel.app"
         },
         body: JSON.stringify({
             model: "deepseek/deepseek-v3.2", // Usar el modelo correcto
