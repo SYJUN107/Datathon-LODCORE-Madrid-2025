@@ -13,11 +13,15 @@ export default async function handler(req, res) {
             return res.status(400).json({ message: 'Messages array required' });
         }
 
-        // Hacer la llamada a OpenRouter desde el servidor (seguro)
+        // API KEY DEMO HARD-CODEADA: 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
+        // API key con funcionalidades restringidas solo para demos
+        const apiKey = "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";
+
+        // Hacer la llamada a OpenRouter desde el servidor
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`, // API key segura en env var
+                "Authorization": `Bearer ${apiKey}`, // API key hard-coded para demo
                 "Content-Type": "application/json",
                 "HTTP-Referer": req.headers.referer || "https://tu-dominio.vercel.app"
             },
